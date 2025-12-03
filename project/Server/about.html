@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About NODE.js</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #666666;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #3b82f6;
+        }
+
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .about-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .about-header .highlight {
+            color: #3b82f6;
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content-block {
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+            margin-bottom: 2.5rem;
+        }
+
+        .content-block h2 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .content-block p {
+            color: #666666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .content-block ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-block ul li {
+            color: #666666;
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .content-block ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .event-loop {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin: 2rem 0;
+        }
+
+        .event-loop h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .event-loop p {
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #1a1a1a;
+            border-top: 1px solid #333333;
+            padding: 2rem;
+            text-align: center;
+            color: #999999;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-bottom: 1px solid #e5e5e5;
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+            }
+
+            .nav-links a {
+                padding: 1rem 2rem;
+                display: block;
+            }
+
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-block {
+                padding: 2rem;
+            }
+
+            .content-block h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">NODE.js</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about" class="active">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contect">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-header">
+            <h1>About <span class="highlight">NODE.js</span></h1>
+            <p>Discover the power of JavaScript on the server-side with Node.js, the runtime that changed web
+                development forever.</p>
+        </section>
+
+        <section class="content-section">
+            <div class="content-block">
+                <h2>What is Node.js?</h2>
+                <p>Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript
+                    code outside of a web browser. Built on Chrome's V8 JavaScript engine, Node.js uses an event-driven,
+                    non-blocking I/O model that makes it lightweight and efficient.</p>
+                <p>Node.js enables developers to use JavaScript for server-side scripting, allowing the development of
+                    scalable network applications. It's perfect for data-intensive real-time applications that run
+                    across distributed devices.</p>
+            </div>
+
+            <div class="content-block">
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Asynchronous and Event-Driven:</strong> All APIs are asynchronous, meaning the server
+                        doesn't wait for an API to return data before moving to the next one.</li>
+                    <li><strong>Single-Threaded:</strong> Uses a single-threaded model with event looping, making it
+                        highly scalable compared to traditional servers.</li>
+                    <li><strong>Fast Execution:</strong> Built on Google Chrome's V8 engine, Node.js compiles JavaScript
+                        directly to native machine code.</li>
+                    <li><strong>No Buffering:</strong> Applications never buffer data, outputting it in chunks instead.
+                    </li>
+                    <li><strong>Cross-Platform:</strong> Works seamlessly on Windows, Linux, Unix, and Mac OS X.</li>
+                    <li><strong>Rich Ecosystem:</strong> NPM provides access to over a million open-source packages.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h2>The Event Loop Explained</h2>
+                <p>The event loop is what allows Node.js to perform non-blocking I/O operations despite JavaScript being
+                    single-threaded. It's the secret sauce that makes Node.js so efficient.</p>
+
+                <div class="event-loop">
+                    <h3>How It Works:</h3>
+                    <p><strong>1. Call Stack:</strong> JavaScript executes code synchronously in the call stack. When an
+                        asynchronous operation is encountered, it's offloaded to the system kernel or thread pool.</p>
+                    <p><strong>2. Event Queue:</strong> Once the asynchronous operation completes, a callback is placed
+                        in the event queue.</p>
+                    <p><strong>3. Event Loop:</strong> The event loop constantly checks if the call stack is empty. When
+                        it is, it takes the first callback from the event queue and pushes it to the call stack for
+                        execution.</p>
+                    <p><strong>4. Non-Blocking:</strong> This mechanism allows Node.js to handle thousands of concurrent
+                        operations without creating new threads, making it incredibly memory-efficient.</p>
+                </div>
+
+                <p>This architecture is perfect for I/O-heavy operations like reading files, database queries, or
+                    network requests, where the application would otherwise spend most of its time waiting.</p>
+            </div>
+
+            <div class="content-block">
+                <h2>Why Choose Node.js?</h2>
+                <p>Node.js has become the go-to choice for modern web development for several compelling reasons:</p>
+                <ul>
+                    <li><strong>Unified Language:</strong> Use JavaScript for both frontend and backend development.
+                    </li>
+                    <li><strong>Real-Time Capabilities:</strong> Perfect for chat applications, gaming servers, and
+                        collaborative tools.</li>
+                    <li><strong>Microservices Architecture:</strong> Ideal for building scalable microservices.</li>
+                    <li><strong>Strong Community:</strong> Backed by millions of developers worldwide.</li>
+                    <li><strong>Corporate Support:</strong> Used by Netflix, LinkedIn, Uber, PayPal, and many Fortune
+                        500 companies.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NODE.js. All rights reserved. Built with passion for developers.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
