@@ -51,12 +51,27 @@ let allUsers = [
 ]
 
 app.set("view engine", "ejs");
+app.use(express.urlencoded());
+
 app.get('/', (req, res) => {
     res.render('home', {
         name: "Sujal",
         isAdmin: true,
         allUsers,
     });
+})
+
+let id = 106;
+app.post('/addUser', (req, res) => {
+    const user = req.body;
+
+    user.Id = id;
+    id++;
+    console.log(req.query)
+    console.log(user)
+
+    allUsers.push(user);
+    res.redirect('/');
 })
 
 app.listen(PORT, (err) => {
