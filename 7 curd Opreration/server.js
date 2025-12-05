@@ -54,11 +54,27 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-    res.render('home', {
+    res.render('form', {
         name: "Sujal",
         isAdmin: true,
         allUsers,
     });
+})
+
+app.get('/addUserPage', (req, res) => {
+    res.render('table', {
+        allUsers,
+    });
+})
+
+app.get('/deleteUser', (req, res) => {
+    console.log(req.query);
+
+    const Userid = req.query    .Id;
+
+    allUsers = allUsers.filter((User) => User.Id != Userid);
+
+    res.redirect('/addUserPage');
 })
 
 let id = 106;
@@ -67,8 +83,6 @@ app.post('/addUser', (req, res) => {
 
     user.Id = id;
     id++;
-    console.log(req.query)
-    console.log(user)
 
     allUsers.push(user);
     res.redirect('/');

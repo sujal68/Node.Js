@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table View</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 4px;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        button,
+        input[type="button"],
+        input[type="submit"] {
+            padding: 10px 20px;
+            background: #ffffff;
+            border: 2px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        button:hover,
+        input[type="button"]:hover,
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        button:active,
+        input[type="button"]:active,
+        input[type="submit"]:active {
+            background: #efefefe0;
+            color: rgb(0, 0, 0);
+            transform: translateY(1px);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.10);
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 8px 12px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 align="center">User Data Table</h1>
+    <table cellpadding="10" align="center">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Phone Num</th>
+            <th>Address</th>
+            <th>Age</th>
+        </tr>
+
+        <% allUsers.map((User , index)=>{ %>
+            <tr>
+                <td>
+                    <%= User.Id %>
+                </td>
+                <td>
+                    <%= User.Name %>
+                </td>
+                <td>
+                    <%= User.Email %>
+                </td>
+                <td>
+                    <%= User.Password %>
+                </td>
+                <td>
+                    <%= User.Phone %>
+                </td>
+                <td>
+                    <%= User.Address %>
+                </td>
+                <td>
+                    <%= User.Age %>
+                </td>
+                <td>
+                    <button
+                        style="background-color: rgba(255, 0, 0, 0.244); color: rgb(124, 0, 0); font-weight: 400;"><a
+                            href="/deleteUser?Id=<%= User.Id %>"><i style="color: rgb(113, 0, 0);"
+                                class="ri-delete-bin-6-line"></i></a></button>
+                </td>
+                <td>
+                    <button
+                        style="background-color: rgba(0, 119, 255, 0.244); color: rgb(0, 95, 124); font-weight: 400;"><a
+                            href="/updateUser"><i style="color: rgb(0, 62, 113);" class="ri-edit-line"></i></a></button>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+
+    <a href="/">Go To Form</a>
+</body>
+
+</html>
