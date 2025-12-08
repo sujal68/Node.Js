@@ -61,6 +61,30 @@ app.post('/addUser', (req, res) => {
 
     res.redirect('/')
 })
+app.get('/editPage', (req, res) => {
+
+    const user = allUser.find((user) => user.id == req.query.id);
+
+    if (!user) {
+        return res.redirect('/')
+    }
+
+    res.render('update', {
+        user
+    })
+})
+
+app.post('/update', (req, res) => {
+    allUser = allUser.map((user) => {
+        if (user.id == req.body.id) {
+            return req.body;
+        }
+        else {
+            return user;
+        }
+    })
+    res.redirect('/');
+})
 
 app.get('/form', (req, res) => {
     res.render('form')

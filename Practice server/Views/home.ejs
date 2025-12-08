@@ -19,6 +19,14 @@
             padding: 10px;
             text-align: left;
         }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -55,7 +63,7 @@
                     <button><a href="/delete?id=<%= user.id %>" style="color: rgb(97, 0, 0);">Delete</a></button>
                 </td>
                 <td>
-                    <button><a href="/update?id=<%= user%>" style="color: rgb(0, 2, 97);">Update</a></button>
+                    <button><a href="/editPage?id=<%= user.id %>" style="color: rgb(0, 2, 97);">Update</a></button>
                 </td>
             </tr>
 
