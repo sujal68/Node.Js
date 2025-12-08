@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        table {
+            width: 50%;
+            margin-top: 50px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table align="center" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Phone</th>
+        </tr>
+
+        <% allUser.map((user , index)=> { %>
+
+            <tr>
+                <td>
+                    <%= user.id %>
+                </td>
+                <td>
+                    <%= user.name %>
+                </td>
+                <td>
+                    <%= user.email %>
+                </td>
+                <td>
+                    <%= user.password %>
+                </td>
+                <td>
+                    <%= user.phone %>
+                </td>
+                <td>
+                    <button><a href="/delete?id=<%= user.id %>" style="color: rgb(97, 0, 0);">Delete</a></button>
+                </td>
+                <td>
+                    <button><a href="/update?id=<%= user%>" style="color: rgb(0, 2, 97);">Update</a></button>
+                </td>
+            </tr>
+
+            <% }) %>
+
+
+    </table>
+    <center>
+        <a href="/form">Add User</a>
+    </center>
+</body>
+
+</html>

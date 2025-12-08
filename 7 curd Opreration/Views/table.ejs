@@ -82,47 +82,53 @@
             <th>Phone Num</th>
             <th>Address</th>
             <th>Age</th>
+            <th style="color: rgb(126, 0, 0);">Delete</th>
+            <th style="color: rgb(0, 82, 145);">Update</th>
         </tr>
 
-        <% allUsers.map((User , index)=>{ %>
+        <% allUsers.map((user , index)=>{ %>
             <tr>
                 <td>
-                    <%= User.Id %>
+                    <%= user.Id %>
                 </td>
                 <td>
-                    <%= User.Name %>
+                    <%= user.Name %>
                 </td>
                 <td>
-                    <%= User.Email %>
+                    <%= user.Email %>
                 </td>
                 <td>
-                    <%= User.Password %>
+                    <%= user.Password %>
                 </td>
                 <td>
-                    <%= User.Phone %>
+                    <%= user.Phone %>
                 </td>
                 <td>
-                    <%= User.Address %>
+                    <%= user.Address %>
                 </td>
                 <td>
-                    <%= User.Age %>
+                    <%= user.Age %>
                 </td>
                 <td>
                     <button
                         style="background-color: rgba(255, 0, 0, 0.244); color: rgb(124, 0, 0); font-weight: 400;"><a
-                            href="/deleteUser?Id=<%= User.Id %>"><i style="color: rgb(113, 0, 0);"
+                            href="/deleteUser?Id=<%= user.Id %>"><i style="color: rgb(113, 0, 0);"
                                 class="ri-delete-bin-6-line"></i></a></button>
                 </td>
                 <td>
                     <button
                         style="background-color: rgba(0, 119, 255, 0.244); color: rgb(0, 95, 124); font-weight: 400;"><a
-                            href="/updateUser"><i style="color: rgb(0, 62, 113);" class="ri-edit-line"></i></a></button>
+                            href="/editUser?Id=<%= user.Id %>"><i style="color: rgb(0, 62, 113);"
+                                class="ri-edit-line"></i></a></button>
                 </td>
             </tr>
             <% }) %>
     </table>
 
-    <a href="/">Go To Form</a>
+    <center>
+        <a href="/addUserPage"
+            style="margin-top: 20px; border: 1px solid black; color: rgb(0, 0, 87); display: inline-block; padding: 10px 20px;">Add User</a>
+    </center>
 </body>
 
 </html>

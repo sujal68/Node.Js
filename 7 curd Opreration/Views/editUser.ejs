@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Form</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -89,41 +91,50 @@
 </head>
 
 <body>
-    <h1 align="center">Form (CRUD Operation)</h1>
+    <h1 align="center">Update Form (CRUD Operation)</h1>
 
     <!-- Add User  -->
     <div class="container">
 
         <!-- LEFT FORM -->
-        <form method="POST" action="/addUser">
+        <form method="POST" action="/updateUser" style="width: 500px;">
             <table cellspacing="5" cellpadding="5">
                 <tr>
+                    <input type="hidden" name="Id" value="<%= user.Id %>">
                     <td>Name : </td>
-                    <td><input type="text" name="Name" required placeholder="Enter Your Name.."></td>
+                    <td><input type="text" name="Name" required placeholder="Enter Your Name.."
+                            value="<%= user.Name %>">
+                    </td>
                 </tr>
                 <tr>
                     <td>Email : </td>
-                    <td><input type="email" name="Email" required placeholder="Enter Your Email.."></td>
+                    <td><input type="email" name="Email" required placeholder="Enter Your Email.."
+                            value="<%= user.Email %>"></td>
                 </tr>
                 <tr>
                     <td>Password : </td>
-                    <td><input type="password" name="Password" required placeholder="Enter Your Password.."></td>
+                    <td><input type="password" name="Password" required placeholder="Enter Your Password.."
+                            value="<%= user.Password %>"></td>
                 </tr>
                 <tr>
                     <td>Phone : </td>
-                    <td><input type="number" name="Phone" required placeholder="Enter Your Phone Number.."></td>
+                    <td><input type="number" name="Phone" required placeholder="Enter Your Phone Number.."
+                            value="<%= user.Phone %>"></td>
                 </tr>
                 <tr>
                     <td>Address : </td>
-                    <td><textarea name="Address" required placeholder="Enter Your Address..."></textarea></td>
+                    <td><textarea name="Address" required
+                            placeholder="Enter Your Address..."><%= user.Address %></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Age : </td>
-                    <td><input type="number" name="Age" required placeholder="Enter Your Age.."></td>
+                    <td><input type="number" name="Age" required placeholder="Enter Your Age.." value="<%= user.Age %>">
+                    </td>
                 </tr>
                 <tr>
                     <td>Add</td>
-                    <td><input type="submit" value="Add"></td>
+                    <td><input type="submit" value="Update"></td>
                 </tr>
             </table>
         </form>

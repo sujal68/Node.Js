@@ -49,12 +49,13 @@ let allUsers = [
         Age: "46",
     },
 ]
+let id = 106;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-    res.render('form', {
+    res.render('table', {
         name: "Sujal",
         isAdmin: true,
         allUsers,
@@ -62,22 +63,44 @@ app.get('/', (req, res) => {
 })
 
 app.get('/addUserPage', (req, res) => {
-    res.render('table', {
+    res.render('form', {
         allUsers,
     });
+})
+
+app.get('/editUser', (req, res) => {
+    const user = allUsers.find((user) => user.Id == req.query.Id);
+    if (!user) {
+        return res.redirect('/');
+    }
+    res.render('editUser', {
+        user
+    });
+});
+
+app.post('/updateUser', (req, res) => {
+    allUsers = allUsers.map((user) => {
+        if (user.Id == req.body.Id) {
+            return req.body;
+        }
+        else {
+            return user;
+        }
+    })
+    return res.redirect('/');
 })
 
 app.get('/deleteUser', (req, res) => {
     console.log(req.query);
 
-    const Userid = req.query    .Id;
+    const Userid = req.query.Id;
 
     allUsers = allUsers.filter((User) => User.Id != Userid);
 
     res.redirect('/addUserPage');
 })
 
-let id = 106;
+
 app.post('/addUser', (req, res) => {
     const user = req.body;
 
