@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" />
+    <link rel="stylesheet" href="dist/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Edit Task</h1>
+            <p>Update your task details</p>
+        </div>
+
+        <div class="edit-task-section">
+            <form method="post" action="/Edit">
+                <input type="hidden" name="Id" value="<%= task.Id %>">
+
+                <div class="form-group">
+                    <label>Task Name</label>
+                    <input type="text" name="Todaytask" required placeholder="Enter task name"
+                        value="<%= task.Todaytask %>">
+                </div>
+
+                <div class="form-group">
+                    <label>Task Description</label>
+                    <input type="text" name="TaskDetails" required placeholder="Enter task details"
+                        value="<%= task.TaskDetails %>">
+                </div>
+
+                <div class="form-group">
+                    <label>Task Time</label>
+                    <div class="time-input-group">
+                        <input type="time" name="StartTime" value="<%= task.StartTime %>" required>
+                        <span class="time-separator">to</span>
+                        <input type="time" name="EndTime" value="<%= task.EndTime %>" required>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn update-btn">
+                        <i class="ri-check-line"></i> Update Task
+                    </button>
+                    <a href="/" class="btn cancel-btn">
+                        <i class="ri-close-line"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
