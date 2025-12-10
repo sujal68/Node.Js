@@ -286,9 +286,12 @@ a {
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-20px);
     }
@@ -627,7 +630,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -787,7 +790,9 @@ a {
         text-align: center;
     }
 
-    .features h2, .database-types h2, .playground h2 {
+    .features h2,
+    .database-types h2,
+    .playground h2 {
         font-size: 2rem;
     }
 
@@ -795,7 +800,7 @@ a {
         padding: 2rem;
         margin: 1rem;
     }
-    
+
     .age-check-card h1 {
         font-size: 1.75rem;
     }
@@ -810,12 +815,14 @@ a {
         font-size: 1rem;
     }
 
-    .btn-primary, .btn-secondary {
+    .btn-primary,
+    .btn-secondary {
         padding: 12px 24px;
         font-size: 0.9rem;
     }
 
-    .feature-card, .db-card {
+    .feature-card,
+    .db-card {
         padding: 1.5rem;
     }
 }
@@ -838,7 +845,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         linear-gradient(rgba(239, 68, 68, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(239, 68, 68, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -879,7 +886,7 @@ a {
     margin-bottom: 1rem;
 }
 
-.error-card > p {
+.error-card>p {
     color: #64748b;
     margin-bottom: 2rem;
     font-size: 1.2rem;
@@ -914,7 +921,8 @@ a {
     flex-wrap: wrap;
 }
 
-.back-btn, .retry-btn {
+.back-btn,
+.retry-btn {
     padding: 14px 28px;
     border-radius: 12px;
     font-weight: 600;
@@ -954,17 +962,226 @@ a {
         padding: 2rem;
         margin: 1rem;
     }
-    
+
     .error-card h1 {
         font-size: 2rem;
     }
-    
+
     .error-actions {
         flex-direction: column;
     }
-    
-    .back-btn, .retry-btn {
+
+    .back-btn,
+    .retry-btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .nav-link {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .nav-link:hover {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+[data-theme="dark"] .hero-left h1 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .hero-left p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .hero-card {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .query-header {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .features {
+    background: #1e293b;
+}
+
+[data-theme="dark"] .database-types {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .playground {
+    background: #1e293b;
+}
+
+[data-theme="dark"] .feature-card {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(71, 85, 105, 0.8);
+}
+
+[data-theme="dark"] .db-card {
+    background: #334155;
+    border-color: #475569;
+}
+
+[data-theme="dark"] .db-card h3,
+[data-theme="dark"] .feature-card h3,
+[data-theme="dark"] .features h2,
+[data-theme="dark"] .database-types h2,
+[data-theme="dark"] .playground h2 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .db-card p,
+[data-theme="dark"] .feature-card p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: #334155;
+    color: #60a5fa;
+    border-color: #475569;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    border-color: #60a5fa;
+    background: #475569;
+}
+
+[data-theme="dark"] .footer-section h3 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .footer-section p,
+[data-theme="dark"] .footer-section ul li a {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .footer-section ul li a:hover {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .footer-bottom {
+    color: #64748b;
+    border-top-color: #475569;
+}
+
+[data-theme="dark"] .feature-icon {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    color: white;
+}
+
+[data-theme="dark"] .db-logo {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    color: white;
+}
+
+[data-theme="dark"] .server-icon {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .social-icons a {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    color: white;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+[data-theme="dark"] .back-to-top {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.db-server span {
+    color: #333 !important;
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .back-to-top {
+        right: 20px;
+        bottom: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
