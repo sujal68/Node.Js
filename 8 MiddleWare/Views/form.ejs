@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        form {
+            margin-top: 50px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Form PAge</h1>
+    <form method="post" action="/addUser" align="center">
+        <input type="text" name="name" required placeholder="Enter Your name.">
+        <input type="Email" name="email" required placeholder="Enter Your Email.">
+        <input type="password" name="password" required placeholder="Enter Your Password.">
+        <input type="number" name="phone" required placeholder="Enter Your phone.">
+        <br><br>
+        <a href="/"><input type="submit"></input></a>
+    </form>
+</body>
+
+</html>
