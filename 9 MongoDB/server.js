@@ -9,8 +9,25 @@ app.set('view engine', "ejs")
 // middle were 
 app.use(express.urlencoded());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+
+    const allbook = await book.find();
+
+    return res.render('table', { allbook })
+})
+
+app.get('/AddBookPage', (req, res) => {
     return res.render('form')
+});
+
+app.get('/bookDelete', async (req, res) => {
+    const deletedBook = await book.findByIdAndDelete(req.query.BookId)
+    if (deletedBook) {
+        console.log("Book Deleted...😄");
+    } else {
+        console.log("Book Deletion Is faild..🥲");
+    }
+    return res.redirect('/')
 })
 
 app.post('/addBook', (req, res) => {
