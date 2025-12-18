@@ -1,27 +1,75 @@
-const book = require('./model/book.model')
+const Book = require('./model/book.model')
 require('./config/db.consig')
 const express = require('express');
 const app = express();
 const PORT = 6800;
+
+/*
+ * Insert : create(body) method in MongoDb Provide 
+ *      ex: body :- object {name : "ABC" , Age : 12}
+ * 
+ * Fetch : find()
+ *       return : Array Of Object
+ * 
+ * Delete : findByIdAndDelete(id)
+ *          return : Delete Sinle Data
+ * 
+ * Update : findByIdAndUpdate(id , body , {new : true})
+ *          return : new Updated data
+ * 
+ * Single data fatch Using Id : findById(id)
+ *          return : Single data matched Id
+ */
 
 app.set('view engine', "ejs")
 
 // middle were 
 app.use(express.urlencoded());
 
+// table View Book 
 app.get('/', async (req, res) => {
 
-    const allbook = await book.find();
+    const allbook = await Book.find();
 
     return res.render('table', { allbook })
 })
 
+// Add Book Form
 app.get('/AddBookPage', (req, res) => {
     return res.render('form')
 });
 
+// Edit Book 
+app.get('/bookEdit/:BookId', async (req, res) => {
+    // console.log(req.params);
+
+    const book = await Book.findById(req.params.BookId);
+
+    // console.log(book);
+
+    if (book) {
+        return res.render('edit', { book });
+    } else {
+        return res.redirect('/');
+    }
+
+});
+
+// Update Book
+app.post('/BookUpdate', async (req, res) => {
+    const book = await Book.findByIdAndUpdate(req.body.id, req.body, { new: true });
+
+    if (book) {
+        return res.redirect('/');
+    } else {
+        return res.redirect('/BookUpdate')
+    }
+
+})
+
+// Delete Book 
 app.get('/bookDelete', async (req, res) => {
-    const deletedBook = await book.findByIdAndDelete(req.query.BookId)
+    const deletedBook = await Book.findByIdAndDelete(req.query.BookId)
     if (deletedBook) {
         console.log("Book Deleted...😄");
     } else {
@@ -30,10 +78,11 @@ app.get('/bookDelete', async (req, res) => {
     return res.redirect('/')
 })
 
+// add book 
 app.post('/addBook', (req, res) => {
     console.log(req.body);
 
-    book.create(req.body).then(() => {
+    Book.create(req.body).then(() => {
         console.log("Inserted Is Successfully Done");
     }).catch((error) => {
         console.log("Inserted IS Failed!!!", error);
@@ -42,6 +91,7 @@ app.post('/addBook', (req, res) => {
     return res.redirect('/');
 })
 
+// Server connect request 
 app.listen(PORT, (error) => {
     if (error) {
         console.log("Server Is Not Connected!!", error);
