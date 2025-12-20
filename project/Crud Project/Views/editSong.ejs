@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Song</title>
+
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../dist/style.css">
+
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Modify Song</h1>
+        <p>Update existing song metadata</p>
+
+        <div class="divider"></div>
+
+        <!-- FORM (NOTHING TOUCHED) -->
+        <form method="post" action="/songUpdate">
+
+            <input type="hidden" name="id" value="<%= song.id %>" required>
+
+            <div class="field">
+                <i class="ri-music-2-line"></i>
+                <input type="text" name="songTitle" value="<%= song.songTitle %>" required>
+            </div>
+
+            <div class="field">
+                <i class="ri-user-3-line"></i>
+                <input type="text" name="songAuth" value="<%= song.songAuth %>" required>
+            </div>
+
+            <div class="field">
+                <i class="ri-disc-line"></i>
+                <input type="text" name="songAlbum" value="<%= song.songAlbum %>" required>
+            </div>
+
+            <div class="field">
+                <i class="ri-calendar-line"></i>
+                <input type="date" name="songAddDate" value="<%= song.songAddDate %>" required>
+            </div>
+
+            <div class="field">
+                <i class="ri-time-line"></i>
+                <input type="text" name="songDuration" value="<%= song.songDuration %>" required>
+            </div>
+
+            <div class="field">
+                <i class="ri-image-line"></i>
+                <input type="text" name="songImg" value="<%= song.songImg %>" required>
+            </div>
+
+            <div class="actions">
+                <a href="/" class="btn-back">Go To View Song</a>
+                <button type="submit" class="btn-save">Update Song</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

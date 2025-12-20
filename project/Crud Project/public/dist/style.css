@@ -1,0 +1,395 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    margin-bottom: 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.play-btn {
+    width: 56px;
+    height: 56px;
+    background: #1ed760;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.play-btn:hover {
+    transform: scale(1.06);
+    background: #1fdf64;
+}
+
+.play-btn i {
+    color: #000;
+    font-size: 24px;
+    margin-left: 3px;
+}
+
+.album-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.action-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.action-icon {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.action-icon:hover {
+    color: #ffffff;
+}
+
+.add-song-btn {
+    background: #1ed760;
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-song-btn:hover {
+    transform: scale(1.04);
+    background: #1fdf64;
+}
+
+/* Song List Styles */
+.song-list {
+    padding: 0 40px;
+}
+
+.song-header {
+    display: grid;
+    grid-template-columns: 50px 6fr 4fr 3fr 100px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #282828;
+    color: #b3b3b3;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.song-row {
+    display: grid;
+    grid-template-columns: 50px 6fr 4fr 3fr 100px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    align-items: center;
+    position: relative;
+}
+
+.song-row:hover {
+    background: #2a2a2a;
+}
+
+.song-number {
+    color: #b3b3b3;
+    font-size: 16px;
+    text-align: center;
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.song-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.song-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.song-artist {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.song-album,
+.song-date {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.song-duration {
+    color: #b3b3b3;
+    font-size: 14px;
+    text-align: right;
+    padding-right: 50px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: absolute;
+    right: 16px;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.song-row:hover .dropdown-toggle {
+    opacity: 1;
+}
+
+.dropdown-toggle:hover {
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    background: #282828;
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    box-shadow: 0 16px 24px rgba(0, 0, 0, .3);
+    min-width: 160px;
+}
+
+.dropdown-item {
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: #3e3e3e;
+    color: #ffffff;
+}
+
+.dropdown-item i {
+    font-size: 16px;
+}
+
+/* Card Styles (for Add/Edit forms) */
+.card {
+    width: 800px;
+    background: rgba(30, 30, 30, 0.78);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 32px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+    margin: 0 auto;
+}
+
+.card h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card p {
+    margin: 6px 0 22px;
+    color: #9a9a9a;
+    font-size: 14px;
+}
+
+.divider {
+    height: 1px;
+    background: #2a2a2a;
+    margin-bottom: 22px;
+}
+
+/* Form Field Styles */
+.field {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.field i {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: #1db954;
+    font-size: 18px;
+}
+
+.field input {
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border: 1px solid #2f2f2f;
+    border-radius: 12px;
+    padding: 0 14px 0 44px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.field input::placeholder {
+    color: #7a7a7a;
+}
+
+.field input:focus {
+    outline: none;
+    border-color: #1db954;
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
+}
+
+.image-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.image-preview {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: #2b2b2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview i {
+    color: #888;
+    font-size: 20px;
+}
+
+/* Date Input Styles */
+input[type="date"] {
+    color-scheme: light;
+    color: #fff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Button Styles */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+}
+
+.btn-back {
+    border: 1px solid #1db954;
+    color: #1db954;
+    padding: 10px 28px;
+    border-radius: 50px;
+    background: transparent;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background: rgba(29, 185, 84, 0.1);
+}
+
+.btn-save,
+.btn-add {
+    background: #1db954;
+    border: none;
+    color: #000;
+    padding: 10px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-reset {
+    background: transparent;
+    border: 1px solid #1db954;
+    color: #1db954;
+    padding: 10px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-reset:hover {
+    background: rgba(29, 185, 84, 0.1);
+}
+
+/* Link Styles */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .song-header,
+    .song-row {
+        grid-template-columns: 40px 1fr 80px;
+    }
+
+    .song-album,
+    .song-date {
+        display: none;
+    }
+
+    .card {
+        width: 95%;
+        padding: 24px;
+    }
+}

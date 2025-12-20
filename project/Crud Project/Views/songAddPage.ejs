@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Song</title>
+
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../dist/style.css">
+
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Add New Song</h1>
+        <p>Manually upload song metadata</p>
+
+        <div class="divider"></div>
+
+        <form action="/addSong" method="post">
+
+            <!-- Song Title -->
+            <div class="field">
+                <i class="ri-music-2-line"></i>
+                <input required type="text" name="songTitle" placeholder="Enter song title">
+            </div>
+
+            <!-- Song Artist -->
+            <div class="field">
+                <i class="ri-user-3-line"></i>
+                <input required type="text" name="songAuth" placeholder="Enter artist name">
+            </div>
+
+            <!-- Song Image URL -->
+            <div class="field image-field">
+                <div style="flex:1; position:relative;">
+                    <i class="ri-image-line"></i>
+                    <input required type="text" name="songImg" placeholder="Paste cover image URL">
+                </div>
+                <div class="image-preview">
+                    <i class="ri-image-fill"></i>
+                </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="field">
+                <i class="ri-time-line"></i>
+                <input required type="text" name="songDuration" placeholder="03:45">
+            </div>
+
+            <!-- Release Date -->
+            <div class="field">
+                <i class="ri-calendar-line"></i>
+                <input required type="date" name="songAddDate">
+            </div>
+
+            <!-- Album -->
+            <div class="field">
+                <i class="ri-disc-line"></i>
+                <input required type="text" name="songAlbum" placeholder="Enter album name">
+            </div>
+
+            <!-- Buttons -->
+            <div class="actions">
+                <a href="/" class="btn-reset">Go Song Page</a>
+                <button type="submit" class="btn-add" style="color: rgb(0, 55, 0);">Add Song</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
