@@ -37,9 +37,9 @@
             <div class="field image-field">
                 <div style="flex:1; position:relative;">
                     <i class="ri-image-line"></i>
-                    <input required type="text" name="songImg" placeholder="Paste cover image URL">
+                    <input required type="text" name="songImg" id="imageInput" placeholder="Paste cover image URL">
                 </div>
-                <div class="image-preview">
+                <div class="image-preview" id="imagePreview">
                     <i class="ri-image-fill"></i>
                 </div>
             </div>
@@ -71,6 +71,33 @@
         </form>
     </div>
 
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageInput.addEventListener('input', function () {
+            const url = this.value.trim();
+
+            if (url) {
+                imagePreview.innerHTML = '';
+
+                const img = document.createElement('img');
+                img.src = url;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+
+                img.onerror = function () {
+                    imagePreview.innerHTML = '<i class="ri-image-fill"></i>';
+                };
+
+                imagePreview.appendChild(img);
+            } else {
+                imagePreview.innerHTML = '<i class="ri-image-fill"></i>';
+            }
+        });
+    </script>
 </body>
+
 
 </html>

@@ -15,7 +15,13 @@ app.use(express.urlencoded());
 // find or fatch song data  
 app.get('/', async (req, res) => {
     const allSong = await Songs.find();
-    return res.render('song', { allSong });
+
+    let totalSongs = allSong.length;
+
+    res.render('song', {
+        allSong,
+        totalSongs
+    });
 })
 
 // routing Form page
@@ -65,6 +71,8 @@ app.post('/songUpdate', async (req, res) => {
         return res.redirect('/SongEdit')
     }
 })
+
+
 
 // Create Server 
 app.listen(PORT, (error) => {
