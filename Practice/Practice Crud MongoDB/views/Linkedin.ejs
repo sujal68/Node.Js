@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Feed</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+            background: #f3f2ef;
+        }
+
+        .navbar-linkedin {
+            background: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 8px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-content {
+            max-width: 1128px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .linkedin-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a66c2;
+        }
+
+        .add-post-btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .add-post-btn:hover {
+            background: #004182;
+            color: white;
+        }
+
+        .feed-container {
+            max-width: 540px;
+            padding: 0 20px;
+            margin: 10px auto;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .post-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .post-user-info {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e0dfdc;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .user-bio {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            margin: 2px 0;
+            line-height: 1.3;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .post-options {
+            position: relative;
+        }
+
+        .three-dots-btn {
+            background: none;
+            border: none;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .three-dots-btn:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .dropdown-menu-custom {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 180px;
+            display: none;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .dropdown-menu-custom.show {
+            display: block;
+        }
+
+        .dropdown-item-custom {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(0, 0, 0, 0.9);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-item-custom:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .dropdown-item-custom.delete-item {
+            color: #cc1016;
+        }
+
+        .post-content {
+            padding: 0 16px 12px;
+        }
+
+        .post-description {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.9);
+            line-height: 1.5;
+            margin: 0;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* 👈 sirf 3 line */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 630px;
+            object-fit: cover;
+        }
+
+        .post-stats {
+            padding: 8px 16px;
+            border-bottom: 1px solid #e0dfdc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 8px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 12px 16px;
+            color: rgba(0, 0, 0, 0.6);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .action-icon {
+            font-size: 20px;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            padding: 4px 0 0;
+            color: #0a66c2;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* NAV STRUCTURE */
+        .nav-left,
+        .nav-center,
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-left {
+            gap: 12px;
+        }
+
+        .nav-center {
+            gap: 26px;
+        }
+
+        .nav-right {
+            gap: 16px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #eef3f8;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 220px;
+        }
+
+        /* CENTER ICONS */
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            gap: 2px;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* PROFILE */
+        .nav-profile {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .nav-profile img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        /* BUSINESS */
+        .nav-business {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+        }
+
+        .nav-business i {
+            font-size: 20px;
+        }
+
+        /* DIVIDER */
+        .nav-divider {
+            width: 1px;
+            height: 32px;
+            background: #ddd;
+        }
+
+        /* CREATE BUTTON FIX */
+        .add-post-btn {
+            padding: 6px 14px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .feed-container {
+                padding: 0;
+            }
+
+            .post-card {
+                border-radius: 0;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <div class="navbar-linkedin">
+        <div class="navbar-content">
+
+            <!-- LEFT -->
+            <div class="nav-left">
+                <div class="linkedin-logo">in</div>
+
+                <div class="search-box">
+                    <i class="ri-search-line"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+
+            <!-- CENTER -->
+            <div class="nav-center">
+                <div class="nav-item active">
+                    <i class="ri-home-5-fill"></i>
+                    <span>Home</span>
+                </div>
+
+                <div class="nav-item">
+                    <i class="ri-group-line"></i>
+                    <span>My Network</span>
+                </div>
+
+                <div class="nav-item">
+                    <i class="ri-briefcase-line"></i>
+                    <span>Jobs</span>
+                </div>
+
+                <div class="nav-item">
+                    <i class="ri-chat-3-line"></i>
+                    <span>Messaging</span>
+                </div>
+
+                <div class="nav-item">
+                    <i class="ri-notification-3-line"></i>
+                    <span>Notifications</span>
+                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="nav-right">
+                <div class="nav-profile">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFCvam2OgYTLg/profile-displayphoto-scale_100_100/B56ZpjTuT.HkAc-/0/1762602706781?e=1767830400&v=beta&t=B3Vpn1cQHcIddon5l9AfzCwYwnSlx1odlQfxPPT3MbA"
+                        alt="">
+                    <span>Me</span>
+                    <i class="ri-arrow-down-s-line"></i>
+                </div>
+
+                <div class="nav-divider"></div>
+
+                <div class="nav-business">
+                    <i class="ri-apps-2-line"></i>
+                    <span>For Business</span>
+                </div>
+
+                <a href="/postAddPage" class="add-post-btn">
+                    <i class="ri-add-line"></i> Create
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Feed Container -->
+    <div class="feed-container">
+        <% allPost.map((Post, index)=> { %>
+            <div class="post-card">
+                <!-- Post Header -->
+                <div class="post-header">
+                    <div class="post-user-info">
+                        <img src="<%= Post.UserImg %>" alt="User Avatar" class="user-avatar">
+                        <div class="user-details">
+                            <h3 class="user-name">
+                                <%= Post.UserName %>
+                            </h3>
+                            <p class="user-bio">
+                                <%= Post.UserBio %>
+                            </p>
+                            <p class="post-time">2w • 🌐</p>
+                        </div>
+                    </div>
+                    <div class="post-options">
+                        <button class="three-dots-btn" onclick="toggleDropdown('<%= index %>')">
+                            <i class="ri-more-fill"></i>
+                        </button>
+                        <div class="dropdown-menu-custom" id="dropdown-<%= index %>">
+                            <a href="/postEdit/<%= Post.id %>" class="dropdown-item-custom">
+                                <i class="ri-edit-line"></i> Edit Post
+                            </a>
+                            <a href="/postDelete/<%= Post.id %>" class="dropdown-item-custom delete-item">
+                                <i class="ri-delete-bin-line"></i> Delete Post
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post Content -->
+                <div class="post-content">
+                    <p class="post-description">
+                        <%= Post.PostDiscription %>
+                    </p>
+                    <button class="read-more-btn" onclick="toggleReadMore('<%= index %>')">
+                        Read more
+                    </button>
+                </div>
+
+                <!-- Post Image -->
+                <img src="<%= Post.PostImage %>" alt="Post Image" class="post-image">
+
+                <!-- Post Stats -->
+                <div class="post-stats">
+                    <span><i class="ri-thumb-up-fill" style="color: #0a66c2;"></i> You and 7 others</span>
+                    <span>4 comments</span>
+                </div>
+
+                <!-- Post Actions -->
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <i class="ri-thumb-up-line action-icon"></i>
+                        Like
+                    </button>
+                    <button class="action-btn">
+                        <i class="ri-chat-3-line action-icon"></i>
+                        Comment
+                    </button>
+                    <button class="action-btn">
+                        <i class="ri-repeat-line action-icon"></i>
+                        Repost
+                    </button>
+                    <button class="action-btn">
+                        <i class="ri-send-plane-line action-icon"></i>
+                        Send
+                    </button>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+
+    <script>
+        function toggleDropdown(index) {
+            const dropdown = document.getElementById(`dropdown-${index}`);
+            const allDropdowns = document.querySelectorAll('.dropdown-menu-custom');
+
+            // Close all other dropdowns
+            allDropdowns.forEach((d, i) => {
+                if (i !== index) {
+                    d.classList.remove('show');
+                }
+            });
+
+            // Toggle current dropdown
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.post-options')) {
+                document.querySelectorAll('.dropdown-menu-custom').forEach(d => {
+                    d.classList.remove('show');
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
