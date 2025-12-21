@@ -1,9 +1,13 @@
 const Book = require('./model/book.model')
 require('./config/db.consig')
+const path = require('path');
+const multer = require('multer')
 const express = require('express');
 const app = express();
 const PORT = 6800;
 
+app.use(express.static(path.join(__dirname, "public")))
+app.use('/images', express.static(path.join(__dirname, "images")))
 /*
  * Insert : create(body) method in MongoDb Provide 
  *      ex: body :- object {name : "ABC" , Age : 12}
@@ -23,8 +27,22 @@ const PORT = 6800;
 
 app.set('view engine', "ejs")
 
+// multer 
+const storage = multer.diskStorage({
+    destination: (req, file, cd) => {
+        cd(null, "images/");
+    },
+    filename: (req, file, cd) => {
+        cd(null, Date.now() + '-' + file.originalname);
+    }
+})
+
+// multer middel ware 
+const upload = multer({ storage })
+
 // middle were 
 app.use(express.urlencoded());
+
 
 // table View Book 
 app.get('/', async (req, res) => {
@@ -79,14 +97,24 @@ app.get('/bookDelete', async (req, res) => {
 })
 
 // add book 
-app.post('/addBook', (req, res) => {
+app.post('/addBook', upload.single('BookImg'), async (req, res) => {
     console.log(req.body);
+    console.log(req.file);
+    req.body.BookImg = "/images/" + req.file.filename;
 
-    Book.create(req.body).then(() => {
-        console.log("Inserted Is Successfully Done");
-    }).catch((error) => {
-        console.log("Inserted IS Failed!!!", error);
-    })
+    const bookAdded = await Book.create(req.body);
+
+    if (bookAdded) {
+        console.log("Book inserted Successfully...");
+    } else {
+        console.log("Book insertion failed...");
+    }
+
+    // Book.create(req.body).then(() => {
+    //     console.log("Inserted Is Successfully Done");
+    // }).catch((error) => {
+    //     console.log("Inserted IS Failed!!!", error);
+    // })
 
     return res.redirect('/');
 })
