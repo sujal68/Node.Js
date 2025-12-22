@@ -1,6 +1,7 @@
 const Book = require('./model/book.model')
 require('./config/db.consig')
 const path = require('path');
+const fs = require('fs')
 const multer = require('multer')
 const express = require('express');
 const app = express();
@@ -74,20 +75,35 @@ app.get('/bookEdit/:BookId', async (req, res) => {
 });
 
 // Update Book
-app.post('/BookUpdate', async (req, res) => {
-    const book = await Book.findByIdAndUpdate(req.body.id, req.body, { new: true });
+app.post('/BookUpdate', upload.single('BookImg'), async (req, res) => {
 
-    if (book) {
+    if (req.file) {
+        const bookData = await Book.findById(req.body.id)
+        req.body.BookImg = req.file.path;
+        fs.unlink(bookData.BookImg, (err) => { })
+
+        const book = await Book.findByIdAndUpdate(req.body.id, req.body, { new: true });
+
+        console.log("Update :", book);
         return res.redirect('/');
     } else {
-        return res.redirect('/BookUpdate')
+
+        const book = await Book.findByIdAndUpdate(req.body.id, req.body, { new: true });
+
+        console.log("Update :", book);
+        return res.redirect('/');
     }
+
+    return res.redirect('/');
 
 })
 
 // Delete Book 
 app.get('/bookDelete', async (req, res) => {
     const deletedBook = await Book.findByIdAndDelete(req.query.BookId)
+
+    fs.unlink(deletedBook.BookImg, (err) => { })
+
     if (deletedBook) {
         console.log("Book Deleted...😄");
     } else {
@@ -100,7 +116,7 @@ app.get('/bookDelete', async (req, res) => {
 app.post('/addBook', upload.single('BookImg'), async (req, res) => {
     console.log(req.body);
     console.log(req.file);
-    req.body.BookImg = "/images/" + req.file.filename;
+    req.body.BookImg = req.file.path;
 
     const bookAdded = await Book.create(req.body);
 
@@ -109,12 +125,6 @@ app.post('/addBook', upload.single('BookImg'), async (req, res) => {
     } else {
         console.log("Book insertion failed...");
     }
-
-    // Book.create(req.body).then(() => {
-    //     console.log("Inserted Is Successfully Done");
-    // }).catch((error) => {
-    //     console.log("Inserted IS Failed!!!", error);
-    // })
 
     return res.redirect('/');
 })
