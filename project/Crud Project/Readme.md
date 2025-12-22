@@ -41,38 +41,37 @@ This project demonstrates **real-world backend fundamentals**, MVC-style structu
 - Nodemon
 
 ---
-
 ## 📁 Project Structure
 
+```
 CRUD PROJECT
 │
-├── config
-│ └── db.config.js
+├── config/
+│   └── db.config.js
 │
-├── model
-│ └── song.model.js
+├── model/
+│   └── song.model.js
 │
-├── public
-│ └── dist
-│ └── style.css
+├── public/
+│   └── dist/
+│       └── style.css
 │
-├── Views
-│ ├── song.ejs
-│ ├── songAddPage.ejs
-│ └── editSong.ejs
+├── Views/
+│   ├── song.ejs
+│   ├── songAddPage.ejs
+│   └── editSong.ejs
 │
-├── ReadmeImg
-│ ├── SongView.png
-│ ├── addSong.png
-│ └── editSong.png
+├── ReadmeImg/
+│   ├── SongView.png
+│   ├── addSong.png
+│   └── editSong.png
 │
 ├── server.js
 ├── package.json
 ├── package-lock.json
 └── README.md
+```
 
-yaml
-Copy code
 
 ---
 
@@ -108,47 +107,53 @@ Each song contains the following fields:
 ```bash
 git clone <repository-url>
 cd crud-project
-2️⃣ Install Dependencies
-bash
-Copy code
+```
+
+### 2️⃣ Install Dependencies
+```bash
 npm install
-3️⃣ Start MongoDB
+```
+
+### 3️⃣ Start MongoDB
 Make sure MongoDB is running locally:
-
-bash
-Copy code
+```bash
 mongodb://localhost:27017/Music-Opretion
-4️⃣ Run the Server
-bash
-Copy code
+```
+
+### 4️⃣ Run the Server
+```bash
 npm start
-5️⃣ Open in Browser
-arduino
-Copy code
+```
+
+### 5️⃣ Open in Browser
+```
 http://localhost:6800
-🔗 Routes Overview
-Method	Route	Description
-GET	/	View all songs
-GET	/songAddPage	Add song page
-POST	/addSong	Save new song
-GET	/SongEdit/:SongId	Edit song page
-POST	/songUpdate	Update song
-GET	/SongDelete/:SongId	Delete song
+```
 
-📚 Learning Outcomes
-MVC-style project structure
+---
 
-CRUD operations using MongoDB
+## 🔗 Routes Overview
 
-Express routing & middleware
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/` | View all songs |
+| GET | `/songAddPage` | Add song page |
+| POST | `/addSong` | Save new song |
+| GET | `/SongEdit/:SongId` | Edit song page |
+| POST | `/songUpdate` | Update song |
+| GET | `/SongDelete/:SongId` | Delete song |
 
-Server-side rendering with EJS
+---
 
-Handling forms & URL parameters
+## 📚 Learning Outcomes
 
-Real-world backend workflow
-
-Clean UI + backend integration
+- MVC-style project structure
+- CRUD operations using MongoDB
+- Express routing & middleware
+- Server-side rendering with EJS
+- Handling forms & URL parameters
+- Real-world backend workflow
+- Clean UI + backend integration
 
 🧑‍🎓 Author
 Sujal Kidecha
