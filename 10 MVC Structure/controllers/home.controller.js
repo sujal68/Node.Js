@@ -3,11 +3,11 @@ const home = (req, res) => {
     return res.render('home');
 };
 
-const about = (req, res) => {
-    return res.render('about');
+const Employee = (req, res) => {
+    return res.render('Employee');
 };
 
 module.exports = {
     home,
-    about
+    Employee
 };
