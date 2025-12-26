@@ -1,10 +1,10 @@
 const express = require('express');
-const { home, Employee } = require('../controllers/home.controller');
+const { home, about, } = require('../controllers/home.controller');
 const routes = express.Router();
 
 console.log('routing..');
 
 routes.get('/', home);
-routes.get('/Employee', Employee);
+routes.get('/about', about);
 
 module.exports = routes;
