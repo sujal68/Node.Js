@@ -70,6 +70,16 @@
                                 <%= employee['emp_Hobbys'] %>
                             </span>
                         </div>
+                        <div class="action-buttons">
+                            <button class="action-btn delete">
+                                <a href="/form/delete/<%= employee.id %> %>">Delete</a>
+                            </button>
+
+                            <button class="action-btn edit">
+                                <a href="/form/edit/<%= employee.id %> %>" style="color: rgb(16, 0, 78);">Edit</a>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
                 <% }) %>

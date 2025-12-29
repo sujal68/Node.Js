@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Video Add</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #cd0014;
+            color: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Fixed height */
+            width: 100vw;
+            overflow: hidden;
+            /* No Vertical or Horizontal Scroll */
+            padding: 10px;
+        }
+
+        .input-group input:focus {
+            border-color: #ff0000;
+            background: #333;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Ye naya CSS yaha add karo */
+        .input-group input:-webkit-autofill,
+        .input-group input:-webkit-autofill:hover,
+        .input-group input:-webkit-autofill:focus,
+        .input-group input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #2f2f2f inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        /* White Logo for Dark Theme */
+        .yt-logo {
+            width: 130px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.1));
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 15px;
+            background: #2a2a2a;
+            border: 1px solid #3f3f3f;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #ff0000;
+            background: #333;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-submit {
+            padding: 12px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .btn-goto {
+            padding: 11px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-goto:hover {
+            background-color: #444;
+        }
+
+        /* Responsive scaling for small screens */
+        @media (max-height: 700px) {
+            .form-container {
+                padding: 20px;
+                transform: scale(1.1);
+                /* Form shrink ho jayega agar screen chhoti hai */
+            }
+
+            h1 {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Video Management</h1>
+
+        <form action="/add-video" method="POST">
+            <div class="input-group">
+                <label>Thumbnail URL</label>
+                <input type="text" name="Thumnail" placeholder="Enter image link..." required>
+            </div>
+            <div class="input-group">
+                <label>Duration</label>
+                <input type="text" name="Duration" placeholder="e.g. 5:30" required>
+            </div>
+
+            <div class="input-group">
+                <label>Channel Profile</label>
+                <input type="text" name="Profile" placeholder="Enter profile link..." required>
+            </div>
+
+            <div class="input-group">
+                <label>Video Title</label>
+                <input type="text" name="Title" placeholder="What's the video about?" required>
+            </div>
+
+            <div class="input-group">
+                <label>Channel Name</label>
+                <input type="text" name="Channel" placeholder="e.g. CodeWithMe" required>
+            </div>
+
+            <div class="input-group">
+                <label>Views Count</label>
+                <input type="text" name="Views" placeholder="e.g. 500K Views" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Add Video to List</button>
+
+                <a href="/" class="btn-goto">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YT Icon"
+                        style="width: 20px;">
+                    Goto YouTube
+                </a>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

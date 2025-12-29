@@ -329,3 +329,66 @@ input[type="number"]::-webkit-outer-spin-button {
         grid-template-columns: 1fr;
     }
 }
+
+.btn {
+    display: flex;
+    gap: 12px;
+}
+
+.action-btn {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: all .3s ease;
+    overflow: hidden;
+}
+
+.action-btn a {
+    color: rgb(78, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: .4px;
+}
+
+.action-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0;
+    transition: .4s;
+    pointer-events: none;
+    /* 🔥 THIS FIXES YOUR CLICK */
+}
+
+.action-btn:hover::before {
+    opacity: 1;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Delete Style */
+.action-btn.delete {
+    border-color: rgba(255, 60, 60, 0.5);
+}
+
+.action-btn.delete:hover {
+    box-shadow: 0 10px 30px rgba(255, 60, 60, 0.4);
+}
+
+/* Edit Style */
+.action-btn.edit {
+    border-color: rgba(80, 150, 255, 0.5);
+}
+
+.action-btn.edit:hover {
+    box-shadow: 0 10px 30px rgba(80, 150, 255, 0.4);
+}
