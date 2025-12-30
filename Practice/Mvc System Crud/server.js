@@ -1,10 +1,13 @@
 const express = require("express");
 require("./config/db.config")
+const path = require('path');
 const app = express();
 const port = 6800;
 
 app.use(express.urlencoded())
 app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'Views'))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // jump middelware for jumping index.js 
 app.use('/', require('./routes/index'))

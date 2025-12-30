@@ -174,39 +174,42 @@
         <form action="/update-video" method="POST">
             <div class="input-group">
                 <input type="hidden" name="id" value="<%= SingleVideoFatch._id %>">
-                <label>Thumbnail URL</label>
-                <input type="text" name="Thumnail" value="<%= SingleVideoFatch.Thumnail %>"
-                    placeholder="Edit image link...">
+                <label for="">Old Thumbnail</label>
+                <br>
+                <img src="/<%= SingleVideoFatch.Thumnail %>" alt="Thumbnail" width="200px"
+                    style="border-radius: 12px; margin-bottom: 10px;">
             </div>
+            <label>Thumbnail URL</label>
+            <input type="file" name="Thumnail" value="<%= SingleVideoFatch.Thumnail %>"
+                placeholder="Edit image link...">
+    </div>
 
-            <div class="input-group">
-                <label>Channel Profile</label>
-                <input type="text" name="Profile" value="<%= SingleVideoFatch.Profile %>"
-                    placeholder="Edit profile link...">
-            </div>
+    <div class="input-group">
+        <label>Channel Profile</label>
+        <input type="file" name="Profile" value="<%= SingleVideoFatch.Profile %>" placeholder="Edit profile link...">
+    </div>
 
-            <div class="input-group">
-                <label>Video Title</label>
-                <input type="text" name="Title" value="<%= SingleVideoFatch.Title %>" placeholder="Update title...">
-            </div>
+    <div class="input-group">
+        <label>Video Title</label>
+        <input type="text" name="Title" value="<%= SingleVideoFatch.Title %>" placeholder="Update title...">
+    </div>
 
-            <div class="input-group">
-                <label>Channel Name</label>
-                <input type="text" name="Channel" value="<%= SingleVideoFatch.Channel %>"
-                    placeholder="Update channel name...">
-            </div>
+    <div class="input-group">
+        <label>Channel Name</label>
+        <input type="text" name="Channel" value="<%= SingleVideoFatch.Channel %>" placeholder="Update channel name...">
+    </div>
 
-            <div class="input-group">
-                <label>Views Count</label>
-                <input type="text" name="Views" value="<%= SingleVideoFatch.Views %>" placeholder="Update views...">
-            </div>
+    <div class="input-group">
+        <label>Views Count</label>
+        <input type="text" name="Views" value="<%= SingleVideoFatch.Views %>" placeholder="Update views...">
+    </div>
 
-            <div class="button-group">
-                <button type="submit" class="btn-update">Save Changes</button>
+    <div class="button-group">
+        <button type="submit" class="btn-update">Save Changes</button>
 
-                <a href="/" class="btn-cancel">Cancel</a>
-            </div>
-        </form>
+        <a href="/" class="btn-cancel">Cancel</a>
+    </div>
+    </form>
     </div>
 
 </body>
