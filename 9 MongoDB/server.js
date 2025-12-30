@@ -8,6 +8,8 @@ const app = express();
 const PORT = 6800;
 
 app.use(express.static(path.join(__dirname, "public")))
+
+// multer image folder
 app.use('/images', express.static(path.join(__dirname, "images")))
 /*
  * Insert : create(body) method in MongoDb Provide 
@@ -28,7 +30,7 @@ app.use('/images', express.static(path.join(__dirname, "images")))
 
 app.set('view engine', "ejs")
 
-// multer 
+// multer storage
 const storage = multer.diskStorage({
     destination: (req, file, cd) => {
         cd(null, "images/");
@@ -41,11 +43,11 @@ const storage = multer.diskStorage({
 // multer middel ware 
 const upload = multer({ storage })
 
-// middle were 
+// middle were post request data
 app.use(express.urlencoded());
 
 
-// table View Book 
+// table View Book page
 app.get('/', async (req, res) => {
 
     const allbook = await Book.find();
@@ -53,7 +55,7 @@ app.get('/', async (req, res) => {
     return res.render('table', { allbook })
 })
 
-// Add Book Form
+// Add Book Form page
 app.get('/AddBookPage', (req, res) => {
     return res.render('form')
 });
@@ -114,8 +116,6 @@ app.get('/bookDelete', async (req, res) => {
 
 // add book 
 app.post('/addBook', upload.single('BookImg'), async (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
     req.body.BookImg = req.file.path;
 
     const bookAdded = await Book.create(req.body);

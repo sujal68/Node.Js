@@ -29,6 +29,10 @@ const EmpSchema = mongoose.Schema({
         type: Array,
         required: true,
     },
+    emp_ProfilePic: {
+        type: String,
+        required: true,
+    }
 });
 
 module.exports = mongoose.model("Employee", EmpSchema, "Employees");

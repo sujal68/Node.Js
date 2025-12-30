@@ -13,6 +13,11 @@
             box-sizing: border-box;
         }
 
+        ::selection {
+            background: #cd0014;
+            color: #fff;
+        }
+
         body {
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #0f0f0f;
@@ -186,6 +191,7 @@
 
         .video-card {
             cursor: pointer;
+            position: relative;
         }
 
         .thumbnail-container {
@@ -195,9 +201,30 @@
             background-color: #181818;
             border-radius: 12px;
             overflow: visible;
-            /* Change from hidden to visible */
         }
 
+        .thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Three Dot Menu */
         .menu-trigger {
             position: absolute;
             top: 8px;
@@ -249,6 +276,13 @@
         }
 
         .dropdown-item {
+            padding: 0;
+            border: none;
+            background: transparent;
+            width: 100%;
+        }
+
+        .dropdown-item a {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -257,52 +291,16 @@
             font-size: 14px;
             cursor: pointer;
             transition: background-color 0.2s;
-            border: none;
-            background: transparent;
+            text-decoration: none;
             width: 100%;
-            text-align: left;
         }
 
-        .dropdown-item:hover {
+        .dropdown-item a:hover {
             background-color: #3f3f3f;
         }
 
         .dropdown-item i {
             font-size: 18px;
-        }
-
-        .dropdown-item a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-        }
-
-        /* Hide old buttons */
-        .BTN {
-            display: none;
-        }
-
-        .thumbnail {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-duration {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
         }
 
         .video-info {
@@ -372,7 +370,6 @@
                 <button class="search-btn">
                     <i class="ri-search-line"></i>
                 </button>
-
             </div>
             <button class="voice-btn">
                 <i class="ri-mic-line"></i>
@@ -399,31 +396,44 @@
         <div class="chip">Programming</div>
         <div class="chip">Web Development</div>
         <div class="chip">JavaScript</div>
-        <div class="chip">Music</div>
-        <div class="chip">Gaming</div>
-        <div class="chip">Live</div>
-        <div class="chip">News</div>
-        <div class="chip">Podcasts</div>
+        <div class="chip">React</div>
+        <div class="chip">Node.js</div>
+        <div class="chip">Tutorial</div>
+        <div class="chip">Entertainment</div>
+        <div class="chip">Sports</div>
     </div>
 
     <!-- Video Grid -->
     <div class="video-container">
         <% videos.map((video, index)=> { %>
             <div class="video-card">
-                <div class="BTN">
-                    <button
-                        style="padding: 5px 20px; border-radius: 10px; margin-left: 10px; margin-bottom: 10px; background-color: transparent; color: white; border: 1px solid white; cursor: pointer;"><a
-                            href="/editVideo/<%= video['id'] %>">Edit</a></button>
-                    <button
-                        style="padding: 5px 20px; border-radius: 10px; margin-left: 10px; margin-bottom: 10px; background-color: transparent; color: white; border: 1px solid white; cursor: pointer;"><a
-                            href="/deleteVideo/<%= video['id'] %>">Delete</a></button>
-                </div>
                 <div class="thumbnail-container">
                     <img src="<%= video['Thumnail'] %>" alt="Thumbnail" class="thumbnail">
                     <span class="video-duration">
                         <%= video['Duration'] %>
                     </span>
+
+                    <button class="menu-trigger" onclick="toggleMenu(event, '<%= index %>')">
+                        <i class="ri-more-2-fill"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu" id="menu-<%= index %>">
+                        <div class="dropdown-item">
+                            <a href="/editVideo/<%= video['id'] %>">
+                                <i class="ri-edit-line"></i>
+                                <span>Edit</span>
+                            </a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="/deleteVideo/<%= video['id'] %>">
+                                <i class="ri-delete-bin-line"></i>
+                                <span>Delete</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="video-info">
                     <img src="<%= video['Profile'] %>" alt="Channel" class="channel-icon">
                     <div class="video-details">
@@ -441,6 +451,32 @@
             </div>
             <% }) %>
     </div>
+
+    <script>
+        function toggleMenu(event, index) {
+            event.stopPropagation();
+            const menu = document.getElementById(`menu-${index}`);
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+
+            // Close all other menus
+            allMenus.forEach(m => {
+                if (m !== menu) {
+                    m.classList.remove('active');
+                }
+            });
+
+            // Toggle current menu
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.menu-trigger')) {
+                const allMenus = document.querySelectorAll('.dropdown-menu');
+                allMenus.forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
 </body>
 
 </html>
