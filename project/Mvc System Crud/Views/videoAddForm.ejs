@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Studio Upload UI</title>
+    <link rel="stylesheet" href="../public/dist/add.css">
+</head>
+
+<body>
+
+    <div class="modal">
+        <div class="header">
+            <div class="header-top">
+                <h2>Video Management</h2>
+                <span><a href="/" style="color: white; text-decoration: none; font-size: 24px;">&times;</a></span>
+            </div>
+        </div>
+
+        <form action="/add-video" method="POST" enctype="multipart/form-data" style="display: contents;">
+            <div class="content-area">
+
+                <div class="form-section">
+                    <h3>Details</h3>
+
+                    <div class="input-box">
+                        <label>Title (required)</label>
+                        <input type="text" name="Title" placeholder="Add a title" required>
+                    </div>
+
+                    <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Select files to upload:</p>
+
+                    <div class="uploads-wrapper">
+                        <div class="upload-item">
+                            <h4>Thumbnail</h4>
+                            <label for="thumbnail-upload" class="upload-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                    <path
+                                        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z" />
+                                </svg>
+                                <span>Thumbnail</span>
+                            </label>
+                            <input type="file" id="thumbnail-upload" name="Thumnail" required style="display: none;"
+                                onchange="previewThumbnail(this)">
+                        </div>
+
+                        <div class="upload-item">
+                            <h4>Channel Logo</h4>
+                            <label for="profile-upload" class="upload-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                                </svg>
+                                <span>Profile</span>
+                            </label>
+                            <input type="file" id="profile-upload" name="Profile" required style="display: none;"
+                                onchange="previewProfile(this)">
+                        </div>
+                        <div class="upload-item">
+                            <h4>Video GIF</h4>
+                            <label for="gif-upload" class="upload-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"
+                                    fill="#aaa">
+                                    <path
+                                        d="M11.5 9H13v6h-1.5V9zM9 9H6c-.6 0-1 .4-1 1v4c0 .6.4 1 1 1h3c.6 0 1-.4 1-1v-2H8.5v1.5h-2v-3H10V10c0-.6-.4-1-1-1zm9 1.5V9h-4.5v6H15v-2h2v-1.5h-2v-1h3z" />
+                                </svg>
+                                <span>Upload GIF</span>
+                            </label>
+                            <input type="file" id="gif-upload" name="VideoGif" style="display: none;"
+                                onchange="previewFile(this, 'main-preview-img')">
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Channel Name</label>
+                        <input type="text" name="Channel" placeholder="e.g. Sujal Kidecha" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="input-box">
+                            <label>Duration</label>
+                            <input type="text" name="Duration" placeholder="e.g. 10:45" required>
+                        </div>
+                        <div class="input-box">
+                            <label>Static Views</label>
+                            <input type="text" name="Views" placeholder="e.g. 1.2M views" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="video-placeholder" id="video-preview-box">
+                        <span id="placeholder-text">Video Preview will appear here</span>
+                        <img id="main-thumbnail-preview" src="#" alt="Thumbnail Preview">
+                    </div>
+                    <div class="preview-details">
+                        <p class="link-label">Video link</p>
+                        <div class="link-area">
+                            <div class="channel-logo-preview">
+                                <svg id="logo-placeholder-svg" xmlns="http://www.w3.org/2000/svg" height="20"
+                                    viewBox="0 0 24 24" width="20" fill="#606060">
+                                    <path
+                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                                <img id="side-profile-preview" src="#" alt="Profile Preview">
+                            </div>
+                            <div class="input-box" style="margin-bottom: 0px;">
+                                <p class="link-url"><input type="text" placeholder="Enter Video Link.."
+                                        name="VideoLink">
+                            </div>
+                            </p>
+                        </div>
+
+                        <p class="link-label">Filename</p>
+                        <p style="font-size: 13px;">Youtube Video</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <div class="status-icons">
+                    <span>HD</span> <span>4K</span> <span>CC</span>
+                    <span style="margin-left: 10px; color: #3ea6ff;">✓ Upload ready</span>
+                </div>
+                <button type="submit" class="btn-next">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Thumbnail Preview Logic
+        function previewThumbnail(input) {
+            const preview = document.getElementById('main-thumbnail-preview');
+            const placeholderText = document.getElementById('placeholder-text');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholderText.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Profile/Logo Preview Logic
+        function previewProfile(input) {
+            const preview = document.getElementById('side-profile-preview');
+            const svgIcon = document.getElementById('logo-placeholder-svg');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    svgIcon.style.display = 'none';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function previewFile(input, targetId) {
+            const preview = document.getElementById(targetId);
+            // Agar main preview box mein placeholder text hai toh use hide karne ke liye
+            const placeholderText = document.getElementById('placeholder-text');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Image dikhao
+                    if (placeholderText) placeholderText.style.display = 'none'; // Text hatao
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

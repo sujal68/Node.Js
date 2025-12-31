@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #cd0014;
+            color: #fff;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #0f0f0f;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .logo i {
+            color: #ff0000;
+            font-size: 32px;
+        }
+
+        .header-center {
+            flex: 0 1 728px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box {
+            display: flex;
+            flex: 1;
+        }
+
+        .search-input {
+            flex: 1;
+            background-color: #121212;
+            border: 1px solid #303030;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 40px 0 0 40px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #1c62b9;
+        }
+
+        .search-btn {
+            background-color: #222222;
+            border: 1px solid #303030;
+            padding: 0 24px;
+            border-radius: 0 40px 40px 0;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .voice-btn {
+            background-color: #181818;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-icon {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ff0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 240px;
+            height: calc(100vh - 60px);
+            background-color: #0f0f0f;
+            overflow-y: auto;
+            padding: 12px 0;
+            z-index: 99;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.closed {
+            transform: translateX(-240px);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: #717171;
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        .sidebar-section {
+            padding: 8px 0;
+            border-bottom: 1px solid #272727;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .sidebar-item:hover {
+            background-color: #272727;
+        }
+
+        .sidebar-item.active {
+            background-color: #272727;
+            font-weight: 500;
+        }
+
+        .sidebar-item i {
+            font-size: 24px;
+            width: 24px;
+        }
+
+        .sidebar-item .live-badge {
+            margin-left: auto;
+            width: 8px;
+            height: 8px;
+            background-color: #ff0000;
+            border-radius: 50%;
+        }
+
+        .sidebar-title {
+            padding: 8px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-title i {
+            font-size: 18px;
+        }
+
+        .channel-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 24px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+        }
+
+        .channel-item:hover {
+            background-color: #272727;
+        }
+
+        .channel-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .show-more {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+        }
+
+        .show-more:hover {
+            background-color: #272727;
+        }
+
+        .show-more i {
+            font-size: 24px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 240px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        /* Chips */
+        .chips-container {
+            display: flex;
+            gap: 12px;
+            padding: 16px 16px;
+            overflow-x: auto;
+            background-color: #0f0f0f;
+            position: sticky;
+            top: 60px;
+            z-index: 98;
+        }
+
+        .chips-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            background-color: #272727;
+            padding: 8px 16px;
+            border-radius: 8px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .chip:hover {
+            background-color: #3f3f3f;
+        }
+
+        .chip.active {
+            background-color: #fff;
+            color: #0f0f0f;
+        }
+
+        /* Video Grid */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            padding: 20px 16px;
+            max-width: 2200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background-color: #181818;
+            border-radius: 12px;
+            overflow: visible;
+        }
+
+        .thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .hover-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            opacity: 0;
+            z-index: 2;
+            transition: all 0.1s;
+        }
+
+        .video-card:hover .hover-gif {
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Three Dot Menu */
+        .menu-trigger {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s, background-color 0.2s;
+            z-index: 10;
+        }
+
+        .video-card:hover .menu-trigger {
+            opacity: 1;
+        }
+
+        .menu-trigger:hover {
+            background-color: rgba(30, 30, 30, 0.95);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 45px;
+            right: 8px;
+            background-color: #282828;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            min-width: 150px;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0;
+            border: none;
+            background: transparent;
+            width: 100%;
+        }
+
+        .dropdown-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .dropdown-item a:hover {
+            background-color: #3f3f3f;
+        }
+
+        .dropdown-item i {
+            font-size: 18px;
+        }
+
+        .video-info {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .channel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .video-details {
+            flex: 1;
+        }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .channel-name {
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-bottom: 2px;
+        }
+
+        .video-meta {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-240px);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-center {
+                display: none;
+            }
+
+            .video-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+    </style> -->
+    <link rel="stylesheet" href="../public/dist/youtube.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <i class="ri-menu-line menu-icon" onclick="toggleSidebar()"></i>
+            <div class="logo">
+                <i class="ri-youtube-fill"></i>
+                <span>YouTube</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search">
+                <button class="search-btn">
+                    <i class="ri-search-line"></i>
+                </button>
+            </div>
+            <button class="voice-btn">
+                <i class="ri-mic-line"></i>
+            </button>
+        </div>
+        <div class="header-right">
+            <a href="/addVideoForm"><i class="ri-video-add-line header-icon"></i></a>
+            <i class="ri-notification-3-line header-icon"></i>
+            <div class="profile-icon">
+                <i class="ri-user-fill"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!-- Home Section -->
+        <div class="sidebar-section">
+            <div class="sidebar-item active">
+                <i class="ri-home-5-fill"></i>
+                <span>Home</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-compass-3-line"></i>
+                <span>Explore</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-play-circle-line"></i>
+                <span>Shorts</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-tv-line"></i>
+                <span>Subscriptions</span>
+            </div>
+        </div>
+
+        <!-- You Section -->
+        <div class="sidebar-section">
+            <div class="sidebar-item">
+                <i class="ri-play-list-2-line"></i>
+                <span>Library</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-history-line"></i>
+                <span>History</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-video-line"></i>
+                <span>Your videos</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-time-line"></i>
+                <span>Watch Later</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-thumb-up-line"></i>
+                <span>Liked videos</span>
+            </div>
+            <div class="show-more">
+                <i class="ri-arrow-down-s-line"></i>
+                <span>Show more</span>
+            </div>
+        </div>
+
+        <!-- Subscriptions Section -->
+        <div class="sidebar-section">
+            <div class="sidebar-title">
+                <span>Subscriptions</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/oggy.jpg" alt="Channel" class="channel-avatar">
+                <span>OGGY</span>
+                <div class="live-badge"></div>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/techno.jpg" alt="Channel" class="channel-avatar">
+                <span>Techno Gamerz</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/Mrbeast.jpg" alt="Channel" class="channel-avatar">
+                <span>MrBeast</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/himeesh.jpg" alt="Channel" class="channel-avatar">
+                <span>Him-eesh Madaan</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/mrindian.jpg" alt="Channel" class="channel-avatar">
+                <span>MR. INDIAN HACKER</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/codewithharry.jpg" alt="Channel" class="channel-avatar">
+                <span>CodeWithHarry</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/techbururner.jpg" alt="Channel" class="channel-avatar">
+                <span>Tech Burner</span>
+            </div>
+            <div class="show-more">
+                <i class="ri-arrow-down-s-line"></i>
+                <span>Show more</span>
+            </div>
+        </div>
+
+        <!-- setting -->
+        <div class="sidebar-section">
+            <div class="sidebar-item">
+                <i class="ri-settings-4-line"></i>
+                <span>Setting</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-flag-fill"></i>
+                <span>Report History</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-question-line"></i>
+                <span>Help</span>
+            </div>
+            <div class="sidebar-item">
+                <i class="ri-feedback-line"></i>
+                <span>Send Feedback</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Chips -->
+        <div class="chips-container">
+            <div class="chip active">All</div>
+            <div class="chip">Music</div>
+            <div class="chip">Gaming</div>
+            <div class="chip">Live</div>
+            <div class="chip">News</div>
+            <div class="chip">Podcasts</div>
+            <div class="chip">Computer Science</div>
+            <div class="chip">Programming</div>
+            <div class="chip">Web Development</div>
+            <div class="chip">JavaScript</div>
+            <div class="chip">React</div>
+            <div class="chip">Node.js</div>
+            <div class="chip">Tutorial</div>
+            <div class="chip">Entertainment</div>
+            <div class="chip">Sports</div>
+        </div>
+
+        <!-- Video Grid -->
+        <div class="video-container">
+            <% videos.map((video, index)=> { %>
+                <div class="video-card">
+                    <div class="thumbnail-container">
+                        <a href="<%= video['VideoLink'] %>"><img src="/<%= video['Thumnail'] %>" alt="Thumbnail"
+                                class="thumbnail">
+                            <img src="/<%= video['VideoGif'] %>" alt="Preview" class="thumbnail hover-gif"></a>
+
+                        <span class="video-duration">
+                            <%= video['Duration'] %>
+                        </span>
+
+                        <button class="menu-trigger" onclick="toggleMenu(event, '<%= index %>')">
+                            <i class="ri-more-2-fill"></i>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu" id="menu-<%= index %>">
+                            <div class="dropdown-item">
+                                <a href="/editVideo/<%= video['id'] %>">
+                                    <i class="ri-edit-line"></i>
+                                    <span>Edit</span>
+                                </a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a href="/deleteVideo/<%= video['id'] %>">
+                                    <i class="ri-delete-bin-line"></i>
+                                    <span>Delete</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-info">
+                        <img src="/<%= video['Profile'] %>" alt="Channel" class="channel-icon">
+                        <div class="video-details">
+                            <div class="video-title">
+                                <%= video['Title'] %>
+                            </div>
+                            <div class="channel-name">
+                                <%= video['Channel'] %>
+                            </div>
+                            <div class="video-meta">
+                                <%= video['Views'] %> • 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.toggle('open');
+            } else {
+                sidebar.classList.toggle('closed');
+                mainContent.classList.toggle('expanded');
+            }
+        }
+
+        function toggleMenu(event, index) {
+            event.stopPropagation();
+            const menu = document.getElementById(`menu-${index}`);
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+
+            // Close all other menus
+            allMenus.forEach(m => {
+                if (m !== menu) {
+                    m.classList.remove('active');
+                }
+            });
+
+            // Toggle current menu
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.menu-trigger')) {
+                const allMenus = document.querySelectorAll('.dropdown-menu');
+                allMenus.forEach(m => m.classList.remove('active'));
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            if (window.innerWidth > 1024) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,9 +1,10 @@
-// require Song model //
+// require Song model
 const Songs = require('./model/song.model')
-// require mongoose DataBase // 
+// require mongoose DataBase 
 require('./config/db.config')
-// require express third party Module //
+// require express third party Module 
 const express = require('express');
+
 const app = express();
 const PORT = 6800;
 
@@ -63,7 +64,7 @@ app.get('/SongEdit/:SongId', async (req, res) => {
 
 // Update Song 
 app.post('/songUpdate', async (req, res) => {
-    const song = await Songs.findByIdAndUpdate(req.body.id, req.body);
+    const song = await Songs.findByIdAndUpdate(req.body.id, req.body, { new: true });
 
     if (song) {
         return res.redirect('/')

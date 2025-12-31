@@ -12,6 +12,45 @@
         body {
             padding: 0px;
         }
+
+        .like-btn.active {
+            color: #0a66c2;
+            font-weight: 600;
+        }
+
+        .like-icon {
+            color: #0a66c2;
+        }
+
+        .linkedin-right-footer {
+            position: fixed;
+            right: 220px;
+            top: 92px;
+            width: 260px;
+            font-size: 12px;
+            color: #b0b3b8;
+        }
+
+        .footer-links div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #b0b3b8;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copy {
+            margin-top: 10px;
+            color: #8b8f94;
+        }
     </style>
 </head>
 
@@ -132,16 +171,20 @@
 
                 <!-- Post Stats -->
                 <div class="post-stats">
-                    <span><i class="ri-thumb-up-fill" style="color: #0a66c2;"></i> You and 7 others</span>
+                    <span>
+                        <i class="ri-thumb-up-fill like-icon"></i>
+                        <span id="like-text-<%= index %>">0 Likes</span>
+                    </span>
                     <span>4 comments</span>
                 </div>
 
                 <!-- Post Actions -->
                 <div class="post-actions">
-                    <button class="action-btn">
-                        <i class="ri-thumb-up-line action-icon"></i>
+                    <button class="action-btn like-btn" onclick="toggleLike('<%= index %>')">
+                        <i class="ri-thumb-up-line action-icon" id="like-icon-<%= index %>"></i>
                         Like
                     </button>
+
                     <button class="action-btn">
                         <i class="ri-chat-3-line action-icon"></i>
                         Comment
@@ -158,6 +201,32 @@
             </div>
             <% }) %>
     </div>
+    <div class="linkedin-right-footer">
+        <div class="footer-links">
+            <div>
+                <a href="#">About</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Help Center</a>
+            </div>
+
+            <div>
+                <a href="#">Privacy & Terms</a>
+                <a href="#">Ad Choices</a>
+                <a href="#">Advertising</a>
+            </div>
+
+            <div>
+                <a href="#">Business Services</a>
+                <a href="#">Get the LinkedIn app</a>
+                <a href="#">More</a>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+            LinkedIn Corporation © 2025
+        </div>
+    </div>
+
 
     <script>
         function toggleDropdown(index) {
@@ -183,7 +252,30 @@
                 });
             }
         });
+        const likes = {};
 
+        function toggleLike(index) {
+            if (!likes[index]) {
+                likes[index] = { count: 0, liked: false };
+            }
+
+            const data = likes[index];
+            const icon = document.getElementById(`like-icon-${index}`);
+            const text = document.getElementById(`like-text-${index}`);
+            const btn = icon.closest('.like-btn');
+
+            if (data.liked) {
+                data.count--;
+                data.liked = false;
+                btn.classList.remove('active');
+            } else {
+                data.count++;
+                data.liked = true;
+                btn.classList.add('active');
+            }
+
+            text.innerText = `${data.count} Likes`;
+        }
     </script>
 </body>
 

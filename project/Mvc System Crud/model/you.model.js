@@ -25,6 +25,14 @@ const schema = mongoose.Schema({
         type: String,
         required: true,
     },
+    VideoLink: {
+        type: String,
+        required: true,
+    },
+    VideoGif: {
+        type: String,
+        required: true,
+    }
 });
 
 const model = mongoose.model("Youtube", schema);

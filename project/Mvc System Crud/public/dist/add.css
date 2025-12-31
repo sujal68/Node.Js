@@ -1,0 +1,242 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: "Roboto", Arial, sans-serif;
+ }
+
+ body {
+     background-color: #0f0f0f;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     color: #f1f1f1;
+     overflow: hidden;
+ }
+
+ .modal {
+     background-color: #282828;
+     width: 90%;
+     max-width: 960px;
+     height: 85vh;
+     border-radius: 12px;
+     display: flex;
+     flex-direction: column;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+     overflow: hidden;
+     border: 1px solid #3e3e3e;
+ }
+
+ .header {
+     padding: 20px 24px;
+     border-bottom: 1px solid #3e3e3e;
+ }
+
+ .header-top {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .header-top h2 {
+     font-size: 20px;
+     font-weight: 500;
+ }
+
+ .content-area {
+     flex: 1;
+     overflow-y: auto;
+     display: grid;
+     grid-template-columns: 1.5fr 1fr;
+     gap: 24px;
+     padding: 24px;
+ }
+
+ .form-section h3 {
+     margin-bottom: 20px;
+     font-size: 24px;
+ }
+
+ .input-box {
+     margin-bottom: 25px;
+     border: 1px solid #606060;
+     border-radius: 4px;
+     padding: 8px 12px;
+ }
+
+ .input-box:focus-within {
+     border-color: #3ea6ff;
+ }
+
+ .input-box label {
+     display: block;
+     font-size: 12px;
+     color: #aaa;
+     margin-bottom: 4px;
+ }
+
+ .input-box input {
+     width: 100%;
+     background: transparent;
+     border: none;
+     color: white;
+     font-size: 15px;
+     outline: none;
+ }
+
+ /* ----- Multiple Upload Boxes Side-by-Side ----- */
+ .uploads-wrapper {
+     display: flex;
+     gap: 15px;
+     margin-bottom: 25px;
+ }
+
+ .upload-item {
+     flex: 1;
+ }
+
+ .upload-item h4 {
+     font-size: 14px;
+     font-weight: 500;
+     margin-bottom: 8px;
+     color: #f1f1f1;
+ }
+
+ .upload-box {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     height: 90px;
+     border: 1px dashed #606060;
+     border-radius: 4px;
+     cursor: pointer;
+     color: #aaa;
+     transition: background 0.2s;
+     text-align: center;
+ }
+
+ .upload-box:hover {
+     background-color: #333;
+     border-color: #909090;
+ }
+
+ .upload-box svg {
+     fill: #aaa;
+     margin-bottom: 4px;
+ }
+
+ .upload-box span {
+     font-size: 10px;
+ }
+
+ /* Right Side Preview */
+ .preview-section {
+     background-color: #1f1f1f;
+     border-radius: 8px;
+     height: fit-content;
+     overflow: hidden;
+     position: sticky;
+     top: 0;
+ }
+
+ .video-placeholder {
+     width: 100%;
+     aspect-ratio: 16/9;
+     background-color: #000;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #606060;
+     position: relative;
+ }
+
+ .video-placeholder img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: none;
+     /* Hide until image is selected */
+ }
+
+ .preview-details {
+     padding: 16px;
+ }
+
+ .link-label {
+     font-size: 12px;
+     color: #aaa;
+     margin-bottom: 10px;
+ }
+
+ .link-area {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin-bottom: 12px;
+ }
+
+ /* Channel Logo Preview */
+ .channel-logo-preview {
+     width: 35px;
+     height: 35px;
+     border-radius: 50%;
+     background-color: #333;
+     border: 1px solid #444;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     overflow: hidden;
+     flex-shrink: 0;
+ }
+
+ .channel-logo-preview img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: none;
+ }
+
+ .link-url {
+     color: #3ea6ff;
+     font-size: 14px;
+     cursor: pointer;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
+
+ .footer {
+     padding: 16px 24px;
+     border-top: 1px solid #3e3e3e;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     background-color: #282828;
+ }
+
+ .btn-next {
+     background-color: #3ea6ff;
+     color: #000;
+     border: none;
+     padding: 10px 24px;
+     border-radius: 2px;
+     font-weight: 500;
+     cursor: pointer;
+     text-transform: uppercase;
+ }
+
+ .status-icons {
+     display: flex;
+     gap: 15px;
+     color: #aaa;
+     font-size: 14px;
+ }
+
+ /* Autocomplete Fix */
+ .input-box input:-webkit-autofill {
+     -webkit-box-shadow: 0 0 0 30px #282828 inset !important;
+     -webkit-text-fill-color: white !important;
+ }

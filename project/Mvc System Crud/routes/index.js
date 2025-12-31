@@ -21,7 +21,7 @@ routes.get("/deleteVideo/:DeleteID", VideoDelete);
 routes.get("/editVideo/:UpdateID", VideoUpdate);
 
 // post request
-routes.post('/add-video', YoutubeImg.single('Thumnail'), addVideo)
-routes.post('/update-video', EditVideo)
+routes.post('/add-video', YoutubeImg.fields([{ name: 'Thumnail', maxCount: 1 }, { name: 'Profile', maxCount: 1 }, { name: 'VideoGif', maxCount: 1 }]), addVideo)
+routes.post('/update-video', YoutubeImg.fields([{ name: 'Thumnail', maxCount: 1 }, { name: 'Profile', maxCount: 1 }, { name: 'VideoGif', maxCount: 1 }]), EditVideo)
 
 module.exports = routes;

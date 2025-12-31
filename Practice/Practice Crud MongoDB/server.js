@@ -4,7 +4,7 @@ const multer = require('multer');
 require('./config/db.config');
 const path = require('path');
 const app = express();
-const PORT = 6800;
+const PORT = 6700;
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded())
@@ -67,5 +67,5 @@ app.listen(PORT, (error) => {
         console.log("Server Is Not Connected🥲❌", error);
         return false;
     }
-    console.log("Server Is Connected In This Port (http://localhost:6800)");
+    console.log("Server Is Connected In This Port (http://localhost:6700)");
 })
