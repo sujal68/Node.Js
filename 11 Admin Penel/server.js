@@ -1,9 +1,10 @@
 const express = require('express');
+require('./config/db.config')
 const app = express();
 const port = 6800;
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use('/', require('./routes/'))

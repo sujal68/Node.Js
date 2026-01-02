@@ -1,680 +1,779 @@
 <%- include('header') %>
 
-    <div class="page-wrapper">
-        <div class="page-breadcrumb">
-            <div class="row">
-                <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Tables</h4>
-                    <div class="ml-auto text-right">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Library</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title m-b-0">Static Table</h5>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox m-b-20">
-                                                <input type="checkbox" id="mainCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <th scope="col">Rendering engine</th>
-                                        <th scope="col">Browser</th>
-                                        <th scope="col">Platform(s)</th>
-                                        <th scope="col">Engine version</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="customtable">
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0</td>
-                                        <td>Win 95+</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0</td>
-                                        <td>Win 95+</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.5</td>
-                                        <td>Win 95+</td>
-                                        <td>5.5</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <label class="customcheckbox">
-                                                <input type="checkbox" class="listCheckbox" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 6</td>
-                                        <td>Win 98+</td>
-                                        <td>6</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Collspan Table Example</h5>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Basic Datatable</h5>
-                            <div class="table-responsive">
-                                <table id="zero_config" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>$90,560</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>$342,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>$470,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>$313,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>$198,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>New York</td>
-                                            <td>64</td>
-                                            <td>2010/06/09</td>
-                                            <td>$725,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>New York</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>$237,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>$217,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>New York</td>
-                                            <td>30</td>
-                                            <td>2011/09/03</td>
-                                            <td>$345,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>Sidney</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>$85,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>$92,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>Singapore</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>$357,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>San Francisco</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>$850,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>Tokyo</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>$163,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Sidney</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>$95,400</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>London</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>$145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>San Francisco</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>$235,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>Edinburgh</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>$324,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>San Francisco</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>$164,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>San Francisco</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>$109,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>$645,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>$234,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>$139,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>$87,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>$138,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
+    <style>
+        /* Custom styles for admin management */
+        .admin-card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge {
+            font-size: 0.75em;
+            padding: 0.4em 0.8em;
+        }
+
+        .table-hover tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+            transform: translateX(-5px);
+        }
+
+        .admin-action-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Custom modal styling */
+        .admin-modal .modal-content {
+            border-radius: 0.5rem;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-modal .modal-header {
+            background: linear-gradient(135deg, #2e313c 0%, #000000 100%);
+            color: white;
+            border-radius: 0.5rem 0.5rem 0 0;
+            padding: 1.2rem 1.5rem;
+        }
+
+        .admin-modal .modal-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .admin-modal .modal-body {
+            padding: 1.5rem;
+        }
+
+        .admin-modal .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .admin-modal .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
+
+        .admin-modal .btn-close:hover {
+            opacity: 1;
+        }
+
+        /* Search input styling */
+        #search-input {
+            border-radius: 0.25rem 0 0 0.25rem;
+            border-right: none;
+        }
+
+        #search-input:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+        }
+
+        .input-group .btn-outline-secondary {
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        /* Responsive table */
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+
+            .admin-action-btn {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.75rem;
+            }
+
+            .admin-avatar {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animation for delete */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+
+        /* Notification styling */
+        .custom-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+            min-width: 300px;
+            animation: slideInRight 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Fix for modal backdrop */
+        .modal-backdrop {
+            z-index: 1040;
+        }
+
+        .modal {
+            z-index: 1050;
+        }
+
+        /* Table styling */
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: 600;
+            color: #495057;
+            padding: 0.75rem 1rem;
+        }
+
+        .table tbody td {
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+    </style>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <img src="/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Admin" />
+                            <span class="text-dark">Admin Panel</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+                <!-- Page Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="mb-0"><strong>Admin</strong> Management</h3>
+                            <a href="/addAdmin" class="btn btn-primary">
+                                <i data-feather="plus"></i> Add New Admin
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search-input"
+                                placeholder="Search by name, email, phone or city...">
+                            <button class="btn btn-outline-primary" type="button" id="search-btn">
+                                <i data-feather="search"></i> Search
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" id="clear-search"
+                                style="display: none;">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Profile</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>City</th>
+                                                <th>Gender</th>
+                                                <th>Status</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-table-body">
+                                            <!-- Admin 1 -->
+                                            <tr class="admin-item" data-id="1" data-name="John Doe"
+                                                data-email="john.doe@example.com" data-phone="+91 9876543210"
+                                                data-city="Mumbai" data-gender="Male" data-status="Active"
+                                                data-hobbies="Reading, Gaming, Music"
+                                                data-about="Experienced administrator with 5+ years of experience in system management and user support. Specialized in database administration and security."
+                                                data-avatar="/img/avatars/avatar.jpg">
+                                                <td>#AD001</td>
+                                                <td>
+                                                    <img src="/img/avatars/avatar.jpg" class="admin-avatar"
+                                                        alt="John Doe">
+                                                </td>
+                                                <td><strong>John Doe</strong></td>
+                                                <td>john.doe@example.com</td>
+                                                <td>+91 9876543210</td>
+                                                <td>Mumbai, India</td>
+                                                <td>Male</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
+                                                        onclick="editAdmin(1)" title="Edit">
+                                                        <i data-feather="edit-2"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
+                                                        onclick="viewAdmin(1)" title="View">
+                                                        <i data-feather="eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger admin-action-btn"
+                                                        onclick="deleteAdmin(1)" title="Delete">
+                                                        <i data-feather="trash-2"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Admin 2 -->
+                                            <tr class="admin-item" data-id="2" data-name="Jane Smith"
+                                                data-email="jane.smith@example.com" data-phone="+91 9876543211"
+                                                data-city="Delhi" data-gender="Female" data-status="Active"
+                                                data-hobbies="Painting, Music, Traveling"
+                                                data-about="Creative administrator with expertise in UI/UX design and frontend development. Passionate about creating user-friendly interfaces."
+                                                data-avatar="/img/avatars/avatar-2.jpg">
+                                                <td>#AD002</td>
+                                                <td>
+                                                    <img src="/img/avatars/avatar-2.jpg" class="admin-avatar"
+                                                        alt="Jane Smith">
+                                                </td>
+                                                <td><strong>Jane Smith</strong></td>
+                                                <td>jane.smith@example.com</td>
+                                                <td>+91 9876543211</td>
+                                                <td>Delhi, India</td>
+                                                <td>Female</td>
+                                                <td>
+                                                    <span class="badge bg-success">Active</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
+                                                        onclick="editAdmin(2)" title="Edit">
+                                                        <i data-feather="edit-2"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
+                                                        onclick="viewAdmin(2)" title="View">
+                                                        <i data-feather="eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger admin-action-btn"
+                                                        onclick="deleteAdmin(2)" title="Delete">
+                                                        <i data-feather="trash-2"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Admin 3 -->
+                                            <tr class="admin-item" data-id="3" data-name="Mike Johnson"
+                                                data-email="mike.j@example.com" data-phone="+91 9876543212"
+                                                data-city="Bangalore" data-gender="Male" data-status="Inactive"
+                                                data-hobbies="Sports, Coding, Photography"
+                                                data-about="Tech enthusiast and backend developer with strong skills in Node.js and database management. Currently on leave."
+                                                data-avatar="/img/avatars/avatar-3.jpg">
+                                                <td>#AD003</td>
+                                                <td>
+                                                    <img src="/img/avatars/avatar-3.jpg" class="admin-avatar"
+                                                        alt="Mike Johnson">
+                                                </td>
+                                                <td><strong>Mike Johnson</strong></td>
+                                                <td>mike.j@example.com</td>
+                                                <td>+91 9876543212</td>
+                                                <td>Bangalore, India</td>
+                                                <td>Male</td>
+                                                <td>
+                                                    <span class="badge bg-warning">Inactive</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
+                                                        onclick="editAdmin(3)" title="Edit">
+                                                        <i data-feather="edit-2"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
+                                                        onclick="viewAdmin(3)" title="View">
+                                                        <i data-feather="eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger admin-action-btn"
+                                                        onclick="deleteAdmin(3)" title="Delete">
+                                                        <i data-feather="trash-2"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </main>
+
+        <!-- View Admin Modal -->
+        <div class="modal fade admin-modal" id="viewAdminModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Admin Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-4">
+                            <div class="col-md-4 text-center">
+                                <img id="adminModalAvatar" src="/img/avatars/avatar.jpg"
+                                    class="rounded-circle shadow mb-3" width="120" height="120" alt="Admin">
+                                <h5 id="adminModalName" class="mb-1">John Doe</h5>
+                                <span id="adminModalStatus" class="badge bg-success">Active</span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="mail"
+                                                    class="feather-sm me-2"></i>Email:</strong><br>
+                                            <span id="adminModalEmail">john.doe@example.com</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="phone"
+                                                    class="feather-sm me-2"></i>Phone:</strong><br>
+                                            <span id="adminModalPhone">+91 9876543210</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="map-pin"
+                                                    class="feather-sm me-2"></i>City:</strong><br>
+                                            <span id="adminModalCity">Mumbai, India</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="users"
+                                                    class="feather-sm me-2"></i>Gender:</strong><br>
+                                            <span id="adminModalGender">Male</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="heart"
+                                                    class="feather-sm me-2"></i>Hobbies:</strong><br>
+                                            <span id="adminModalHobbies">Reading, Gaming</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p><strong><i data-feather="calendar" class="feather-sm me-2"></i>Admin
+                                                ID:</strong><br>
+                                            <span id="adminModalId">#AD001</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h6><i data-feather="info" class="feather-sm me-2"></i>About:</h6>
+                            <p id="adminModalAbout" class="text-muted">Experienced administrator with 5 years of
+                                experience in system management and user support.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i data-feather="x" class="feather-sm me-1"></i> Close
+                        </button>
+                        <button type="button" class="btn btn-primary" id="editFromModal">
+                            <i data-feather="edit-2" class="feather-sm me-1"></i> Edit Admin
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialize Feather Icons
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+
+                // Search Functionality
+                const searchInput = document.getElementById('search-input');
+                const searchBtn = document.getElementById('search-btn');
+                const clearSearchBtn = document.getElementById('clear-search');
+                const adminTableBody = document.getElementById('admin-table-body');
+
+                function performSearch() {
+                    const searchTerm = searchInput.value.toLowerCase().trim();
+
+                    if (searchTerm) {
+                        clearSearchBtn.style.display = 'block';
+
+                        const rows = adminTableBody.querySelectorAll('tr');
+                        let hasResults = false;
+
+                        rows.forEach(row => {
+                            const rowText = row.textContent.toLowerCase();
+                            if (rowText.includes(searchTerm)) {
+                                row.style.display = '';
+                                hasResults = true;
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+
+                        if (!hasResults) {
+                            showNotification('No admins found matching your search', 'warning');
+                        }
+                    } else {
+                        clearSearch();
+                    }
+                }
+
+                function clearSearch() {
+                    searchInput.value = '';
+                    clearSearchBtn.style.display = 'none';
+
+                    const rows = adminTableBody.querySelectorAll('tr');
+                    rows.forEach(row => {
+                        row.style.display = '';
+                    });
+                }
+
+                searchInput.addEventListener('input', performSearch);
+                searchBtn.addEventListener('click', performSearch);
+                clearSearchBtn.addEventListener('click', clearSearch);
+
+                // Enter key for search
+                searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+
+                // Modal setup
+                const viewModal = new bootstrap.Modal(document.getElementById('viewAdminModal'));
+
+                // Edit from modal button
+                document.getElementById('editFromModal').addEventListener('click', function () {
+                    const adminId = this.getAttribute('data-admin-id');
+                    if (adminId) {
+                        viewModal.hide();
+                        editAdmin(adminId);
+                    }
+                });
+
+                // Modal event listeners to fix scroll issues
+                viewModal._element.addEventListener('show.bs.modal', function () {
+                    // Add custom class to body
+                    document.body.classList.add('modal-open-custom');
+                });
+
+                viewModal._element.addEventListener('hidden.bs.modal', function () {
+                    // Remove custom class from body
+                    document.body.classList.remove('modal-open-custom');
+                });
+            });
+
+            // View Admin Function - FIXED VERSION
+            function viewAdmin(id) {
+                const adminRow = document.querySelector(`tr[data-id="${id}"]`);
+
+                if (!adminRow) {
+                    showNotification('Admin not found!', 'error');
+                    return;
+                }
+
+                // Get data from data attributes
+                const adminData = {
+                    id: adminRow.getAttribute('data-id'),
+                    name: adminRow.getAttribute('data-name'),
+                    email: adminRow.getAttribute('data-email'),
+                    phone: adminRow.getAttribute('data-phone'),
+                    city: adminRow.getAttribute('data-city'),
+                    gender: adminRow.getAttribute('data-gender'),
+                    status: adminRow.getAttribute('data-status'),
+                    hobbies: adminRow.getAttribute('data-hobbies'),
+                    about: adminRow.getAttribute('data-about'),
+                    avatar: adminRow.getAttribute('data-avatar')
+                };
+
+                // Update modal content
+                document.getElementById('adminModalName').textContent = adminData.name;
+                document.getElementById('adminModalEmail').textContent = adminData.email;
+                document.getElementById('adminModalPhone').textContent = adminData.phone;
+                document.getElementById('adminModalCity').textContent = adminData.city;
+                document.getElementById('adminModalGender').textContent = adminData.gender;
+                document.getElementById('adminModalHobbies').textContent = adminData.hobbies;
+                document.getElementById('adminModalAbout').textContent = adminData.about;
+                document.getElementById('adminModalAvatar').src = adminData.avatar;
+                document.getElementById('adminModalId').textContent = `#AD${adminData.id.toString().padStart(3, '0')}`;
+
+                // Update status badge
+                const statusBadge = document.getElementById('adminModalStatus');
+                statusBadge.textContent = adminData.status;
+                statusBadge.className = `badge bg-${adminData.status === 'Active' ? 'success' : 'warning'}`;
+
+                // Set edit button data
+                document.getElementById('editFromModal').setAttribute('data-admin-id', adminData.id);
+
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('viewAdminModal'));
+                modal.show();
+
+                // Update feather icons in modal
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            }
+
+            // Edit Admin Function
+            function editAdmin(id) {
+                const btn = event?.target?.closest('button');
+
+                if (btn) {
+                    // Show loading state
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<span class="loading"></span>';
+                    btn.disabled = true;
+
+                    // Simulate API call/redirect
+                    setTimeout(function () {
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+
+                        // Show notification
+                        showNotification(`Redirecting to edit admin #${id}...`, 'info');
+
+                        // In real app, redirect to edit page
+                        // window.location.href = '/editAdmin/' + id;
+
+                        // For demo, show alert
+                        setTimeout(() => {
+                            alert(`In real application, this would redirect to edit page for admin ID: ${id}\n\nRedirect URL: /editAdmin/${id}`);
+                        }, 500);
+                    }, 800);
+                }
+            }
+
+            // Delete Admin Function
+            function deleteAdmin(id) {
+                if (confirm(`Are you sure you want to delete admin #AD${id.toString().padStart(3, '0')}? This action cannot be undone.`)) {
+                    const btn = event?.target?.closest('button');
+
+                    if (btn) {
+                        // Show loading state
+                        const originalHTML = btn.innerHTML;
+                        btn.innerHTML = '<span class="loading"></span>';
+                        btn.disabled = true;
+
+                        // Simulate API call
+                        setTimeout(function () {
+                            // Remove admin row with animation
+                            const adminRow = document.querySelector(`tr[data-id="${id}"]`);
+
+                            if (adminRow) {
+                                adminRow.style.animation = 'fadeOut 0.5s ease forwards';
+
+                                setTimeout(function () {
+                                    adminRow.remove();
+                                    showNotification(`Admin #AD${id.toString().padStart(3, '0')} deleted successfully!`, 'success');
+
+                                    // Check if no admins left
+                                    const remainingRows = document.querySelectorAll('#admin-table-body tr');
+                                    if (remainingRows.length === 0) {
+                                        showEmptyState();
+                                    }
+                                }, 500);
+                            }
+
+                            btn.innerHTML = originalHTML;
+                            btn.disabled = false;
+                        }, 1000);
+                    }
+                }
+            }
+
+            // Show Notification
+            function showNotification(message, type = 'info') {
+                // Remove existing notifications
+                const existingNotifications = document.querySelectorAll('.custom-notification');
+                existingNotifications.forEach(notification => notification.remove());
+
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} custom-notification`;
+
+                const icons = {
+                    'success': 'check-circle',
+                    'error': 'alert-circle',
+                    'warning': 'alert-triangle',
+                    'info': 'info'
+                };
+
+                notification.innerHTML = `
+            <div class="d-flex align-items-center">
+                <i data-feather="${icons[type] || 'info'}" class="me-2"></i>
+                <span>${message}</span>
+                <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
+            </div>
+        `;
+
+                document.body.appendChild(notification);
+
+                // Initialize feather icon
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOutRight 0.3s ease forwards';
+                        setTimeout(() => {
+                            if (notification.parentNode) {
+                                notification.remove();
+                            }
+                        }, 300);
+                    }
+                }, 5000);
+            }
+
+            // Show empty state
+            function showEmptyState() {
+                const tableBody = document.getElementById('admin-table-body');
+                tableBody.innerHTML = `
+            <tr>
+                <td colspan="9" class="text-center py-5">
+                    <div class="empty-state">
+                        <i data-feather="users" class="text-muted mb-3" style="width: 60px; height: 60px;"></i>
+                        <h5 class="text-muted mb-2">No Admins Found</h5>
+                        <p class="text-muted mb-4">There are no administrators in the system.</p>
+                        <a href="/addAdmin" class="btn btn-primary">
+                            <i data-feather="plus"></i> Add Your First Admin
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            }
+
+            // Add custom CSS to fix modal scroll issues
+            if (!document.querySelector('#modal-fix-css')) {
+                const style = document.createElement('style');
+                style.id = 'modal-fix-css';
+                style.textContent = `
+            .modal-open-custom {
+                overflow: hidden !important;
+                padding-right: 0 !important;
+            }
+            
+            .modal-open-custom .modal {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            
+            .modal-backdrop {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            
+            .modal.show {
+                display: block;
+                overflow: hidden;
+            }
+            
+            /* Fix for Bootstrap modal backdrop */
+            body.modal-open {
+                overflow: hidden;
+                padding-right: 0 !important;
+            }
+        `;
+                document.head.appendChild(style);
+            }
+        </script>
 
         <%- include('footer') %>
