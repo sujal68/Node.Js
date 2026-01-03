@@ -2405,7 +2405,7 @@ progress {
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.5;
-    padding: .3rem .85rem;
+    padding: .6rem .85rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     width: 100%
 }

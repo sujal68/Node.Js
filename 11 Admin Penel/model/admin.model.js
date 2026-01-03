@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const adminSchema = mongoose.Schema({
+    profile: {
+        type: String,
+        required: true,
+    },
     fname: {
         type: String,
         required: true

@@ -1,0 +1,24 @@
+<div class="channel-item">
+                <img src="../uploads/techno.jpg" alt="Channel" class="channel-avatar">
+                <span>Techno Gamerz</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/Mrbeast.jpg" alt="Channel" class="channel-avatar">
+                <span>MrBeast</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/himeesh.jpg" alt="Channel" class="channel-avatar">
+                <span>Him-eesh Madaan</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/mrindian.jpg" alt="Channel" class="channel-avatar">
+                <span>MR. INDIAN HACKER</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/codewithharry.jpg" alt="Channel" class="channel-avatar">
+                <span>CodeWithHarry</span>
+            </div>
+            <div class="channel-item">
+                <img src="../uploads/techbururner.jpg" alt="Channel" class="channel-avatar">
+                <span>Tech Burner</span>
+            </div>

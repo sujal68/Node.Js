@@ -1,213 +1,5 @@
 <%- include('header') %>
 
-    <style>
-        /* Custom styles for admin management */
-        .admin-card {
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .badge {
-            font-size: 0.75em;
-            padding: 0.4em 0.8em;
-        }
-
-        .table-hover tbody tr {
-            transition: all 0.3s ease;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: rgba(0, 123, 255, 0.05);
-            transform: translateX(-5px);
-        }
-
-        .admin-action-btn {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            border-radius: 0.25rem;
-        }
-
-        /* Custom modal styling */
-        .admin-modal .modal-content {
-            border-radius: 0.5rem;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .admin-modal .modal-header {
-            background: linear-gradient(135deg, #2e313c 0%, #000000 100%);
-            color: white;
-            border-radius: 0.5rem 0.5rem 0 0;
-            padding: 1.2rem 1.5rem;
-        }
-
-        .admin-modal .modal-title {
-            font-weight: 600;
-            font-size: 1.25rem;
-            color: white;
-        }
-
-        .admin-modal .modal-body {
-            padding: 1.5rem;
-        }
-
-        .admin-modal .modal-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .admin-modal .btn-close {
-            filter: invert(1);
-            opacity: 0.8;
-        }
-
-        .admin-modal .btn-close:hover {
-            opacity: 1;
-        }
-
-        /* Search input styling */
-        #search-input {
-            border-radius: 0.25rem 0 0 0.25rem;
-            border-right: none;
-        }
-
-        #search-input:focus {
-            box-shadow: none;
-            border-color: #ced4da;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-radius: 0 0.25rem 0.25rem 0;
-        }
-
-        /* Responsive table */
-        @media (max-width: 768px) {
-            .table-responsive {
-                font-size: 0.875rem;
-            }
-
-            .admin-action-btn {
-                padding: 0.2rem 0.4rem;
-                font-size: 0.75rem;
-            }
-
-            .admin-avatar {
-                width: 45px;
-                height: 45px;
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Animation for delete */
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            to {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-        }
-
-        /* Notification styling */
-        .custom-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1060;
-            min-width: 300px;
-            animation: slideInRight 0.3s ease;
-            border-radius: 0.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: none;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-
-        /* Fix for modal backdrop */
-        .modal-backdrop {
-            z-index: 1040;
-        }
-
-        .modal {
-            z-index: 1050;
-        }
-
-        /* Table styling */
-        .table thead th {
-            background-color: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-            font-weight: 600;
-            color: #495057;
-            padding: 0.75rem 1rem;
-        }
-
-        .table tbody td {
-            padding: 0.75rem 1rem;
-            vertical-align: middle;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-    </style>
-
     <div class="main">
         <nav class="navbar navbar-expand navbar-light navbar-bg">
             <a class="sidebar-toggle js-sidebar-toggle">
@@ -245,12 +37,13 @@
                     <div class="col-md-12">
                         <div class="input-group">
                             <input type="text" class="form-control" id="search-input"
-                                placeholder="Search by name, email, phone or city...">
+                                placeholder="Search by name, email, phone or city..."
+                                style="border-radius: 0.25rem 0 0 0.25rem; border-right: none;">
                             <button class="btn btn-outline-primary" type="button" id="search-btn">
                                 <i data-feather="search"></i> Search
                             </button>
                             <button class="btn btn-outline-secondary" type="button" id="clear-search"
-                                style="display: none;">
+                                style="display: none; border-radius: 0 0.25rem 0.25rem 0;">
                                 <i data-feather="x"></i>
                             </button>
                         </div>
@@ -260,131 +53,106 @@
                 <!-- Admin Table -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card"
+                            style="transition: all 0.3s ease; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Profile</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>City</th>
-                                                <th>Gender</th>
-                                                <th>Status</th>
-                                                <th class="text-center">Actions</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    ID</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Profile</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Name</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Email</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Phone</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    City</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Gender</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Hobbies</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    City</th>
+                                                <th
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    About</th>
+                                                <th class="text-center"
+                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                    Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody id="admin-table-body">
                                             <!-- Admin 1 -->
-                                            <tr class="admin-item" data-id="1" data-name="John Doe"
-                                                data-email="john.doe@example.com" data-phone="+91 9876543210"
-                                                data-city="Mumbai" data-gender="Male" data-status="Active"
-                                                data-hobbies="Reading, Gaming, Music"
-                                                data-about="Experienced administrator with 5+ years of experience in system management and user support. Specialized in database administration and security."
-                                                data-avatar="/img/avatars/avatar.jpg">
-                                                <td>#AD001</td>
-                                                <td>
-                                                    <img src="/img/avatars/avatar.jpg" class="admin-avatar"
-                                                        alt="John Doe">
-                                                </td>
-                                                <td><strong>John Doe</strong></td>
-                                                <td>john.doe@example.com</td>
-                                                <td>+91 9876543210</td>
-                                                <td>Mumbai, India</td>
-                                                <td>Male</td>
-                                                <td>
-                                                    <span class="badge bg-success">Active</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
-                                                        onclick="editAdmin(1)" title="Edit">
-                                                        <i data-feather="edit-2"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
-                                                        onclick="viewAdmin(1)" title="View">
-                                                        <i data-feather="eye"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-danger admin-action-btn"
-                                                        onclick="deleteAdmin(1)" title="Delete">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <% allAdmin.map((admin , index)=>{ %>
+                                                <tr class="admin-item" style="transition: all 0.3s ease;">
 
-                                            <!-- Admin 2 -->
-                                            <tr class="admin-item" data-id="2" data-name="Jane Smith"
-                                                data-email="jane.smith@example.com" data-phone="+91 9876543211"
-                                                data-city="Delhi" data-gender="Female" data-status="Active"
-                                                data-hobbies="Painting, Music, Traveling"
-                                                data-about="Creative administrator with expertise in UI/UX design and frontend development. Passionate about creating user-friendly interfaces."
-                                                data-avatar="/img/avatars/avatar-2.jpg">
-                                                <td>#AD002</td>
-                                                <td>
-                                                    <img src="/img/avatars/avatar-2.jpg" class="admin-avatar"
-                                                        alt="Jane Smith">
-                                                </td>
-                                                <td><strong>Jane Smith</strong></td>
-                                                <td>jane.smith@example.com</td>
-                                                <td>+91 9876543211</td>
-                                                <td>Delhi, India</td>
-                                                <td>Female</td>
-                                                <td>
-                                                    <span class="badge bg-success">Active</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
-                                                        onclick="editAdmin(2)" title="Edit">
-                                                        <i data-feather="edit-2"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
-                                                        onclick="viewAdmin(2)" title="View">
-                                                        <i data-feather="eye"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-danger admin-action-btn"
-                                                        onclick="deleteAdmin(2)" title="Delete">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= index + 1 %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <img src="/<%= admin.profile %>"
+                                                            style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"
+                                                            alt="John Doe">
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <strong>
+                                                            <%= admin.fname %>
+                                                                <%= admin.lname %>
+                                                        </strong>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= admin.email %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">+91
+                                                        <%= admin.phone %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= admin.city %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= admin.gander %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <span class="badge bg-info"
+                                                            style="font-size: 0.75em; padding: 0.8em 0.8em;">
+                                                            <%= admin.hobby%>
+                                                        </span>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= admin.city %>
+                                                    </td>
+                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= admin.about %>
+                                                    </td>
 
-                                            <!-- Admin 3 -->
-                                            <tr class="admin-item" data-id="3" data-name="Mike Johnson"
-                                                data-email="mike.j@example.com" data-phone="+91 9876543212"
-                                                data-city="Bangalore" data-gender="Male" data-status="Inactive"
-                                                data-hobbies="Sports, Coding, Photography"
-                                                data-about="Tech enthusiast and backend developer with strong skills in Node.js and database management. Currently on leave."
-                                                data-avatar="/img/avatars/avatar-3.jpg">
-                                                <td>#AD003</td>
-                                                <td>
-                                                    <img src="/img/avatars/avatar-3.jpg" class="admin-avatar"
-                                                        alt="Mike Johnson">
-                                                </td>
-                                                <td><strong>Mike Johnson</strong></td>
-                                                <td>mike.j@example.com</td>
-                                                <td>+91 9876543212</td>
-                                                <td>Bangalore, India</td>
-                                                <td>Male</td>
-                                                <td>
-                                                    <span class="badge bg-warning">Inactive</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-sm btn-primary admin-action-btn me-1"
-                                                        onclick="editAdmin(3)" title="Edit">
-                                                        <i data-feather="edit-2"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-info admin-action-btn me-1"
-                                                        onclick="viewAdmin(3)" title="View">
-                                                        <i data-feather="eye"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-danger admin-action-btn"
-                                                        onclick="deleteAdmin(3)" title="Delete">
-                                                        <i data-feather="trash-2"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+
+                                                    <td class="text-center"
+                                                        style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <button class="btn btn-sm btn-primary me-1" title="Edit"
+                                                            style="padding: 0.25rem 0.5rem; font-size: 0.875rem; border-radius: 0.25rem;">
+                                                            <i data-feather="edit-2"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-danger"
+                                                            style="padding: 0.25rem 0.5rem; font-size: 0.875rem; border-radius: 0.25rem;">
+                                                            <i data-feather="trash-2"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -395,78 +163,101 @@
             </div>
         </main>
 
-        <!-- View Admin Modal -->
-        <div class="modal fade admin-modal" id="viewAdminModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Admin Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mb-4">
-                            <div class="col-md-4 text-center">
-                                <img id="adminModalAvatar" src="/img/avatars/avatar.jpg"
-                                    class="rounded-circle shadow mb-3" width="120" height="120" alt="Admin">
-                                <h5 id="adminModalName" class="mb-1">John Doe</h5>
-                                <span id="adminModalStatus" class="badge bg-success">Active</span>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="mail"
-                                                    class="feather-sm me-2"></i>Email:</strong><br>
-                                            <span id="adminModalEmail">john.doe@example.com</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="phone"
-                                                    class="feather-sm me-2"></i>Phone:</strong><br>
-                                            <span id="adminModalPhone">+91 9876543210</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="map-pin"
-                                                    class="feather-sm me-2"></i>City:</strong><br>
-                                            <span id="adminModalCity">Mumbai, India</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="users"
-                                                    class="feather-sm me-2"></i>Gender:</strong><br>
-                                            <span id="adminModalGender">Male</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="heart"
-                                                    class="feather-sm me-2"></i>Hobbies:</strong><br>
-                                            <span id="adminModalHobbies">Reading, Gaming</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <p><strong><i data-feather="calendar" class="feather-sm me-2"></i>Admin
-                                                ID:</strong><br>
-                                            <span id="adminModalId">#AD001</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Right Sidebar for Admin Details -->
+        <div id="sidebarOverlay"
+            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
+        </div>
+        <div id="adminSidebar"
+            style="position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 9999; transition: right 0.3s ease; overflow-y: auto;">
+            <div
+                style="background: linear-gradient(135deg, #2e313c 0%, #000000 100%); color: white; padding: 20px; position: sticky; top: 0; z-index: 10;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0" style="color: #dee2e6;">Admin Details</h5>
+                    <button class="btn btn-sm btn-outline-light" onclick="closeSidebar()">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+            </div>
+            <div style="padding: 20px;">
+                <div class="text-center mb-4">
+                    <img id="sidebarAvatar" src="/img/avatars/avatar.jpg"
+                        style="width: 100px; height: 100px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"
+                        alt="Admin">
+                    <h4 id="sidebarName" class="mt-3 mb-1">John Doe</h4>
+                    <span id="sidebarStatus" class="badge bg-success">Active</span>
+                    <p id="sidebarId" class="text-muted mt-2">#AD001</p>
+                </div>
 
-                        <div class="mt-4">
-                            <h6><i data-feather="info" class="feather-sm me-2"></i>About:</h6>
-                            <p id="adminModalAbout" class="text-muted">Experienced administrator with 5 years of
-                                experience in system management and user support.</p>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="mail" class="feather-sm me-2"></i>Email
+                                </h6>
+                                <p id="sidebarEmail" class="mb-0">john.doe@example.com</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i data-feather="x" class="feather-sm me-1"></i> Close
-                        </button>
-                        <button type="button" class="btn btn-primary" id="editFromModal">
-                            <i data-feather="edit-2" class="feather-sm me-1"></i> Edit Admin
-                        </button>
+
+                    <div class="col-12 mb-3">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="phone" class="feather-sm me-2"></i>Phone
+                                </h6>
+                                <p id="sidebarPhone" class="mb-0">+91 9876543210</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-12 mb-3">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="map-pin"
+                                        class="feather-sm me-2"></i>Location</h6>
+                                <p id="sidebarCity" class="mb-0">Mumbai, India</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="users" class="feather-sm me-2"></i>Gender
+                                </h6>
+                                <p id="sidebarGender" class="mb-0">Male</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="heart"
+                                        class="feather-sm me-2"></i>Hobbies</h6>
+                                <p id="sidebarHobbies" class="mb-0">Reading, Gaming</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <div style="border: 0; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <div style="padding: 0.75rem;">
+                                <h6 class="text-primary mb-2"><i data-feather="info" class="feather-sm me-2"></i>About
+                                </h6>
+                                <p id="sidebarAbout" class="mb-0">Experienced administrator with 5+ years of experience.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" onclick="editAdminFromSidebar()">
+                        <i data-feather="edit-2" class="feather-sm me-2"></i>Edit Admin
+                    </button>
+                    <button class="btn btn-outline-danger" onclick="deleteAdminFromSidebar()">
+                        <i data-feather="trash-2" class="feather-sm me-2"></i>Delete Admin
+                    </button>
                 </div>
             </div>
         </div>
@@ -532,248 +323,33 @@
                     }
                 });
 
-                // Modal setup
-                const viewModal = new bootstrap.Modal(document.getElementById('viewAdminModal'));
+                // Close sidebar on overlay click
+                document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
 
-                // Edit from modal button
-                document.getElementById('editFromModal').addEventListener('click', function () {
-                    const adminId = this.getAttribute('data-admin-id');
-                    if (adminId) {
-                        viewModal.hide();
-                        editAdmin(adminId);
+                // Close sidebar on ESC key
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape') {
+                        closeSidebar();
                     }
                 });
 
-                // Modal event listeners to fix scroll issues
-                viewModal._element.addEventListener('show.bs.modal', function () {
-                    // Add custom class to body
-                    document.body.classList.add('modal-open-custom');
-                });
-
-                viewModal._element.addEventListener('hidden.bs.modal', function () {
-                    // Remove custom class from body
-                    document.body.classList.remove('modal-open-custom');
+                // Add hover effect to table rows
+                const tableRows = document.querySelectorAll('.admin-item');
+                tableRows.forEach(row => {
+                    row.addEventListener('mouseenter', function () {
+                        this.style.backgroundColor = 'rgba(0, 123, 255, 0.05)';
+                        this.style.transform = 'translateX(-5px)';
+                    });
+                    row.addEventListener('mouseleave', function () {
+                        this.style.backgroundColor = '';
+                        this.style.transform = 'translateX(0)';
+                    });
                 });
             });
 
-            // View Admin Function - FIXED VERSION
-            function viewAdmin(id) {
-                const adminRow = document.querySelector(`tr[data-id="${id}"]`);
 
-                if (!adminRow) {
-                    showNotification('Admin not found!', 'error');
-                    return;
-                }
 
-                // Get data from data attributes
-                const adminData = {
-                    id: adminRow.getAttribute('data-id'),
-                    name: adminRow.getAttribute('data-name'),
-                    email: adminRow.getAttribute('data-email'),
-                    phone: adminRow.getAttribute('data-phone'),
-                    city: adminRow.getAttribute('data-city'),
-                    gender: adminRow.getAttribute('data-gender'),
-                    status: adminRow.getAttribute('data-status'),
-                    hobbies: adminRow.getAttribute('data-hobbies'),
-                    about: adminRow.getAttribute('data-about'),
-                    avatar: adminRow.getAttribute('data-avatar')
-                };
 
-                // Update modal content
-                document.getElementById('adminModalName').textContent = adminData.name;
-                document.getElementById('adminModalEmail').textContent = adminData.email;
-                document.getElementById('adminModalPhone').textContent = adminData.phone;
-                document.getElementById('adminModalCity').textContent = adminData.city;
-                document.getElementById('adminModalGender').textContent = adminData.gender;
-                document.getElementById('adminModalHobbies').textContent = adminData.hobbies;
-                document.getElementById('adminModalAbout').textContent = adminData.about;
-                document.getElementById('adminModalAvatar').src = adminData.avatar;
-                document.getElementById('adminModalId').textContent = `#AD${adminData.id.toString().padStart(3, '0')}`;
-
-                // Update status badge
-                const statusBadge = document.getElementById('adminModalStatus');
-                statusBadge.textContent = adminData.status;
-                statusBadge.className = `badge bg-${adminData.status === 'Active' ? 'success' : 'warning'}`;
-
-                // Set edit button data
-                document.getElementById('editFromModal').setAttribute('data-admin-id', adminData.id);
-
-                // Show modal
-                const modal = new bootstrap.Modal(document.getElementById('viewAdminModal'));
-                modal.show();
-
-                // Update feather icons in modal
-                if (typeof feather !== 'undefined') {
-                    feather.replace();
-                }
-            }
-
-            // Edit Admin Function
-            function editAdmin(id) {
-                const btn = event?.target?.closest('button');
-
-                if (btn) {
-                    // Show loading state
-                    const originalHTML = btn.innerHTML;
-                    btn.innerHTML = '<span class="loading"></span>';
-                    btn.disabled = true;
-
-                    // Simulate API call/redirect
-                    setTimeout(function () {
-                        btn.innerHTML = originalHTML;
-                        btn.disabled = false;
-
-                        // Show notification
-                        showNotification(`Redirecting to edit admin #${id}...`, 'info');
-
-                        // In real app, redirect to edit page
-                        // window.location.href = '/editAdmin/' + id;
-
-                        // For demo, show alert
-                        setTimeout(() => {
-                            alert(`In real application, this would redirect to edit page for admin ID: ${id}\n\nRedirect URL: /editAdmin/${id}`);
-                        }, 500);
-                    }, 800);
-                }
-            }
-
-            // Delete Admin Function
-            function deleteAdmin(id) {
-                if (confirm(`Are you sure you want to delete admin #AD${id.toString().padStart(3, '0')}? This action cannot be undone.`)) {
-                    const btn = event?.target?.closest('button');
-
-                    if (btn) {
-                        // Show loading state
-                        const originalHTML = btn.innerHTML;
-                        btn.innerHTML = '<span class="loading"></span>';
-                        btn.disabled = true;
-
-                        // Simulate API call
-                        setTimeout(function () {
-                            // Remove admin row with animation
-                            const adminRow = document.querySelector(`tr[data-id="${id}"]`);
-
-                            if (adminRow) {
-                                adminRow.style.animation = 'fadeOut 0.5s ease forwards';
-
-                                setTimeout(function () {
-                                    adminRow.remove();
-                                    showNotification(`Admin #AD${id.toString().padStart(3, '0')} deleted successfully!`, 'success');
-
-                                    // Check if no admins left
-                                    const remainingRows = document.querySelectorAll('#admin-table-body tr');
-                                    if (remainingRows.length === 0) {
-                                        showEmptyState();
-                                    }
-                                }, 500);
-                            }
-
-                            btn.innerHTML = originalHTML;
-                            btn.disabled = false;
-                        }, 1000);
-                    }
-                }
-            }
-
-            // Show Notification
-            function showNotification(message, type = 'info') {
-                // Remove existing notifications
-                const existingNotifications = document.querySelectorAll('.custom-notification');
-                existingNotifications.forEach(notification => notification.remove());
-
-                const notification = document.createElement('div');
-                notification.className = `alert alert-${type} custom-notification`;
-
-                const icons = {
-                    'success': 'check-circle',
-                    'error': 'alert-circle',
-                    'warning': 'alert-triangle',
-                    'info': 'info'
-                };
-
-                notification.innerHTML = `
-            <div class="d-flex align-items-center">
-                <i data-feather="${icons[type] || 'info'}" class="me-2"></i>
-                <span>${message}</span>
-                <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
-            </div>
-        `;
-
-                document.body.appendChild(notification);
-
-                // Initialize feather icon
-                if (typeof feather !== 'undefined') {
-                    feather.replace();
-                }
-
-                // Auto remove after 5 seconds
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.style.animation = 'slideOutRight 0.3s ease forwards';
-                        setTimeout(() => {
-                            if (notification.parentNode) {
-                                notification.remove();
-                            }
-                        }, 300);
-                    }
-                }, 5000);
-            }
-
-            // Show empty state
-            function showEmptyState() {
-                const tableBody = document.getElementById('admin-table-body');
-                tableBody.innerHTML = `
-            <tr>
-                <td colspan="9" class="text-center py-5">
-                    <div class="empty-state">
-                        <i data-feather="users" class="text-muted mb-3" style="width: 60px; height: 60px;"></i>
-                        <h5 class="text-muted mb-2">No Admins Found</h5>
-                        <p class="text-muted mb-4">There are no administrators in the system.</p>
-                        <a href="/addAdmin" class="btn btn-primary">
-                            <i data-feather="plus"></i> Add Your First Admin
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        `;
-
-                if (typeof feather !== 'undefined') {
-                    feather.replace();
-                }
-            }
-
-            // Add custom CSS to fix modal scroll issues
-            if (!document.querySelector('#modal-fix-css')) {
-                const style = document.createElement('style');
-                style.id = 'modal-fix-css';
-                style.textContent = `
-            .modal-open-custom {
-                overflow: hidden !important;
-                padding-right: 0 !important;
-            }
-            
-            .modal-open-custom .modal {
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-            
-            .modal-backdrop {
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-            
-            .modal.show {
-                display: block;
-                overflow: hidden;
-            }
-            
-            /* Fix for Bootstrap modal backdrop */
-            body.modal-open {
-                overflow: hidden;
-                padding-right: 0 !important;
-            }
-        `;
-                document.head.appendChild(style);
-            }
         </script>
 
         <%- include('footer') %>
