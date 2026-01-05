@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { dashborad, viewadmin, addAdmin, addAdminPage } = require('../controller/admin.controller');
+const { dashborad, viewadmin, addAdmin, addAdminPage, deleteAdmin } = require('../controller/admin.controller');
 const adminRoutes = express.Router();
 
 const storage = multer.diskStorage({
@@ -17,6 +17,7 @@ const upload = multer({ storage: storage })
 adminRoutes.get('/', dashborad)
 adminRoutes.get('/viewAdmin', viewadmin)
 adminRoutes.get('/addAdmin', addAdminPage)
+adminRoutes.get('/deleteAdmin/:id', deleteAdmin)
 
 // post request 
 adminRoutes.post('/addAdmin', upload.single('profile'), addAdmin)

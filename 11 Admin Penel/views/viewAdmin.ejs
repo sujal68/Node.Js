@@ -1,5 +1,70 @@
 <%- include('header') %>
+    <style>
+        /* .action-cell {
+            position: relative;
+        } */
 
+        .action-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .action-btn {
+            font-size: 20px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .table-responsive {
+            overflow: visible !important;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .action-dropdown {
+            position: absolute;
+            right: 0;
+            top: 36px;
+            background: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            min-width: 120px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            transition: 0.25s ease;
+            z-index: 1000;
+        }
+
+        .action-dropdown button {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 999 !important;
+        }
+
+        .action-dropdown button:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .action-menu.active .action-dropdown {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+    </style>
     <div class="main">
         <nav class="navbar navbar-expand navbar-light navbar-bg">
             <a class="sidebar-toggle js-sidebar-toggle">
@@ -140,17 +205,26 @@
                                                     </td>
 
 
-                                                    <td class="text-center"
-                                                        style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <button class="btn btn-sm btn-primary me-1" title="Edit"
-                                                            style="padding: 0.25rem 0.5rem; font-size: 0.875rem; border-radius: 0.25rem;">
-                                                            <i data-feather="edit-2"></i>
-                                                        </button>
-                                                        <button class="btn btn-sm btn-danger"
-                                                            style="padding: 0.25rem 0.5rem; font-size: 0.875rem; border-radius: 0.25rem;">
-                                                            <i data-feather="trash-2"></i>
-                                                        </button>
+                                                    <td class="action-cell">
+                                                        <div class="action-menu">
+                                                            <i class="ri-more-2-fill action-btn"></i>
+
+                                                            <div class="action-dropdown">
+                                                                <button class="edit-btn">
+                                                                    <i class="ri-edit-2-line"></i> <a
+                                                                        href="/editAdmin/<%= admin.id %>"
+                                                                        style="color: white;">Edit</a>
+                                                                </button>
+
+                                                                <button class="delete-btn">
+                                                                    <i class="ri-delete-bin-6-line"></i> <a
+                                                                        href="/deleteAdmin/<%= admin.id %>"
+                                                                        style="color: white;">Delete</a>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </td>
+
                                                 </tr>
                                                 <% }) %>
                                         </tbody>

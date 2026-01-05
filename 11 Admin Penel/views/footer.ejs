@@ -253,6 +253,28 @@
         });
     });
 </script>
+<script>
+    document.querySelectorAll(".action-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            document.querySelectorAll(".action-menu").forEach(menu => {
+                if (menu !== this.parentElement) {
+                    menu.classList.remove("active");
+                }
+            });
+
+            this.parentElement.classList.toggle("active");
+        });
+    });
+
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".action-menu").forEach(menu => {
+            menu.classList.remove("active");
+        });
+    });
+</script>
+
 
 </body>
 
