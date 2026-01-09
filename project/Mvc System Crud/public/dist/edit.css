@@ -174,8 +174,8 @@
   }
 
   .mini-profile-preview {
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 26px;
       border-radius: 50%;
       overflow: hidden;
       background: #333;

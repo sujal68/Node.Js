@@ -74,10 +74,173 @@
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav navbar-align">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                            <img src="/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Admin" />
-                            <span class="text-dark">Admin Panel</span>
+                        <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                            <div class="position-relative">
+                                <i class="align-middle" data-feather="bell"></i>
+                                <span class="indicator">4</span>
+                            </div>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                            aria-labelledby="alertsDropdown">
+                            <div class="dropdown-menu-header">
+                                4 New Notifications
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <i class="text-danger" data-feather="alert-circle"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="text-dark">Update completed</div>
+                                            <div class="text-muted small mt-1">Restart server 12 to complete the update.
+                                            </div>
+                                            <div class="text-muted small mt-1">30m ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <i class="text-warning" data-feather="bell"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="text-dark">Lorem ipsum</div>
+                                            <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate
+                                                hendrerit et.</div>
+                                            <div class="text-muted small mt-1">2h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <i class="text-primary" data-feather="home"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="text-dark">Login from 192.186.1.8</div>
+                                            <div class="text-muted small mt-1">5h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <i class="text-success" data-feather="user-plus"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="text-dark">New connection</div>
+                                            <div class="text-muted small mt-1">Christina accepted your request.</div>
+                                            <div class="text-muted small mt-1">14h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-menu-footer">
+                                <a href="#" class="text-muted">Show all notifications</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
+                            <div class="position-relative">
+                                <i class="align-middle" data-feather="message-square"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                            aria-labelledby="messagesDropdown">
+                            <div class="dropdown-menu-header">
+                                <div class="position-relative">
+                                    4 New Messages
+                                </div>
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle"
+                                                alt="Vanessa Tucker">
+                                        </div>
+                                        <div class="col-10 ps-2">
+                                            <div class="text-dark">Vanessa Tucker</div>
+                                            <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu
+                                                tortor.</div>
+                                            <div class="text-muted small mt-1">15m ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle"
+                                                alt="William Harris">
+                                        </div>
+                                        <div class="col-10 ps-2">
+                                            <div class="text-dark">William Harris</div>
+                                            <div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.
+                                            </div>
+                                            <div class="text-muted small mt-1">2h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle"
+                                                alt="Christina Mason">
+                                        </div>
+                                        <div class="col-10 ps-2">
+                                            <div class="text-dark">Christina Mason</div>
+                                            <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
+                                            <div class="text-muted small mt-1">4h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-2">
+                                            <img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle"
+                                                alt="Sharon Lessman">
+                                        </div>
+                                        <div class="col-10 ps-2">
+                                            <div class="text-dark">Sharon Lessman</div>
+                                            <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed,
+                                                posuere ac, mattis non.</div>
+                                            <div class="text-muted small mt-1">5h ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-menu-footer">
+                                <a href="#" class="text-muted">Show all messages</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                            <i class="align-middle" data-feather="settings"></i>
+                        </a>
+
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <img src="<%= admin.profile %>" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
+                            <span class="text-dark">
+                                <%= admin.fname %>
+                                    <%= admin.lname %>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="/"><i class="align-middle me-1" data-feather="user"></i>
+                                <%= admin.fname %>
+                                    <%= admin.lname %>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
+                                    data-feather="settings"></i> Settings & Privacy</a>
+                            <a class="dropdown-item" href="/change-password"><i class="align-middle me-1"
+                                    data-feather="lock"></i>Change password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Log out</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -152,78 +315,81 @@
                                                 <th
                                                     style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
                                                     City</th>
-                                                <th
+                                                <!-- <th
                                                     style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
-                                                    About</th>
-                                                <th class="text-center"
-                                                    style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
-                                                    Actions</th>
+                                                    About</th> -->
+                                                <% if(admin.email==="sujalkidecha68@gmail.com" ) {%>
+                                                    <th class="text-center"
+                                                        style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; font-weight: 600; color: #495057; padding: 0.75rem 1rem;">
+                                                        Actions</th>
+                                                    <%}%>
                                             </tr>
                                         </thead>
                                         <tbody id="admin-table-body">
-                                            <!-- Admin 1 -->
-                                            <% allAdmin.map((admin , index)=>{ %>
+                                            <% allAdmin.map((subadmin , index)=>{ %>
                                                 <tr class="admin-item" style="transition: all 0.3s ease;">
 
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
                                                         <%= index + 1 %>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <img src="/<%= admin.profile %>"
+                                                        <img src="/<%= subadmin.profile %>"
                                                             style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"
                                                             alt="John Doe">
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
                                                         <strong>
-                                                            <%= admin.fname %>
-                                                                <%= admin.lname %>
+                                                            <%= subadmin.fname %>
+                                                                <%= subadmin.lname %>
                                                         </strong>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <%= admin.email %>
+                                                        <%= subadmin.email %>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">+91
-                                                        <%= admin.phone %>
+                                                        <%= subadmin.phone %>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <%= admin.city %>
+                                                        <%= subadmin.city %>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <%= admin.gander %>
+                                                        <%= subadmin.gander %>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
                                                         <span class="badge bg-info"
                                                             style="font-size: 0.75em; padding: 0.8em 0.8em;">
-                                                            <%= admin.hobby%>
+                                                            <%= subadmin.hobby%>
                                                         </span>
                                                     </td>
                                                     <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <%= admin.city %>
+                                                        <%= subadmin.city %>
                                                     </td>
-                                                    <td style="padding: 0.75rem 1rem; vertical-align: middle;">
-                                                        <%= admin.about %>
-                                                    </td>
+                                                    <!-- <td style="padding: 0.75rem 1rem; vertical-align: middle;">
+                                                        <%= subadmin.about %>
+                                                    </td> -->
 
 
-                                                    <td class="action-cell">
-                                                        <div class="action-menu">
-                                                            <i class="ri-more-2-fill action-btn"></i>
+                                                    <% if(admin.email=="sujalkidecha68@gmail.com" ) {%>
+                                                        <td class="action-cell">
+                                                            <div class="action-menu">
+                                                                <i class="ri-more-2-fill action-btn"></i>
 
-                                                            <div class="action-dropdown">
-                                                                <button class="edit-btn">
-                                                                    <i class="ri-edit-2-line"></i> <a
-                                                                        href="/editAdmin/<%= admin.id %>"
-                                                                        style="color: white;">Edit</a>
-                                                                </button>
+                                                                <div class="action-dropdown">
+                                                                    <button class="edit-btn">
+                                                                        <i class="ri-edit-2-line"></i> <a
+                                                                            href="/editAdmin/<%= subadmin.id %>"
+                                                                            style="color: white;">Edit</a>
+                                                                    </button>
 
-                                                                <button class="delete-btn">
-                                                                    <i class="ri-delete-bin-6-line"></i> <a
-                                                                        href="/deleteAdmin/<%= admin.id %>"
-                                                                        style="color: white;">Delete</a>
-                                                                </button>
+                                                                    <button class="delete-btn">
+                                                                        <i class="ri-delete-bin-6-line"></i> <a
+                                                                            href="/deleteAdmin/<%= subadmin.id %>"
+                                                                            style="color: white;">Delete</a>
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
+                                                        </td>
+                                                        <% }%>
 
                                                 </tr>
                                                 <% }) %>

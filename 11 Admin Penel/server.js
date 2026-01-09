@@ -1,9 +1,11 @@
 const express = require('express');
+const Cookie = require('cookie-parser');
 const path = require('path');
 require('./config/db.config')
 const app = express();
 const port = 6800;
 
+app.use(Cookie());
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));

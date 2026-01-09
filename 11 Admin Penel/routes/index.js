@@ -1,6 +1,20 @@
 const express = require('express');
 const multer = require('multer');
-const { dashborad, viewadmin, addAdmin, addAdminPage, deleteAdmin } = require('../controller/admin.controller');
+const {
+    dashborad,
+    viewadmin,
+    addAdmin,
+    addAdminPage,
+    deleteAdmin,
+    editAdmin,
+    updateAdmin,
+    loginPage,
+    login,
+    logout,
+    changePasswordPage,
+    changePassword
+} = require('../controller/admin.controller');
+
 const adminRoutes = express.Router();
 
 const storage = multer.diskStorage({
@@ -14,12 +28,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-adminRoutes.get('/', dashborad)
+adminRoutes.get('/', loginPage)
 adminRoutes.get('/viewAdmin', viewadmin)
 adminRoutes.get('/addAdmin', addAdminPage)
 adminRoutes.get('/deleteAdmin/:id', deleteAdmin)
+adminRoutes.get('/editAdmin/:id', editAdmin)
+adminRoutes.get('/dashboard', dashborad)
+adminRoutes.get('/logout', logout)
+adminRoutes.get('/change-password', changePasswordPage)
 
 // post request 
 adminRoutes.post('/addAdmin', upload.single('profile'), addAdmin)
+adminRoutes.post('/updateAdmin/:id', upload.single('profile'), updateAdmin)
+
+// login express.request
+adminRoutes.post('/login', login)
+adminRoutes.post('/change-password', changePassword)
+
 
 module.exports = adminRoutes;

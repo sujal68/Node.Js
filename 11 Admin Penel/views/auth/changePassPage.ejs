@@ -1,4 +1,4 @@
-<%- include('header') %>
+<%- include('../header') %>
 
     <style>
         .linkedin-form {
@@ -292,8 +292,8 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
                                     data-feather="settings"></i> Settings & Privacy</a>
-                            <a class="dropdown-item" href="#"><i class="align-middle me-1"
-                                    data-feather="help-circle"></i> Help Center</a>
+                            <a class="dropdown-item" href="/change-password"><i class="align-middle me-1"
+                                    data-feather="lock"></i>Change password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">Log out</a>
                         </div>
@@ -306,99 +306,38 @@
             <div class="container-fluid p-0">
 
                 <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Forms</h1>
+                    <h1 class="h3 d-inline align-middle">Change Password</h1>
                     <a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-                        Add Admins
+                        Password
                     </a>
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-12">
-                        <form action="/addAdmin" method="post" enctype="multipart/form-data">
+                        <form action="/change-password" method="post">
                             <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Fill Admin Data</h5>
-                                </div>
                                 <div class="card-body linkedin-form">
 
                                     <div class="li-field">
-                                        <label>Profile Photo</label>
-
-                                        <div class="upload-box" id="uploadBox">
-                                            <i class="ri-upload-cloud-2-line"></i>
-                                            <p><strong>Click to upload</strong> or drag & drop</p>
-                                            <span>PNG, JPG up to 5MB</span>
-                                            <input type="file" id="fileInput" name="profile" hidden>
-                                        </div>
+                                        <label>Current Password</label>
+                                        <input type="password" placeholder="Enter Your Current Password"
+                                            name="currentPass" id="currentPass">
                                     </div>
-
-
                                     <div class="li-row">
                                         <div class="li-field">
-                                            <label>First Name</label>
-                                            <input type="text" placeholder="Sujal" name="fname">
+                                            <label>New Password</label>
+                                            <input type="password" id="newPass" placeholder="Enter New Password"
+                                                name="newPass">
                                         </div>
                                         <div class="li-field">
-                                            <label>Last Name</label>
-                                            <input type="text" placeholder="Kidecha" name="lname">
+                                            <label>Confirm Password</label>
+                                            <input type="password" id="ConfPass" placeholder="Enter Confirm Password"
+                                                name="ConfPass">
                                         </div>
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>Email Address</label>
-                                        <input type="email" placeholder="name@example.com" name="email">
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>Password</label>
-                                        <input type="password" placeholder="Create password" name="password">
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>Contact Number</label>
-                                        <input type="number" placeholder="+91 XXXXX XXXXX" name="phone">
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>Gender</label>
-                                        <div class="li-options">
-                                            <label><input type="radio" name="gander" value="Male"> Male</label>
-                                            <label><input type="radio" name="gander" value="Female"> Female</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>Hobbies</label>
-                                        <div class="li-options">
-                                            <label><input type="checkbox" value="Coding" name="hobby"> Coding</label>
-                                            <label><input type="checkbox" value="Cricket" name="hobby"> Cricket</label>
-                                            <label><input type="checkbox" value="Music" name="hobby"> Music</label>
-                                            <label><input type="checkbox" value="Other" name="hobby"> Other</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>City</label>
-                                        <select name="city">
-                                            <option disabled selected>Select your city</option>
-                                            <option>Surat</option>
-                                            <option>Ahmedabad</option>
-                                            <option>Bharuch</option>
-                                            <option>Navsari</option>
-                                            <option>Vadodara</option>
-                                            <option>Bardoli</option>
-                                            <option>Amreli</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="li-field">
-                                        <label>About</label>
-                                        <textarea rows="3" placeholder="Tell us about yourself" name="about"></textarea>
                                     </div>
 
                                     <div class="li-actions">
-                                        <button type="submit" class="li-submit">Submit</button>
+                                        <button type="submit" class="li-submit">Change Password</button>
                                     </div>
-
 
                                 </div>
 
@@ -442,4 +381,4 @@
             });
 
         </script>
-        <%- include('footer') %>
+        <%- include('../footer') %>

@@ -1,19 +1,28 @@
 const youtube = require('../model/you.model')
 const fs = require('fs');
 
+// Youtube Page 
 const Youtube = async (req, res) => {
     const videos = await youtube.find();
     res.render("youtube", { videos });
 };
 
+// Add Video Page 
 const YoutubeVideoForm = (req, res) => {
     res.render("videoAddForm");
 }
+
+// edit Video Page
+const YoutubeVideoEdit = (req, res) => {
+    res.render("editVideoForm")
+}
+
+// Add Youtube Video Logic 
 const addVideo = async (req, res) => {
-    // req.body.Thumnail = req.file.path;
-    // req.body.Profile = req.file.path;
     req.body.Thumnail = req.files['Thumnail'][0].path;
+
     req.body.Profile = req.files['Profile'][0].path;
+
     req.body.VideoGif = req.files['VideoGif'][0].path;
     const added = await youtube.create(req.body);
     if (added) {
@@ -25,20 +34,15 @@ const addVideo = async (req, res) => {
     return res.redirect('/');
 };
 
-const YoutubeVideoEdit = (req, res) => {
-    res.render("editVideoForm")
-}
-
+// delete Youtube Video Logic 
 const VideoDelete = async (req, res) => {
 
     const DeleteVideo = await youtube.findByIdAndDelete(req.params.DeleteID);
-    // fs.unlinkSync(DeleteVideo.Thumnail);
-    // fs.unlinkSync(DeleteVideo.Profile);
 
-    if (!DeleteVideo) {
-        console.log("Video Not Found ❌");
-        return res.redirect('/');
-    }
+    // if (!DeleteVideo) {
+    //     console.log("Video Not Found ❌");
+    //     return res.redirect('/');
+    // }
 
     if (DeleteVideo.Thumnail && fs.existsSync(DeleteVideo.Thumnail)) {
         fs.unlinkSync(DeleteVideo.Thumnail);
@@ -53,6 +57,7 @@ const VideoDelete = async (req, res) => {
     return res.redirect('/')
 }
 
+// Find Youtube video Logic 
 const VideoUpdate = async (req, res) => {
     const SingleVideoFatch = await youtube.findById(req.params.UpdateID);
 
@@ -65,16 +70,16 @@ const VideoUpdate = async (req, res) => {
     return res.render('editVideoForm', { SingleVideoFatch })
 }
 
+// edit Youtube Video logic
 const EditVideo = async (req, res) => {
 
     const oldData = await youtube.findById(req.body.id);
 
-    if (!oldData) {
-        console.log("Video not found ❌");
-        return res.redirect('/');
-    }
+    // if (!oldData) {
+    //     return res.redirect('/');
+    // }
 
-    // thumnaill
+    // add Thumnaill Img 
     if (req.files['Thumnail']) {
         if (oldData.Thumnail && fs.existsSync(oldData.Thumnail)) {
             fs.unlinkSync(oldData.Thumnail);
@@ -82,7 +87,7 @@ const EditVideo = async (req, res) => {
         req.body.Thumnail = req.files['Thumnail'][0].path;
     }
 
-    // profile
+    // Profile img add 
     if (req.files['Profile']) {
         if (oldData.Profile && fs.existsSync(oldData.Profile)) {
             fs.unlinkSync(oldData.Profile);
@@ -90,7 +95,7 @@ const EditVideo = async (req, res) => {
         req.body.Profile = req.files['Profile'][0].path;
     }
 
-    //gif
+    // gif Add 
     if (req.files['VideoGif']) {
         if (oldData.VideoGif && fs.existsSync(oldData.VideoGif)) {
             fs.unlinkSync(oldData.VideoGif);
