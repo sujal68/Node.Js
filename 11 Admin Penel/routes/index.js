@@ -12,7 +12,8 @@ const {
     login,
     logout,
     changePasswordPage,
-    changePassword
+    changePassword,
+    profile
 } = require('../controller/admin.controller');
 
 const adminRoutes = express.Router();
@@ -36,6 +37,7 @@ adminRoutes.get('/editAdmin/:id', editAdmin)
 adminRoutes.get('/dashboard', dashborad)
 adminRoutes.get('/logout', logout)
 adminRoutes.get('/change-password', changePasswordPage)
+adminRoutes.get('/profile', profile);
 
 // post request 
 adminRoutes.post('/addAdmin', upload.single('profile'), addAdmin)

@@ -7,7 +7,7 @@ module.exports.dashborad = async (req, res) => {
     if (req.cookies.adminId == undefined && !admin) {
         return res.redirect('/');
     }
-    return res.render('dashboard', { admin })
+    return res.render('dashboard', { admin, currentPath: req.path });
 }
 
 module.exports.viewadmin = async (req, res) => {
@@ -19,7 +19,7 @@ module.exports.viewadmin = async (req, res) => {
         }
         let allAdmin = await Admin.find();
         allAdmin = allAdmin.filter((subadmin) => subadmin.email != admin.email);
-        return res.render('viewAdmin', { allAdmin, admin })
+        return res.render('viewAdmin', { allAdmin, admin, currentPath: req.path })
     } catch (error) {
         console.log("Something went wrong");
         console.log("Error : ", err);
@@ -33,7 +33,15 @@ module.exports.addAdminPage = async (req, res) => {
     if (req.cookies.adminId == undefined && !admin) {
         return res.redirect('/');
     }
-    return res.render('addAdmin', { admin })
+    return res.render('addAdmin', { admin, currentPath: req.path })
+}
+
+module.exports.profile = async (req, res) => {
+    const admin = await Admin.findById(req.cookies.adminId);
+    if (req.cookies.adminId == undefined && !admin) {
+        return res.redirect('/');
+    }
+    return res.render('Profile/Profile', { admin, currentPath: req.path })
 }
 
 module.exports.changePasswordPage = async (req, res) => {
@@ -44,7 +52,7 @@ module.exports.changePasswordPage = async (req, res) => {
         return res.redirect('/');
     }
 
-    return res.render('auth/changePassPage', { admin })
+    return res.render('auth/changePassPage', { admin, currentPath: req.path })
 
 }
 module.exports.changePassword = async (req, res) => {
@@ -186,7 +194,8 @@ module.exports.deleteAdmin = async (req, res) => {
 module.exports.editAdmin = async (req, res) => {
     try {
         const singleAdmin = await Admin.findById(req.params.id);
-        return res.render('editAdmin', { singleAdmin });
+        const returnTo = req.query.returnTo || '/viewAdmin';
+        return res.render('editAdmin', { singleAdmin, currentPath: req.path, returnTo });
     } catch (err) {
         console.log(err);
         return res.redirect('/viewAdmin');
@@ -222,9 +231,9 @@ module.exports.updateAdmin = async (req, res) => {
                 console.log("Admin Updation Failed...");
             }
         }
+        const returnTo = req.body.returnTo || '/viewAdmin';
 
-        return res.redirect('/viewAdmin');
-
+        return res.redirect(returnTo);
     } catch (err) {
         console.log("Something went wrong");
         console.log("Error :", err);
