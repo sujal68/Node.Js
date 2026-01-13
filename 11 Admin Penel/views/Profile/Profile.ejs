@@ -234,255 +234,320 @@
         </nav>
 
         <main class="content">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+                rel="stylesheet">
+            <script src="https://unpkg.com/feather-icons"></script>
+
+            <style>
+                .content {
+                    font-family: 'Inter', sans-serif;
+                    background-color: #f4f7fa;
+                    padding: 2rem !important;
+                }
+
+                /* Profile Header Design */
+                .profile-container {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                }
+
+                .main-profile-card {
+                    border: none;
+                    border-radius: 24px;
+                    background: #fff;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+                    overflow: hidden;
+                }
+
+                .profile-banner {
+                    height: 180px;
+                    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+                    position: relative;
+                }
+
+                .profile-header-body {
+                    position: relative;
+                    padding: 0 2.5rem 2rem;
+                    margin-top: -65px;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                }
+
+                .profile-avatar-box {
+                    position: relative;
+                }
+
+                .profile-img-lg {
+                    width: 140px;
+                    height: 140px;
+                    border: 6px solid #fff;
+                    border-radius: 32px;
+                    /* Modern Squircle */
+                    object-fit: cover;
+                    background: #fff;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                }
+
+                /* Action Dropdown Modernized */
+                .action-menu {
+                    position: absolute;
+                    right: 25px;
+                    top: 0px;
+                }
+
+                .action-toggle-btn {
+                    width: 44px;
+                    height: 44px;
+                    background: #fff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    color: #64748b;
+                }
+
+                .action-toggle-btn:hover {
+                    border-color: #4f46e5;
+                    color: #4f46e5;
+                    transform: translateY(-2px);
+                }
+
+                .action-dropdown {
+                    position: absolute;
+                    right: 0;
+                    top: 55px;
+                    background: #1e293b;
+                    /* Dark Premium Theme */
+                    border-radius: 16px;
+                    min-width: 180px;
+                    padding: 8px;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                    opacity: 0;
+                    transform: scale(0.9) translateY(10px);
+                    pointer-events: none;
+                    transition: 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    z-index: 1000;
+                }
+
+                .action-dropdown.active {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                    pointer-events: auto;
+                }
+
+                .action-dropdown a {
+                    color: #f1f5f9;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 12px 16px;
+                    border-radius: 12px;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+
+                .action-dropdown a:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: #fff;
+                }
+
+                /* Content Sections */
+                .info-section {
+                    padding: 2.5rem;
+                }
+
+                .section-title {
+                    font-size: 12px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: #94a3b8;
+                    letter-spacing: 1.5px;
+                    margin-bottom: 1.5rem;
+                    display: block;
+                }
+
+                .hobby-chip {
+                    background: #eef2ff;
+                    color: #4f46e5;
+                    padding: 8px 20px;
+                    border-radius: 50px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .detail-card {
+                    background: #f8fafc;
+                    border-radius: 20px;
+                    padding: 20px;
+                    height: 100%;
+                    border: 1px solid #f1f5f9;
+                }
+
+                .social-link {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 12px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #fff;
+                    color: #64748b;
+                    border: 1px solid #e2e8f0;
+                    margin-right: 10px;
+                    transition: 0.2s;
+                }
+
+                .social-link:hover {
+                    background: #4f46e5;
+                    color: #fff;
+                    transform: translateY(-3px);
+                }
+            </style>
+
             <div class="container-fluid p-0">
+                <div class="profile-container">
 
-                <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Profile</h1>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-xl-12">
-                        <div class="card mb-3">
+                    <div class="mb-4">
+                        <h1 class="h3 fw-bold text-dark">Account Profile</h1>
+                    </div>
 
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Profile Details</h5>
-                                <div class="action-menu">
-                                    <i class="ri-more-2-fill action-btn"></i>
+                    <div class="main-profile-card">
+                        <div class="profile-banner"></div>
 
-                                    <div class="action-dropdown">
-                                        <button class="edit-btn">
-                                            <i class="ri-edit-2-line"></i>
-                                            <a href="/editAdmin/<%= admin._id %>?returnTo=/profile"
-                                                style="color:white; text-decoration: none;">Edit</a>
-                                        </button>
+                        <div class="profile-header-body">
+                            <div class="d-flex align-items-end flex-wrap gap-4">
+                                <div class="profile-avatar-box">
+                                    <img src="<%= admin.profile %>" class="profile-img-lg" alt="Profile" />
+                                </div>
+                                <div class="mb-2">
+                                    <h2 class="fw-bold text-dark mb-1">
+                                        <%= admin.fname %>
+                                            <%= admin.lname %>
+                                    </h2>
+                                    <p class="text-muted mb-0 d-flex align-items-center gap-2">
+                                        <i data-feather="mail" style="width:16px"></i>
+                                        <%= admin.email %>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="action-menu">
+                                <div class="action-toggle-btn" id="profileMenuBtn">
+                                    <i data-feather="more-horizontal"></i>
+                                </div>
+                                <div class="action-dropdown" id="profileDropdown">
+                                    <a href="/editAdmin/<%= admin._id %>?returnTo=/profile">
+                                        <i data-feather="edit-3" style="width:16px"></i> Edit Profile
+                                    </a>
+                                    <a href="/logout" style="color: #fda4af;">
+                                        <i data-feather="log-out" style="width:16px"></i> Logout
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-4">
+                                <button class="btn btn-primary px-4 py-2"
+                                    style="border-radius: 12px; font-weight: 600;">Follow</button>
+                                <button class="btn btn-outline-secondary px-4 py-2"
+                                    style="border-radius: 12px; background: #fff;">Message</button>
+                            </div>
+                        </div>
+
+                        <hr class="mx-5 my-0" style="opacity: 0.05;">
+
+                        <div class="info-section">
+                            <div class="row g-4">
+                                <div class="col-lg-7">
+                                    <span class="section-title">Biography</span>
+                                    <p class="text-secondary mb-4" style="font-size: 16px; line-height: 1.8;">
+                                        <%= admin.about
+                                            || "Add a professional bio to showcase your skills and background. Let the community know who you are."
+                                            %>
+                                    </p>
+
+                                    <span class="section-title">Top Interests</span>
+                                    <div class="hobby-chip">
+                                        <i data-feather="zap" style="width:14px"></i>
+                                        <%= admin.hobby %>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="<%= admin.profile %>" alt="Christina Mason"
-                                    class="img-fluid rounded-circle mb-2" width="128" height="128" />
-                                <h5 class="card-title mb-0">
-                                    <%= admin.fname %>
-                                        <%= admin.lname %>
-                                </h5>
-                                <div class="text-muted mb-2">
-                                    <%= admin.email %>
-                                </div>
 
-                                <div>
-                                    <a class="btn btn-primary btn-sm" href="#">Follow</a>
-                                    <a class="btn btn-primary btn-sm" href="#"><span
-                                            data-feather="message-square"></span> Message</a>
+                                <div class="col-lg-5">
+                                    <div class="detail-card">
+                                        <span class="section-title">Personal Details</span>
+                                        <div class="d-flex align-items-center gap-3 mb-4">
+                                            <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                <i data-feather="map-pin" class="text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted d-block">Location</small>
+                                                <span class="fw-600">
+                                                    <%= admin.city %>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="bg-white p-2 rounded-3 shadow-sm">
+                                                <i data-feather="calendar" class="text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted d-block">Joined</small>
+                                                <span class="fw-600">January 2026</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-5">
+                                            <span class="section-title">Social Connect</span>
+                                            <div class="d-flex">
+                                                <a href="#" class="social-link"><i data-feather="twitter"
+                                                        style="width:18px"></i></a>
+                                                <a href="#" class="social-link"><i data-feather="linkedin"
+                                                        style="width:18px"></i></a>
+                                                <a href="#" class="social-link"><i data-feather="github"
+                                                        style="width:18px"></i></a>
+                                                <a href="#" class="social-link"><i data-feather="instagram"
+                                                        style="width:18px"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr class="my-0" />
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Hobbies</h5>
-                                <a href="#" class="badge bg-primary me-1 my-1">
-                                    <%= admin.hobby %>
-                                </a>
-                            </div>
-                            <hr class="my-0" />
-                            <div class="card-body">
-                                <h5 class="h6 card-title">About</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span> Lives in
-                                        <a href="#">
-                                            <%= admin.city %>
-                                        </a>
-                                    </li>
-                                    <li class="mb-1"><span data-feather="user" class="feather-sm me-1"></span> Bio:
-                                        <a href="#">
-                                            <%= admin.about %>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <hr class="my-0" />
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Elsewhere</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-1"><a href="#">staciehall.co</a></li>
-                                    <li class="mb-1"><a href="#">Twitter</a></li>
-                                    <li class="mb-1"><a href="#">Facebook</a></li>
-                                    <li class="mb-1"><a href="#">Instagram</a></li>
-                                    <li class="mb-1"><a href="#">LinkedIn</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div class="col-md-8 col-xl-9">
-                        <div class="card">
-                            <div class="card-header">
-
-                                <h5 class="card-title mb-0">Activities</h5>
-                            </div>
-                            <div class="card-body h-100">
-
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar-5.jpg" width="36" height="36"
-                                        class="rounded-circle me-2" alt="Vanessa Tucker">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">5m ago</small>
-                                        <strong>Vanessa Tucker</strong> started following <strong>Christina
-                                            Mason</strong><br />
-                                        <small class="text-muted">Today 7:51 pm</small><br />
-
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle me-2"
-                                        alt="Charles Hall">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">30m ago</small>
-                                        <strong>Charles Hall</strong> posted something on <strong>Christina
-                                            Mason</strong>'s timeline<br />
-                                        <small class="text-muted">Today 7:21 pm</small>
-
-                                        <div class="border text-sm text-muted p-2 mt-1">
-                                            Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam
-                                            semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
-                                            blandit vel, luctus
-                                            pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.
-                                            Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante.
-                                        </div>
-
-                                        <a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm"
-                                                data-feather="heart"></i> Like</a>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar-4.jpg" width="36" height="36"
-                                        class="rounded-circle me-2" alt="Christina Mason">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">1h ago</small>
-                                        <strong>Christina Mason</strong> posted a new blog<br />
-
-                                        <small class="text-muted">Today 6:35 pm</small>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar-2.jpg" width="36" height="36"
-                                        class="rounded-circle me-2" alt="William Harris">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">3h ago</small>
-                                        <strong>William Harris</strong> posted two photos on <strong>Christina
-                                            Mason</strong>'s timeline<br />
-                                        <small class="text-muted">Today 5:12 pm</small>
-
-                                        <div class="row g-0 mt-1">
-                                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                                <img src="img/photos/unsplash-1.jpg" class="img-fluid pe-2"
-                                                    alt="Unsplash">
-                                            </div>
-                                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                                <img src="img/photos/unsplash-2.jpg" class="img-fluid pe-2"
-                                                    alt="Unsplash">
-                                            </div>
-                                        </div>
-
-                                        <a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm"
-                                                data-feather="heart"></i> Like</a>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar-2.jpg" width="36" height="36"
-                                        class="rounded-circle me-2" alt="William Harris">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">1d ago</small>
-                                        <strong>William Harris</strong> started following <strong>Christina
-                                            Mason</strong><br />
-                                        <small class="text-muted">Yesterday 3:12 pm</small>
-
-                                        <div class="d-flex align-items-start mt-1">
-                                            <a class="pe-3" href="#">
-                                                <img src="img/avatars/avatar-4.jpg" width="36" height="36"
-                                                    class="rounded-circle me-2" alt="Christina Mason">
-                                            </a>
-                                            <div class="flex-grow-1">
-                                                <div class="border text-sm text-muted p-2 mt-1">
-                                                    Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
-                                                    Maecenas nec odio et ante tincidunt tempus.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar-4.jpg" width="36" height="36"
-                                        class="rounded-circle me-2" alt="Christina Mason">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">1d ago</small>
-                                        <strong>Christina Mason</strong> posted a new blog<br />
-                                        <small class="text-muted">Yesterday 2:43 pm</small>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-flex align-items-start">
-                                    <img src="img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle me-2"
-                                        alt="Charles Hall">
-                                    <div class="flex-grow-1">
-                                        <small class="float-end text-navy">1d ago</small>
-                                        <strong>Charles Hall</strong> started following <strong>Christina
-                                            Mason</strong><br />
-                                        <small class="text-muted">Yesterdag 1:51 pm</small>
-                                    </div>
-                                </div>
-
-                                <hr />
-                                <div class="d-grid">
-                                    <a href="#" class="btn btn-primary">Load more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
-
             </div>
-        </main>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Feather Icons Initialize
+                    feather.replace();
 
-                const actionButtons = document.querySelectorAll(".action-btn");
+                    // Modern Dropdown Logic
+                    const btn = document.getElementById("profileMenuBtn");
+                    const menu = document.getElementById("profileDropdown");
 
-                actionButtons.forEach(btn => {
                     btn.addEventListener("click", function (e) {
                         e.stopPropagation();
-
-                        // close other menus
-                        document.querySelectorAll(".action-dropdown").forEach(menu => {
-                            if (menu !== this.nextElementSibling) {
-                                menu.classList.remove("active");
-                            }
-                        });
-
-                        // toggle current
-                        const menu = this.nextElementSibling;
                         menu.classList.toggle("active");
                     });
-                });
 
-                // close when clicking outside
-                document.addEventListener("click", function () {
-                    document.querySelectorAll(".action-dropdown").forEach(menu => {
+                    document.addEventListener("click", function () {
                         menu.classList.remove("active");
                     });
                 });
-
-            });
-        </script>
+            </script>
+        </main>
 
 
         <%- include('../footer') %>

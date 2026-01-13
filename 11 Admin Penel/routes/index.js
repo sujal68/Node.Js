@@ -13,7 +13,8 @@ const {
     logout,
     changePasswordPage,
     changePassword,
-    profile
+    profile,
+    verifyEmail
 } = require('../controller/admin.controller');
 
 const adminRoutes = express.Router();
@@ -46,6 +47,7 @@ adminRoutes.post('/updateAdmin/:id', upload.single('profile'), updateAdmin)
 // login express.request
 adminRoutes.post('/login', login)
 adminRoutes.post('/change-password', changePassword)
+adminRoutes.post('/verify-email', verifyEmail)
 
 
 module.exports = adminRoutes;

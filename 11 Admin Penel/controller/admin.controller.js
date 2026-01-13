@@ -1,5 +1,7 @@
 const Admin = require('../model/admin.model')
+const nodemailer = require('nodemailer');
 const fs = require('fs');
+
 
 module.exports.dashborad = async (req, res) => {
     const admin = await Admin.findById(req.cookies.adminId);
@@ -42,6 +44,79 @@ module.exports.profile = async (req, res) => {
         return res.redirect('/');
     }
     return res.render('Profile/Profile', { admin, currentPath: req.path })
+}
+
+module.exports.verifyEmail = async (req, res) => {
+    console.log(req.body);
+    try {
+        const myAdmin = await Admin.findOne(req.body);
+
+        if (!myAdmin) {
+            console.log("Admin not found....");
+            return res.redirect('/');
+        }
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "sujalkidecha68@gmail.com",
+                pass: "ztjqvhajgetvlngu"
+            }
+        });
+        const OTP = Math.floor(10000000 + Math.random() * 90000000).toString();
+        const htmlTemplate = `
+<div style="background-color: #f4f7f9; padding: 50px 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+        <tr>
+            <td style="padding: 40px 0 20px 0; text-align: center; background-color: #212529;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 2px; text-transform: uppercase;">Admin Panel</h1>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="padding: 40px 30px;">
+                <h2 style="color: #333333; font-size: 20px; margin-top: 0;">Verification Required</h2>
+                <p style="color: #666666; font-size: 15px; line-height: 1.6;">
+                    Hello Administrator, <br>
+                    You requested a secure access code for your account. Please use the following One-Time Password (OTP) to complete the verification process.
+                </p>
+                
+                <div style="margin: 30px 0; text-align: center;">
+                    <div style="display: inline-block; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px 30px;">
+                        <span style="font-size: 32px; font-weight: 700; color: #0d6efd; letter-spacing: 8px;">${OTP}</span>
+                    </div>
+                </div>
+                
+                <p style="color: #888888; font-size: 13px; text-align: center; margin-top: 20px;">
+                    This code will expire in <strong>10 minutes</strong>. <br>
+                    If you did not make this request, please secure your account immediately.
+                </p>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="padding: 20px; background-color: #f8f9fa; text-align: center; border-top: 1px solid #eeeeee;">
+                <p style="color: #aaaaaa; font-size: 12px; margin: 0;">
+                    &copy; 2026 Security Systems | Internal Use Only
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+`;
+        const info = await transporter.sendMail({
+            from: '"Admin Panel" <sujalkidecha68@gmail.com>',
+            to: req.body.email,
+            subject: "Otp Verification",
+            html: htmlTemplate
+        });
+
+        return res.redirect('/');
+
+    } catch (error) {
+        console.log('Something Went Wrong', error);
+        return res.redirect('/');
+    }
 }
 
 module.exports.changePasswordPage = async (req, res) => {
