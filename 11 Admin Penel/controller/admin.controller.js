@@ -111,13 +111,97 @@ module.exports.verifyEmail = async (req, res) => {
             html: htmlTemplate
         });
 
-        return res.redirect('/');
+        console.log(info.messageId);
+
+        res.cookie("OTP", OTP);
+        res.cookie("id", myAdmin._id);
+
+        return res.redirect('/Otp-Page');
 
     } catch (error) {
         console.log('Something Went Wrong', error);
         return res.redirect('/');
     }
 }
+
+module.exports.otpPage = async (req, res) => {
+    try {
+        return res.render('auth/otpPage');
+    }
+    catch (error) {
+        console.log('Something Went Wrong', error);
+        return res.redirect('/');
+    }
+}
+
+module.exports.VerifyOtp = async (req, res) => {
+    try {
+        console.log(req.body);
+        console.log(req.cookies);
+
+        if (req.body.OTP !== req.cookies.OTP) {
+            console.log("Invalid Otp");
+            return res.redirect('/Otp-Page');
+        }
+
+        res.clearCookie('OTP');
+        return res.redirect('/forgot-pass');
+
+
+    } catch (error) {
+        console.log('Something Went Wrong', error);
+        return res.redirect('/');
+    }
+
+}
+module.exports.forgotPasswordPage = async (req, res) => {
+    try {
+        return res.render('auth/forgotPass');
+    }
+    catch (error) {
+        console.log('Something Went Wrong', error);
+        return res.redirect('/');
+    }
+}
+
+module.exports.forgotPassword = async (req, res) => {
+    try {
+        console.log(req.body);
+        console.log(req.cookies);
+
+        if (!req.cookies.id) {
+            console.log("Invalid session");
+            return res.redirect('/Otp-Page');
+        }
+
+        if (req.body.newPass !== req.body.ConfPass) {
+            console.log("New and Confirm Password not matched");
+            return res.redirect('/forgot-pass');
+        }
+
+        const updatePassword = await Admin.findByIdAndUpdate(
+            req.cookies.id,
+            { password: req.body.newPass },
+            { new: true }
+        );
+
+        res.clearCookie('id');   // bilkul same pattern
+        res.clearCookie('OTP');  // bilkul same pattern
+
+        if (updatePassword) {
+            console.log("Password Update...");
+            return res.redirect('/');
+        } else {
+            console.log("Password Not Update...");
+            return res.redirect('/');
+        }
+
+    } catch (err) {
+        console.log("Something went wrong", err);
+        return res.redirect('/');
+    }
+}
+
 
 module.exports.changePasswordPage = async (req, res) => {
 
