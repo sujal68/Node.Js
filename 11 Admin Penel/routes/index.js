@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const Admin = require('../model/admin.model');
 const {
     dashborad,
     viewadmin,
@@ -23,6 +24,23 @@ const {
 
 const adminRoutes = express.Router();
 
+// Admin Auth Middleware
+const checkAdminAuth = async (req, res, next) => {
+    try {
+        if (!req.cookies.adminId) {
+            return res.redirect('/');
+        }
+        const admin = await Admin.findById(req.cookies.adminId);
+        if (!admin) {
+            return res.redirect('/');
+        }
+        req.admin = admin;
+        next();
+    } catch (error) {
+        return res.redirect('/');
+    }
+};
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'upload/admin')
@@ -34,28 +52,29 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+// Public routes (no auth required)
 adminRoutes.get('/', loginPage)
-adminRoutes.get('/viewAdmin', viewadmin)
-adminRoutes.get('/addAdmin', addAdminPage)
-adminRoutes.get('/deleteAdmin/:id', deleteAdmin)
-adminRoutes.get('/editAdmin/:id', editAdmin)
-adminRoutes.get('/dashboard', dashborad)
-adminRoutes.get('/logout', logout)
-adminRoutes.get('/change-password', changePasswordPage)
-adminRoutes.get('/profile', profile);
 adminRoutes.get('/Otp-Page', otpPage);
 adminRoutes.get('/forgot-pass', forgotPasswordPage);
-
-// post request 
-adminRoutes.post('/addAdmin', upload.single('profile'), addAdmin)
-adminRoutes.post('/updateAdmin/:id', upload.single('profile'), updateAdmin)
+adminRoutes.post('/login', login)
 adminRoutes.post('/VerifyOtp', VerifyOtp)
 adminRoutes.post('/forgot-pass', forgotPassword)
-
-// login express.request
-adminRoutes.post('/login', login)
-adminRoutes.post('/change-password', changePassword)
 adminRoutes.post('/verify-email', verifyEmail)
+
+// Protected routes (auth required)
+adminRoutes.get('/viewAdmin', checkAdminAuth, viewadmin)
+adminRoutes.get('/addAdmin', checkAdminAuth, addAdminPage)
+adminRoutes.get('/deleteAdmin/:id', checkAdminAuth, deleteAdmin)
+adminRoutes.get('/editAdmin/:id', checkAdminAuth, editAdmin)
+adminRoutes.get('/dashboard', checkAdminAuth, dashborad)
+adminRoutes.get('/logout', checkAdminAuth, logout)
+adminRoutes.get('/change-password', checkAdminAuth, changePasswordPage)
+adminRoutes.get('/profile', checkAdminAuth, profile);
+
+// Protected POST routes
+adminRoutes.post('/addAdmin', checkAdminAuth, upload.single('profile'), addAdmin)
+adminRoutes.post('/updateAdmin/:id', checkAdminAuth, upload.single('profile'), updateAdmin)
+adminRoutes.post('/change-password', checkAdminAuth, changePassword)
 
 
 module.exports = adminRoutes;

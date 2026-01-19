@@ -4,45 +4,30 @@ const fs = require('fs');
 
 
 module.exports.dashborad = async (req, res) => {
-    const admin = await Admin.findById(req.cookies.adminId);
-
-    if (req.cookies.adminId == undefined && !admin) {
-        return res.redirect('/');
-    }
+    const admin = req.admin;
     return res.render('dashboard', { admin, currentPath: req.path });
 }
 
 module.exports.viewadmin = async (req, res) => {
     try {
-        const admin = await Admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !admin) {
-            return res.redirect('/');
-        }
+        const admin = req.admin;
         let allAdmin = await Admin.find();
         allAdmin = allAdmin.filter((subadmin) => subadmin.email != admin.email);
         return res.render('viewAdmin', { allAdmin, admin, currentPath: req.path })
     } catch (error) {
         console.log("Something went wrong");
-        console.log("Error : ", err);
+        console.log("Error : ", error);
         return res.redirect('/dashboard');
     }
 }
 
 module.exports.addAdminPage = async (req, res) => {
-    const admin = await Admin.findById(req.cookies.adminId);
-
-    if (req.cookies.adminId == undefined && !admin) {
-        return res.redirect('/');
-    }
+    const admin = req.admin;
     return res.render('addAdmin', { admin, currentPath: req.path })
 }
 
 module.exports.profile = async (req, res) => {
-    const admin = await Admin.findById(req.cookies.adminId);
-    if (req.cookies.adminId == undefined && !admin) {
-        return res.redirect('/');
-    }
+    const admin = req.admin;
     return res.render('Profile/Profile', { admin, currentPath: req.path })
 }
 
@@ -126,6 +111,9 @@ module.exports.verifyEmail = async (req, res) => {
 
 module.exports.otpPage = async (req, res) => {
     try {
+        if (!req.cookies.OTP || !req.cookies.id) {
+            return res.redirect('/');
+        }
         return res.render('auth/otpPage');
     }
     catch (error) {
@@ -156,6 +144,9 @@ module.exports.VerifyOtp = async (req, res) => {
 }
 module.exports.forgotPasswordPage = async (req, res) => {
     try {
+        if (!req.cookies.id) {
+            return res.redirect('/');
+        }
         return res.render('auth/forgotPass');
     }
     catch (error) {
@@ -204,25 +195,12 @@ module.exports.forgotPassword = async (req, res) => {
 
 
 module.exports.changePasswordPage = async (req, res) => {
-
-    const admin = await Admin.findById(req.cookies.adminId);
-
-    if (req.cookies.adminId == undefined && !admin) {
-        return res.redirect('/');
-    }
-
+    const admin = req.admin;
     return res.render('auth/changePassPage', { admin, currentPath: req.path })
-
 }
 module.exports.changePassword = async (req, res) => {
-
     try {
-        const admin = await Admin.findById(req.cookies.adminId);
-
-        if (req.cookies.adminId == undefined && !admin) {
-            return res.redirect('/');
-        }
-
+        const admin = req.admin;
         const { currentPass, newPass, ConfPass } = req.body;
 
         if (currentPass != admin.password) {
@@ -323,16 +301,13 @@ module.exports.addAdmin = async (req, res) => {
 
 module.exports.deleteAdmin = async (req, res) => {
     try {
-        const currentAdmin = await Admin.findById(req.cookies.adminId);
-
-        if (!currentAdmin) return res.redirect('/');
+        const currentAdmin = req.admin;
 
         if (currentAdmin.email !== "sujalkidecha68@gmail.com") {
             return res.redirect('/viewAdmin');
         }
 
         const id = req.params.id;
-
         const deleteAdmin = await Admin.findByIdAndDelete(id);
 
         if (deleteAdmin) {
