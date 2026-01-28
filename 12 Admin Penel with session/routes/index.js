@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 // const multer = require('multer');
 const upload = require('../middleware/multer.middleware')
 const Admin = require('../model/admin.model');
@@ -42,22 +43,14 @@ const checkAdminAuth = async (req, res, next) => {
     }
 };
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'upload/admin')
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, Date.now() + '-' + file.originalname);
-//     }
-// })
-
-// const upload = multer({ storage: storage })
 
 // Public routes (no auth required)
 adminRoutes.get('/', loginPage)
 adminRoutes.get('/Otp-Page', otpPage);
 adminRoutes.get('/forgot-pass', forgotPasswordPage);
-adminRoutes.post('/login', login)
+adminRoutes.post('/login', passport.authenticate("localAuth", {
+    failureRedirect: '/'
+}), login)
 adminRoutes.post('/VerifyOtp', VerifyOtp)
 adminRoutes.post('/forgot-pass', forgotPassword)
 adminRoutes.post('/verify-email', verifyEmail)
@@ -67,7 +60,7 @@ adminRoutes.get('/viewAdmin', checkAdminAuth, viewadmin)
 adminRoutes.get('/addAdmin', checkAdminAuth, addAdminPage)
 adminRoutes.get('/deleteAdmin/:id', checkAdminAuth, deleteAdmin)
 adminRoutes.get('/editAdmin/:id', checkAdminAuth, editAdmin)
-adminRoutes.get('/dashboard', checkAdminAuth, dashborad)
+adminRoutes.get('/dashboard', dashborad)
 adminRoutes.get('/logout', checkAdminAuth, logout)
 adminRoutes.get('/change-password', checkAdminAuth, changePasswordPage)
 adminRoutes.get('/profile', checkAdminAuth, profile);

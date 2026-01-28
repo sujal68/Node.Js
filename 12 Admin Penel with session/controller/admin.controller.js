@@ -251,19 +251,7 @@ module.exports.logout = (req, res) => {
 
 module.exports.login = async (req, res) => {
     try {
-        const admin = await Admin.findOne({ email: req.body.email });
 
-        if (!admin) {
-            console.log("Admin Not Found!!");
-            return res.redirect('/');
-        }
-
-        if (admin.password != req.body.password) {
-            console.log("Password not matched!!");
-            return res.redirect('/');
-        }
-
-        res.cookie('adminId', admin._id);
         return res.redirect('/dashboard');
 
     } catch (error) {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb://localhost:27017/Admin-Penel';
+const URI = 'mongodb://localhost:27017/Admin-Penel-Passport';
 
 mongoose.connect(URI).then(() => {
 
