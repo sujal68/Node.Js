@@ -176,8 +176,8 @@ module.exports.forgotPassword = async (req, res) => {
             { new: true }
         );
 
-        res.clearCookie('id');   // bilkul same pattern
-        res.clearCookie('OTP');  // bilkul same pattern
+        res.clearCookie('id');
+        res.clearCookie('OTP');
 
         if (updatePassword) {
             console.log("Password Update...");
@@ -204,21 +204,21 @@ module.exports.changePassword = async (req, res) => {
         const { currentPass, newPass, ConfPass } = req.body;
 
         if (currentPass != admin.password) {
-            console.log('Current Password Is Not Matched Original Password!!');
+            console.log('Current Password Is Not Matched!!!!!!');
             return res.redirect('/change-password')
         }
 
         if (newPass === admin.password) {
-            console.log("New Password or original Password Is Matched!! try Again");
+            console.log("New Password or original Password Is Matched!....");
             return res.redirect('/change-password')
         }
 
         if (ConfPass != newPass) {
-            console.log("Confirm Password Note Matched New Password!!");
+            console.log("Confirm Password Note match New Password!!");
             return res.redirect('/change-password')
         }
 
-        const ChangePass = await Admin.findByIdAndUpdate(admin._id, { password: newPass }, { new: true });
+        const ChangePass = await Admin.findByIdAndUpdate(admin.id, { password: newPass }, { new: true });
         console.log(ChangePass);
 
         if (ChangePass) {
