@@ -2,15 +2,27 @@ const Admin = require('../model/admin.model')
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 
+// Session Remove
+function sessionRemove(req, res) {
+    console.log("Session Remove");
+
+    req.session.destroy((err) => {
+        if (!err) {
+            console.log("Session Removed");
+            return res.redirect('/');
+        }
+        console.log("Error : ", err);
+    });
+}
 
 module.exports.dashborad = async (req, res) => {
-    const admin = req.admin;
+    const admin = res.locals.admin;
     return res.render('dashboard', { admin, currentPath: req.path });
 }
 
 module.exports.viewadmin = async (req, res) => {
     try {
-        const admin = req.admin;
+        const admin = res.locals.admin;
         let allAdmin = await Admin.find();
         allAdmin = allAdmin.filter((subadmin) => subadmin.email != admin.email);
         return res.render('viewAdmin', { allAdmin, admin, currentPath: req.path })
@@ -22,12 +34,12 @@ module.exports.viewadmin = async (req, res) => {
 }
 
 module.exports.addAdminPage = async (req, res) => {
-    const admin = req.admin;
+    const admin = res.locals.admin;
     return res.render('addAdmin', { admin, currentPath: req.path })
 }
 
 module.exports.profile = async (req, res) => {
-    const admin = req.admin;
+    const admin = res.locals.admin;
     return res.render('Profile/Profile', { admin, currentPath: req.path })
 }
 
@@ -98,8 +110,8 @@ module.exports.verifyEmail = async (req, res) => {
 
         console.log(info.messageId);
 
-        res.cookie("OTP", OTP);
-        res.cookie("id", myAdmin._id);
+        req.session.OTP = OTP;
+        req.session.resetAdminId = myAdmin._id;
 
         return res.redirect('/Otp-Page');
 
@@ -111,7 +123,7 @@ module.exports.verifyEmail = async (req, res) => {
 
 module.exports.otpPage = async (req, res) => {
     try {
-        if (!req.cookies.OTP || !req.cookies.id) {
+        if (!req.session.OTP || !req.session.resetAdminId) {
             return res.redirect('/');
         }
         return res.render('auth/otpPage');
@@ -125,14 +137,14 @@ module.exports.otpPage = async (req, res) => {
 module.exports.VerifyOtp = async (req, res) => {
     try {
         console.log(req.body);
-        console.log(req.cookies);
+        console.log(req.session);
 
-        if (req.body.OTP !== req.cookies.OTP) {
+        if (req.body.OTP !== req.session.OTP) {
             console.log("Invalid Otp");
             return res.redirect('/Otp-Page');
         }
 
-        res.clearCookie('OTP');
+        req.session.OTP = null;
         return res.redirect('/forgot-pass');
 
 
@@ -144,7 +156,7 @@ module.exports.VerifyOtp = async (req, res) => {
 }
 module.exports.forgotPasswordPage = async (req, res) => {
     try {
-        if (!req.cookies.id) {
+        if (!req.session.resetAdminId) {
             return res.redirect('/');
         }
         return res.render('auth/forgotPass');
@@ -158,9 +170,9 @@ module.exports.forgotPasswordPage = async (req, res) => {
 module.exports.forgotPassword = async (req, res) => {
     try {
         console.log(req.body);
-        console.log(req.cookies);
+        console.log(req.session);
 
-        if (!req.cookies.id) {
+        if (!req.session.resetAdminId) {
             console.log("Invalid session");
             return res.redirect('/Otp-Page');
         }
@@ -171,13 +183,13 @@ module.exports.forgotPassword = async (req, res) => {
         }
 
         const updatePassword = await Admin.findByIdAndUpdate(
-            req.cookies.id,
+            req.session.resetAdminId,
             { password: req.body.newPass },
             { new: true }
         );
 
-        res.clearCookie('id');   // bilkul same pattern
-        res.clearCookie('OTP');  // bilkul same pattern
+        req.session.resetAdminId = null;
+        req.session.OTP = null;
 
         if (updatePassword) {
             console.log("Password Update...");
@@ -195,12 +207,12 @@ module.exports.forgotPassword = async (req, res) => {
 
 
 module.exports.changePasswordPage = async (req, res) => {
-    const admin = req.admin;
+    const admin = res.locals.admin;
     return res.render('auth/changePassPage', { admin, currentPath: req.path })
 }
 module.exports.changePassword = async (req, res) => {
     try {
-        const admin = req.admin;
+        const admin = res.locals.admin;
         const { currentPass, newPass, ConfPass } = req.body;
 
         if (currentPass != admin.password) {
@@ -227,7 +239,7 @@ module.exports.changePassword = async (req, res) => {
             console.log("Password Updation failed!!!");
         }
 
-        return res.redirect('/')
+        sessionRemove(req, res);
 
     } catch (error) {
         console.log("Delete error:", error);
@@ -236,18 +248,15 @@ module.exports.changePassword = async (req, res) => {
 }
 
 module.exports.loginPage = async (req, res) => {
-    const admin = await Admin.findById(req.cookies.adminId);
-
-    if (req.cookies.adminId && admin) {
+    if (req.isAuthenticated()) {
         return res.redirect('/dashboard');
     }
-    return res.render('auth/login')
+    return res.render('auth/login');
 }
 
 module.exports.logout = (req, res) => {
-    res.clearCookie('adminId');
-    return res.redirect('/');
-}
+    sessionRemove(req, res);
+};
 
 module.exports.login = async (req, res) => {
     try {
@@ -289,7 +298,7 @@ module.exports.addAdmin = async (req, res) => {
 
 module.exports.deleteAdmin = async (req, res) => {
     try {
-        const currentAdmin = req.admin;
+        const currentAdmin = res.locals.admin;
 
         if (currentAdmin.email !== "sujalkidecha68@gmail.com") {
             return res.redirect('/viewAdmin');

@@ -1,8 +1,7 @@
 const express = require('express');
 const passport = require('passport');
-// const multer = require('multer');
-const upload = require('../middleware/multer.middleware')
-const Admin = require('../model/admin.model');
+const upload = require('../middleware/multer.middleware');
+
 const {
     dashborad,
     viewadmin,
@@ -25,50 +24,58 @@ const {
 } = require('../controller/admin.controller');
 
 const adminRoutes = express.Router();
+// Login
+adminRoutes.get('/', passport.checkAuthIsNotDone, loginPage);
 
-// Admin Auth Middleware
-const checkAdminAuth = async (req, res, next) => {
-    try {
-        if (!req.cookies.adminId) {
-            return res.redirect('/');
-        }
-        const admin = await Admin.findById(req.cookies.adminId);
-        if (!admin) {
-            return res.redirect('/');
-        }
-        req.admin = admin;
-        next();
-    } catch (error) {
-        return res.redirect('/');
-    }
-};
+adminRoutes.post(
+    '/login',
+    passport.checkAuthIsNotDone,
+    passport.authenticate('localAuth', { failureRedirect: '/' }),
+    login
+);
 
+// Forgot password – email verify
+adminRoutes.post('/verify-email', passport.checkAuthIsNotDone, verifyEmail);
 
-// Public routes (no auth required)
-adminRoutes.get('/', loginPage)
-adminRoutes.get('/Otp-Page', otpPage);
-adminRoutes.get('/forgot-pass', forgotPasswordPage);
-adminRoutes.post('/login', passport.authenticate("localAuth", {
-    failureRedirect: '/'
-}), login)
-adminRoutes.post('/VerifyOtp', VerifyOtp)
-adminRoutes.post('/forgot-pass', forgotPassword)
-adminRoutes.post('/verify-email', verifyEmail)
+// OTP
+adminRoutes.get('/Otp-Page', passport.checkAuthIsNotDone, otpPage);
+adminRoutes.post('/VerifyOtp', passport.checkAuthIsNotDone, VerifyOtp);
 
-// Protected routes (auth required)
-adminRoutes.get('/viewAdmin', checkAdminAuth, viewadmin)
-adminRoutes.get('/addAdmin', checkAdminAuth, addAdminPage)
-adminRoutes.get('/deleteAdmin/:id', checkAdminAuth, deleteAdmin)
-adminRoutes.get('/editAdmin/:id', checkAdminAuth, editAdmin)
-adminRoutes.get('/dashboard', dashborad)
-adminRoutes.get('/logout', checkAdminAuth, logout)
-adminRoutes.get('/change-password', checkAdminAuth, changePasswordPage)
-adminRoutes.get('/profile', checkAdminAuth, profile);
+// New password
+adminRoutes.get('/forgot-pass', passport.checkAuthIsNotDone, forgotPasswordPage);
+adminRoutes.post('/forgot-pass', passport.checkAuthIsNotDone, forgotPassword);
 
-// Protected POST routes
-adminRoutes.post('/addAdmin', checkAdminAuth, upload.single('profile'), addAdmin)
-adminRoutes.post('/updateAdmin/:id', checkAdminAuth, upload.single('profile'), updateAdmin)
-adminRoutes.post('/change-password', checkAdminAuth, changePassword)
+// Dashboard
+adminRoutes.get('/dashboard', passport.checkAuthIsDone, dashborad);
 
+// Admin CRUD
+adminRoutes.get('/viewAdmin', passport.checkAuthIsDone, viewadmin);
+adminRoutes.get('/addAdmin', passport.checkAuthIsDone, addAdminPage);
+adminRoutes.post(
+    '/addAdmin',
+    passport.checkAuthIsDone,
+    upload.single('profile'),
+    addAdmin
+);
+
+adminRoutes.get('/editAdmin/:id', passport.checkAuthIsDone, editAdmin);
+adminRoutes.post(
+    '/updateAdmin/:id',
+    passport.checkAuthIsDone,
+    upload.single('profile'),
+    updateAdmin
+);
+
+adminRoutes.get('/deleteAdmin/:id', passport.checkAuthIsDone, deleteAdmin);
+
+// Profile
+adminRoutes.get('/profile', passport.checkAuthIsDone, profile);
+
+// Change password (logged in)
+adminRoutes.get('/change-password', passport.checkAuthIsDone, changePasswordPage);
+adminRoutes.post('/change-password', passport.checkAuthIsDone, changePassword);
+
+// Logout
+adminRoutes.get('/logout', passport.checkAuthIsDone, logout);
 
 module.exports = adminRoutes;

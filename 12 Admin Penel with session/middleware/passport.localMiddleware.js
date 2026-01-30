@@ -34,12 +34,27 @@ passport.deserializeUser(async (id, done) => {
     return done(null, admin);
 });
 
-// passport.checkAuthIsDone = (req, res, next) => {
-//     console.log("Authentication : ", req.isAuthenticated());
+passport.checkAuthIsDone = (req, res, next) => {
+    console.log("Authentication : ", req.isAuthenticated());
 
-//     if (req.isAuthenticated()) {
-//         return next();
-//     }
-//     return res.redirect('/');
-// }
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect('/');
+}
 
+passport.checkAuthIsNotDone = (req, res, next) => {
+    console.log("Authentication : ", req.isAuthenticated());
+
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect('/dashboard');
+}
+
+passport.currentAdmin = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        res.locals.admin = req.user;
+    }
+    next();
+};
