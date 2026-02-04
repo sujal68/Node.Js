@@ -5,6 +5,8 @@ require('./config/db.config')
 
 const session = require('express-session')
 const passport = require('passport');
+const flash = require('connect-flash');
+const { setFlash } = require('./middleware/flash.middleware');
 
 require('./middleware/passport.localMiddleware');
 
@@ -25,12 +27,14 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
-})
-)
+}));
+
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.currentAdmin);
+app.use(setFlash)
 
 
 app.use('/', require('./routes/'))

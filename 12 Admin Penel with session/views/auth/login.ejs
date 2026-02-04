@@ -9,6 +9,8 @@
 
     <link href="/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <style>
         .form-section {
@@ -95,6 +97,51 @@
             </div>
         </div>
     </main>
+
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <script>
+        function showToast(message, type = 'success') {
+            const colors = {
+                success: 'linear-gradient(to right, #00b09b, #96c93d)',
+                error: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+                warning: 'linear-gradient(to right, #f093fb, #f5576c)',
+                info: 'linear-gradient(to right, #4facfe, #00f2fe)'
+            };
+            
+            Toastify({
+                text: message,
+                duration: 4000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: colors[type] || colors.success,
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "500"
+                }
+            }).showToast();
+        }
+        
+        <% if (typeof success !== 'undefined' && success.length > 0) { %>
+            showToast('<%= success %>', 'success');
+        <% } %>
+        
+        <% if (typeof error !== 'undefined' && error.length > 0) { %>
+            showToast('<%= error %>', 'error');
+        <% } %>
+        
+        <% if (typeof warning !== 'undefined' && warning.length > 0) { %>
+            showToast('<%= warning %>', 'warning');
+        <% } %>
+        
+        <% if (typeof info !== 'undefined' && info.length > 0) { %>
+            showToast('<%= info %>', 'info');
+        <% } %>
+    </script>
 
     <script>
         /**

@@ -49,6 +49,7 @@ module.exports.verifyEmail = async (req, res) => {
         const myAdmin = await Admin.findOne(req.body);
 
         if (!myAdmin) {
+            req.flash('error', 'Admin not found with this email address.');
             console.log("Admin not found....");
             return res.redirect('/');
         }
@@ -113,6 +114,7 @@ module.exports.verifyEmail = async (req, res) => {
         req.session.OTP = OTP;
         req.session.resetAdminId = myAdmin._id;
 
+        req.flash('info', 'OTP sent to your email address. Please check your inbox.');
         return res.redirect('/Otp-Page');
 
     } catch (error) {
@@ -140,10 +142,11 @@ module.exports.VerifyOtp = async (req, res) => {
         console.log(req.session);
 
         if (req.body.OTP !== req.session.OTP) {
+            req.flash('error', 'Invalid OTP. Please try again.');
             console.log("Invalid Otp");
             return res.redirect('/Otp-Page');
         }
-
+        req.flash('error', 'Invalid OTP. Please try again.');
         req.session.OTP = null;
         return res.redirect('/forgot-pass');
 
@@ -178,6 +181,7 @@ module.exports.forgotPassword = async (req, res) => {
         }
 
         if (req.body.newPass !== req.body.ConfPass) {
+            req.flash('error', 'New password and confirm password do not match.');
             console.log("New and Confirm Password not matched");
             return res.redirect('/forgot-pass');
         }
@@ -192,9 +196,11 @@ module.exports.forgotPassword = async (req, res) => {
         req.session.OTP = null;
 
         if (updatePassword) {
+            req.flash('success', 'Password updated successfully!');
             console.log("Password Update...");
             return res.redirect('/');
         } else {
+            req.flash('error', 'Failed to update password. Please try again.');
             console.log("Password Not Update...");
             return res.redirect('/');
         }
@@ -216,16 +222,19 @@ module.exports.changePassword = async (req, res) => {
         const { currentPass, newPass, ConfPass } = req.body;
 
         if (currentPass != admin.password) {
+            req.flash('error', 'Current password is incorrect.');
             console.log('Current Password Is Not Matched Original Password!!');
             return res.redirect('/change-password')
         }
 
         if (newPass === admin.password) {
+            req.flash('warning', 'New password cannot be the same as current password.');
             console.log("New Password or original Password Is Matched!! try Again");
             return res.redirect('/change-password')
         }
 
         if (ConfPass != newPass) {
+            req.flash('error', 'New password and confirm password do not match.');
             console.log("Confirm Password Note Matched New Password!!");
             return res.redirect('/change-password')
         }
@@ -234,8 +243,10 @@ module.exports.changePassword = async (req, res) => {
         console.log(ChangePass);
 
         if (ChangePass) {
+            req.flash('success', 'Password changed successfully! Please login again.');
             console.log("Password Updated!!!");
         } else {
+            req.flash('error', 'Failed to change password. Please try again.');
             console.log("Password Updation failed!!!");
         }
 
@@ -255,15 +266,17 @@ module.exports.loginPage = async (req, res) => {
 }
 
 module.exports.logout = (req, res) => {
+    req.flash('info', 'You have been logged out successfully.');
     sessionRemove(req, res);
 };
 
 module.exports.login = async (req, res) => {
     try {
-
+        req.flash('success', 'Admin Login Successfully!');
         return res.redirect('/dashboard');
 
     } catch (error) {
+        req.flash('error', 'Login failed. Please try again.');
         console.log('Something Went Wrong', error);
         return res.redirect('/')
     }
@@ -279,10 +292,12 @@ module.exports.addAdmin = async (req, res) => {
             }
             const AddAdmin = await Admin.create(req.body);
             if (AddAdmin) {
+                req.flash('success', 'Admin added successfully!');
                 console.log("Admin Insertion SuccessFully!");
                 return res.redirect('/viewAdmin')
             }
             else {
+                req.flash('error', 'Failed to add admin. Please try again.');
                 console.log("Admin Insertion failed!");
                 return res.redirect('/addAdmin')
             }
@@ -311,7 +326,10 @@ module.exports.deleteAdmin = async (req, res) => {
             if (deleteAdmin.profile && fs.existsSync(deleteAdmin.profile)) {
                 fs.unlinkSync(deleteAdmin.profile);
             }
+            req.flash('success', 'Admin deleted successfully!');
             console.log("Admin Deleted Successfully!");
+        } else {
+            req.flash('error', 'Failed to delete admin.');
         }
 
         return res.redirect('/viewAdmin');
@@ -347,8 +365,10 @@ module.exports.updateAdmin = async (req, res) => {
 
             if (updatedData) {
                 fs.unlink(updatedData.profile, () => { });
+                req.flash('success', 'Admin updated successfully!');
                 console.log("Admin Updated Successfully...");
             } else {
+                req.flash('error', 'Failed to update admin.');
                 console.log("Admin Updation Failed...");
             }
 
@@ -357,8 +377,10 @@ module.exports.updateAdmin = async (req, res) => {
             const updatedData = await Admin.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
             if (updatedData) {
+                req.flash('success', 'Admin updated successfully!');
                 console.log("Admin Updated Successfully...");
             } else {
+                req.flash('error', 'Failed to update admin.');
                 console.log("Admin Updation Failed...");
             }
         }

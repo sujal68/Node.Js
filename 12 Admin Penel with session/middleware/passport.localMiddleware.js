@@ -4,21 +4,26 @@ const localStrategy = require('passport-local').Strategy;
 const Admin = require('../model/admin.model');
 
 passport.use("localAuth", new localStrategy({
-    usernameField: 'email'
-}, async (email, password, done) => {
+    usernameField: 'email',
+    passReqToCallback: true
+}, async (req, email, password, done) => {
     try {
         const admin = await Admin.findOne({ email });
         if (!admin) {
+            req.flash('error', 'Admin not found with this email address.');
             console.log("Admin not found!!");
             return done(null, false);
         }
         if (password !== admin.password) {
+            req.flash('error', 'Invalid password. Please try again.');
             console.log("Password is invalid..");
             return done(null, false);
         }
 
+        req.flash('success', 'Login successful! Welcome back.');
         return done(null, admin);
     } catch (error) {
+        req.flash('error', 'Login failed. Please try again.');
         return done(error);
     }
 }));
@@ -40,6 +45,7 @@ passport.checkAuthIsDone = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
+    req.flash('warning', 'Please login to access this page.');
     return res.redirect('/');
 }
 
