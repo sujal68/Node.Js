@@ -11,13 +11,13 @@
         content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="../img/icons/icon-48x48.png" />
+    <link rel="shortcut icon" href="/img/icons/icon-48x48.png" />
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
     <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
-    <link href="../css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
@@ -75,6 +75,12 @@
                     <li class="sidebar-item <%= currentPath === '/category/addCategoryPage' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/category/addCategoryPage">
                             <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add
+                                Categories</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item <%= currentPath === '/category/viewCategoryPage' ? 'active' : '' %>">
+                        <a class="sidebar-link" href="/category/viewCategoryPage">
+                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All
                                 Categories</span>
                         </a>
                     </li>

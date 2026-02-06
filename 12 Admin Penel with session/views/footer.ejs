@@ -30,7 +30,7 @@
 </div>
 </div>
 
-<script src="../js/app.js"></script>
+<script src="/js/app.js"></script>
 
 <!-- Toast Notification Script -->
 <script>
@@ -57,14 +57,14 @@
         const toast = document.createElement('div');
         const toastId = 'toast-' + Date.now();
         toast.id = toastId;
-        
+
         const colors = {
             success: { bg: '#10b981', border: '#059669', icon: '✓' },
             error: { bg: '#ef4444', border: '#dc2626', icon: '✕' }
         };
-        
+
         const color = colors[type] || colors.success;
-        
+
         toast.style.cssText = `
             background: ${color.bg};
             color: white;
@@ -84,7 +84,7 @@
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             cursor: pointer;
         `;
-        
+
         toast.innerHTML = `
             <div style="
                 width: 20px;
@@ -110,23 +110,23 @@
                 cursor: pointer;
             " onclick="removeToast('${toastId}')">×</div>
         `;
-        
+
         toastContainer.appendChild(toast);
-        
+
         // Animate in
         setTimeout(() => {
             toast.style.transform = 'translateX(0)';
         }, 10);
-        
+
         // Auto remove after 4 seconds
         setTimeout(() => {
             removeToast(toastId);
         }, 4000);
-        
+
         // Click to dismiss
         toast.addEventListener('click', () => removeToast(toastId));
     }
-    
+
     function removeToast(toastId) {
         const toast = document.getElementById(toastId);
         if (toast) {
@@ -139,7 +139,7 @@
             }, 300);
         }
     }
-    
+
     // Check for flash messages and show toasts
     <% if (typeof success !== '' && success.length > 0) { %>
         showToast('<%= success %>', 'success');
@@ -151,74 +151,74 @@
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-        var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-        gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-        gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-        // Line chart
-        new Chart(document.getElementById("chartjs-dashboard-line"), {
-            type: "line",
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Sales ($)",
-                    fill: true,
-                    backgroundColor: gradient,
-                    borderColor: window.theme.primary,
-                    data: [
-                        2115,
-                        1562,
-                        1584,
-                        1892,
-                        1587,
-                        1923,
-                        2566,
-                        2448,
-                        2805,
-                        3438,
-                        2917,
-                        3327
-                    ]
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    intersect: false
-                },
-                hover: {
-                    intersect: true
-                },
-                plugins: {
-                    filler: {
-                        propagate: false
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        reverse: true,
-                        gridLines: {
-                            color: "rgba(0,0,0,0.0)"
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            stepSize: 1000
-                        },
-                        display: true,
-                        borderDash: [3, 3],
-                        gridLines: {
-                            color: "rgba(0,0,0,0.0)"
-                        }
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+            var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+            gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+            gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+            // Line chart
+            new Chart(document.getElementById("chartjs-dashboard-line"), {
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "Sales ($)",
+                        fill: true,
+                        backgroundColor: gradient,
+                        borderColor: window.theme.primary,
+                        data: [
+                            2115,
+                            1562,
+                            1584,
+                            1892,
+                            1587,
+                            1923,
+                            2566,
+                            2448,
+                            2805,
+                            3438,
+                            2917,
+                            3327
+                        ]
                     }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        intersect: false
+                    },
+                    hover: {
+                        intersect: true
+                    },
+                    plugins: {
+                        filler: {
+                            propagate: false
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            reverse: true,
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                stepSize: 1000
+                            },
+                            display: true,
+                            borderDash: [3, 3],
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }]
+                    }
                 }
-            }
+            });
         });
-    });
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -306,21 +306,23 @@
                 <div class="mb-3">
                     <h1 class="h3 d-inline align-middle">Forms</h1>
                     <a class="badge bg-dark text-white ms-2">
-                        Add category
+                        Edit category
                     </a>
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-12">
-                        <form action="/category/addCategory" method="post" enctype="multipart/form-data">
+                        <form action="/category/editCategory/<%= categoryData._id %>" method="post"
+                            enctype="multipart/form-data">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title mb-0">Fill category Data</h5>
+                                    <h5 class="card-title mb-0">Edit category Data</h5>
                                 </div>
                                 <div class="card-body linkedin-form">
 
                                     <div class="li-field">
                                         <label>Categorie Photo</label>
-
+                                        <img src="/<%= categoryData.category_img %>" alt="Category Image"
+                                            class="img-fluid mb-3" style="max-width: 100px; border-radius: 8px;">
                                         <div class="upload-box" id="uploadBox">
                                             <i class="ri-upload-cloud-2-line"></i>
                                             <p><strong>Click to upload</strong> or drag & drop</p>
@@ -333,7 +335,8 @@
                                     <div class="li-row">
                                         <div class="li-field">
                                             <label>Categories Name</label>
-                                            <input type="text" placeholder="feshion" name="category_name">
+                                            <input type="text" placeholder="feshion" name="category_name"
+                                                value="<%= categoryData.category_name %>" required>
                                         </div>
                                     </div>
 

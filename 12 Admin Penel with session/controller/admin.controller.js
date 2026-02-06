@@ -291,15 +291,14 @@ module.exports.addAdmin = async (req, res) => {
             const AddAdmin = await Admin.create(req.body);
             if (AddAdmin) {
                 req.flash('success', 'Admin added successfully!');
-                console.log("Admin Insertion SuccessFully!");
                 return res.redirect('/viewAdmin')
             }
             else {
                 req.flash('error', 'Failed to add admin. Please try again.');
-                console.log("Admin Insertion failed!");
                 return res.redirect('/addAdmin')
             }
         } catch (error) {
+            req.flash('error', 'Failed to add admin. Please try again.');
             console.log("Something Went Wrong", error);
         }
     } catch (error) {
