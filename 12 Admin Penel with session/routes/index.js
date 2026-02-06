@@ -78,4 +78,7 @@ adminRoutes.post('/change-password', passport.checkAuthIsDone, changePassword);
 // Logout
 adminRoutes.get('/logout', passport.checkAuthIsDone, logout);
 
+// Category Route
+adminRoutes.use('/category', passport.checkAuthIsDone, require("./category.route"));
+
 module.exports = adminRoutes;

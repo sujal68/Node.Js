@@ -21,8 +21,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
-    <!-- Toastify CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -67,6 +65,17 @@
                         <a class="sidebar-link" href="/addAdmin">
                             <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add
                                 Admin</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-header">
+                        Categories & Sub Categories
+                    </li>
+
+
+                    <li class="sidebar-item <%= currentPath === '/category/addCategoryPage' ? 'active' : '' %>">
+                        <a class="sidebar-link" href="/category/addCategoryPage">
+                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add
+                                Categories</span>
                         </a>
                     </li>
                 </ul>

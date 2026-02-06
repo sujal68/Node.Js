@@ -31,35 +31,113 @@
 </div>
 
 <script src="../js/app.js"></script>
-<!-- Toastify JS -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 <!-- Toast Notification Script -->
 <script>
-    // Function to show toast notifications
+    // Function to show React-style toast notifications
     function showToast(message, type = 'success') {
+        // Create toast container if it doesn't exist
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            `;
+            document.body.appendChild(toastContainer);
+        }
+
+        // Create toast element
+        const toast = document.createElement('div');
+        const toastId = 'toast-' + Date.now();
+        toast.id = toastId;
+        
         const colors = {
-            success: 'linear-gradient(to right, #00b09b, #96c93d)',
-            error: 'linear-gradient(to right, #ff5f6d, #ffc371)',
-            warning: 'linear-gradient(to right, #f093fb, #f5576c)',
-            info: 'linear-gradient(to right, #4facfe, #00f2fe)'
+            success: { bg: '#10b981', border: '#059669', icon: '✓' },
+            error: { bg: '#ef4444', border: '#dc2626', icon: '✕' }
         };
         
-        Toastify({
-            text: message,
-            duration: 4000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-            style: {
-                background: colors[type] || colors.success,
-                borderRadius: "8px",
-                fontSize: "14px",
-                fontWeight: "500"
-            },
-            onClick: function(){}
-        }).showToast();
+        const color = colors[type] || colors.success;
+        
+        toast.style.cssText = `
+            background: ${color.bg};
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border-left: 4px solid ${color.border};
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            max-width: 400px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+        `;
+        
+        toast.innerHTML = `
+            <div style="
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+            ">${color.icon}</div>
+            <div style="flex: 1;">${message}</div>
+            <div style="
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                cursor: pointer;
+            " onclick="removeToast('${toastId}')">×</div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Animate in
+        setTimeout(() => {
+            toast.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Auto remove after 4 seconds
+        setTimeout(() => {
+            removeToast(toastId);
+        }, 4000);
+        
+        // Click to dismiss
+        toast.addEventListener('click', () => removeToast(toastId));
+    }
+    
+    function removeToast(toastId) {
+        const toast = document.getElementById(toastId);
+        if (toast) {
+            toast.style.transform = 'translateX(100%)';
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }
     }
     
     // Check for flash messages and show toasts
@@ -69,14 +147,6 @@
     
     <% if (typeof error !== '' && error.length > 0) { %>
         showToast('<%= error %>', 'error');
-    <% } %>
-    
-    <% if (typeof warning !== '' && warning.length > 0) { %>
-        showToast('<%= warning %>', 'warning');
-    <% } %>
-    
-    <% if (typeof info !== '' && info.length > 0) { %>
-        showToast('<%= info %>', 'info');
     <% } %>
 </script>
 

@@ -114,7 +114,7 @@ module.exports.verifyEmail = async (req, res) => {
         req.session.OTP = OTP;
         req.session.resetAdminId = myAdmin._id;
 
-        req.flash('info', 'OTP sent to your email address. Please check your inbox.');
+        req.flash('success', 'OTP sent to your email address. Please check your inbox.');
         return res.redirect('/Otp-Page');
 
     } catch (error) {
@@ -146,16 +146,14 @@ module.exports.VerifyOtp = async (req, res) => {
             console.log("Invalid Otp");
             return res.redirect('/Otp-Page');
         }
-        req.flash('error', 'Invalid OTP. Please try again.');
+
         req.session.OTP = null;
         return res.redirect('/forgot-pass');
-
 
     } catch (error) {
         console.log('Something Went Wrong', error);
         return res.redirect('/');
     }
-
 }
 module.exports.forgotPasswordPage = async (req, res) => {
     try {
@@ -228,7 +226,7 @@ module.exports.changePassword = async (req, res) => {
         }
 
         if (newPass === admin.password) {
-            req.flash('warning', 'New password cannot be the same as current password.');
+            req.flash('error', 'New password cannot be the same as current password.');
             console.log("New Password or original Password Is Matched!! try Again");
             return res.redirect('/change-password')
         }
@@ -266,7 +264,7 @@ module.exports.loginPage = async (req, res) => {
 }
 
 module.exports.logout = (req, res) => {
-    req.flash('info', 'You have been logged out successfully.');
+    req.flash('success', 'You have been logged out successfully.');
     sessionRemove(req, res);
 };
 
