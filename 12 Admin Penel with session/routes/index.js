@@ -80,5 +80,6 @@ adminRoutes.get('/logout', passport.checkAuthIsDone, logout);
 
 // Category Route
 adminRoutes.use('/category', passport.checkAuthIsDone, require("./category.route"));
+adminRoutes.use('/subCategory', passport.checkAuthIsDone, require("./subcategory.route"));
 
 module.exports = adminRoutes;

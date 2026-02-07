@@ -38,20 +38,20 @@
 
                     <li class="sidebar-item <%= currentPath === '/dashboard' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/dashboard">
-                            <i class="align-middle" data-feather="sliders"></i> <span
+                            <i class="align-middle bx bx-home"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <%= currentPath === '/profile' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/profile">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+                            <i class="align-middle ri-user-3-line"></i> <span class="align-middle">Profile</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item <%= currentPath === '/viewAdmin' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/viewAdmin">
-                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage
+                            <i class="align-middle bx bx-group"></i> <span class="align-middle">Manage
                                 Admins</span>
                         </a>
                     </li>
@@ -63,25 +63,42 @@
 
                     <li class="sidebar-item <%= currentPath === '/addAdmin' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/addAdmin">
-                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add
+                            <i class="align-middle bx bx-user-plus"></i> <span class="align-middle">Add
                                 Admin</span>
                         </a>
                     </li>
                     <li class="sidebar-header">
-                        Categories & Sub Categories
+                        Categories
                     </li>
 
 
                     <li class="sidebar-item <%= currentPath === '/category/addCategoryPage' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/category/addCategoryPage">
-                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Add
+                            <i class="align-middle bx bx-category"></i> <span class="align-middle">Add
                                 Categories</span>
                         </a>
                     </li>
                     <li class="sidebar-item <%= currentPath === '/category/viewCategoryPage' ? 'active' : '' %>">
                         <a class="sidebar-link" href="/category/viewCategoryPage">
-                            <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">All
+                            <i class="align-middle ri-file-list-3-line"></i> <span class="align-middle">All
                                 Categories</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-header">
+                        Sub Categories
+                    </li>
+
+
+                    <li class="sidebar-item <%= currentPath === '/subCategory/addSubCategoryPage' ? 'active' : '' %>">
+                        <a class="sidebar-link" href="/subCategory/addSubCategoryPage">
+                            <i class="align-middle bx bx-list-ul"></i> <span class="align-middle">Add
+                                Sub Categories</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item <%= currentPath === '/subCategory/viewSubCategoryPage' ? 'active' : '' %>">
+                        <a class="sidebar-link" href="/subCategory/viewSubCategoryPage">
+                            <i class="align-middle bx bx-folder"></i> <span class="align-middle">All
+                                Sub Categories</span>
                         </a>
                     </li>
                 </ul>
