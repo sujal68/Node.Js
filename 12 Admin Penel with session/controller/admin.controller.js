@@ -1,4 +1,6 @@
 const Admin = require('../model/admin.model')
+const Category = require('../model/categories.model');
+const SubCategory = require('../model/subCategories.model');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 
@@ -16,8 +18,32 @@ function sessionRemove(req, res) {
 }
 
 module.exports.dashborad = async (req, res) => {
-    const admin = res.locals.admin;
-    return res.render('dashboard', { admin, currentPath: req.path });
+    try {
+        const admin = res.locals.admin;
+        const totalAdmins = await Admin.countDocuments();
+        const totalCategories = await Category.countDocuments();
+        const totalSubCategories = await SubCategory.countDocuments();
+        const mainAdmins = 1; // Static value as requested
+
+        return res.render('dashboard', {
+            admin,
+            currentPath: req.path,
+            totalAdmins,
+            totalCategories,
+            totalSubCategories,
+            mainAdmins
+        });
+    } catch (err) {
+        console.log("Error : ", err);
+        return res.render('dashboard', {
+            admin: res.locals.admin,
+            currentPath: req.path,
+            totalAdmins: 0,
+            totalCategories: 0,
+            totalSubCategories: 0,
+            mainAdmins: 1
+        });
+    }
 }
 
 module.exports.viewadmin = async (req, res) => {

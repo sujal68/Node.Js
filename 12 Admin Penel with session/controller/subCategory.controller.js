@@ -1,13 +1,44 @@
 const Category = require("../model/categories.model");
-const subCategory = require("../model/subCategories.model");
+const SubCategory = require("../model/subCategories.model");
 
 module.exports.addSubCategoryPage = async (req, res) => {
     try {
-        const categoryData = await Category.find({});
-        return res.render('subCategory/addSubCategoryPage', { categoryData, currentPath: req.originalUrl.split('?')[0] });
-    } catch (error) {
-        req.flash('error', 'Failed to load Add sub category page. Please try again.');
-        console.log("Something Went Wrong", error);
-        res.redirect('/subCategory/viewSubCategoryPage');
+        const allCategory = await Category.find();
+        return res.render('subCategory/addSubCategoryPage', { allCategory, currentPath: req.originalUrl.split('?')[0] });
+    } catch (err) {
+        console.log("Error : ", err);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/addSubCategoryPage');
     }
-};
+}
+
+module.exports.addSubCategory = async (req, res) => {
+    try {
+        console.log(req.body);
+
+        const newSubCategory = await SubCategory.create(req.body);
+
+        if (newSubCategory) {
+            req.flash('success', 'SubCategory Inserted Successfully..');
+        } else {
+            req.flash('error', 'SubCategory Insertion Failed..');
+        }
+        return res.redirect('/subCategory/addSubCategoryPage');
+
+    } catch (err) {
+        console.log("Error : ", err);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/addSubCategoryPage');
+    }
+}
+
+module.exports.viewSubCategoryPage = async (req, res) => {
+    try {
+        const allSubCategory = await SubCategory.find().populate('category_id');
+        return res.render('subCategory/viewSubCategoryPage', { allSubCategory, currentPath: req.originalUrl.split('?')[0] });
+    } catch (err) {
+        console.log("Error : ", err);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    }
+}

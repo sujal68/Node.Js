@@ -14,6 +14,10 @@
             gap: 14px;
         }
 
+        .li-row.full-width {
+            grid-template-columns: 1fr;
+        }
+
         .li-field {
             display: flex;
             flex-direction: column;
@@ -36,6 +40,28 @@
             outline: none;
             transition: all 0.2s ease;
             background: #fff;
+        }
+
+        .li-field select {
+            cursor: pointer;
+            padding: 10px 12px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a66c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 20px;
+            padding-right: 36px;
+        }
+
+        .li-field select option {
+            padding: 8px 12px;
+            background: #fff;
+            color: #333;
+        }
+
+        .li-field select option:hover {
+            background: #0a66c2;
+            color: #fff;
         }
 
         .li-field input:focus,
@@ -311,23 +337,32 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-12">
-                        <form action="/subCategory/addSubCategory" method="post" enctype="multipart/form-data">
+                        <form action="/subCategory/addSubCategory" method="post">
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0">Fill sub category Data</h5>
                                 </div>
                                 <div class="card-body linkedin-form">
-                                    <div class="li-row">
+                                    <div class="li-row full-width">
                                         <div class="li-field">
-                                            <label>Sub Category Name</label>
-                                            <input type="text" placeholder="T-Shirts" name="subCategory_name">
+                                            <label>📝 Sub Category Name</label>
+                                            <input type="text"
+                                                placeholder="Enter sub category name (e.g., T-Shirts, Jeans)"
+                                                name="subCategory_name" required>
                                         </div>
                                     </div>
 
-                                    <div class="li-row">
+                                    <div class="li-row full-width">
                                         <div class="li-field">
-                                            <label>Category Name</label>
-                                            <input type="text" placeholder="feshion" name="category_name">
+                                            <label>📂 Select Category</label>
+                                            <select name="category_id" required>
+                                                <option value="">-- Select a Category --</option>
+                                                <% allCategory.forEach((category)=> { %>
+                                                    <option value="<%= category._id %>">
+                                                        <%= category.category_name %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
                                         </div>
                                     </div>
 

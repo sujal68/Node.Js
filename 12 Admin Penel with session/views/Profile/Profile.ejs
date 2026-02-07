@@ -157,11 +157,11 @@
                         </a>
 
                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                            <img src="<%= locals.admin.profile %>" class="avatar img-fluid rounded me-1"
-                                alt="Charles Hall" />
+                            <img src="<%= admin.profile %>" class="avatar img-fluid rounded me-1"
+                                alt="<%= admin.fname %> <%= admin.lname %>" />
                             <span class="text-dark">
-                                <%= locals.admin.fname %>
-                                    <%= locals.admin.lname %>
+                                <%= admin.fname %>
+                                    <%= admin.lname %>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -183,143 +183,113 @@
 
         <main class="content">
             <div class="container-fluid p-0">
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 class="h2">Profile</h1>
+                    <div>
+                        <a class="btn btn-outline-secondary me-2" href="/change-password"><i class="bx bx-lock"></i>
+                            Change Password</a>
+                        <a class="btn btn-primary" href="/editAdmin/<%= admin._id %>?returnTo=/profile"><i
+                                class="bx bx-edit-alt"></i> Edit</a>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4 col-xl-3">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Profile Details</h5>
-                            </div>
+                    <!-- Profile Card -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="card shadow-sm">
                             <div class="card-body text-center">
-                                <img src="<%= locals.admin.profile %>" alt="<%= admin.fname %> <%= admin.lname %>"
-                                    class="img-fluid rounded-circle mb-2" width="128" height="128" />
-                                <h5 class="card-title mb-0">
-                                    <%= locals.admin.fname %>
-                                        <%= locals.admin.lname %>
-                                </h5>
-                                <div class="text-muted mb-2">Administrator</div>
-                                <div>
-                                    <a class="btn btn-primary btn-sm"
-                                        href="/editAdmin/<%= admin._id %>?returnTo=/profile">
-                                        <i data-feather="edit-3"></i> Edit Profile
-                                    </a>
+                                <div style="width:140px; height:140px; margin:0 auto;">
+                                    <img src="<%= admin.profile %>" alt="<%= admin.fname %>" class="rounded-circle"
+                                        style="width:100%; height:100%; object-fit:cover; border:4px solid rgba(255,255,255,0.6); box-shadow:0 6px 18px rgba(0,0,0,0.12);" />
+                                </div>
+                                <h4 class="mt-3 mb-0">
+                                    <%= admin.fname %>
+                                        <%= admin.lname %>
+                                </h4>
+                                <p class="text-muted mb-2">Administrator</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a class="btn btn-sm btn-outline-primary"
+                                        href="/editAdmin/<%= admin._id %>?returnTo=/profile"><i
+                                            class="bx bx-pencil"></i> Edit Profile</a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="#"><i class="bx bx-share-alt"></i>
+                                        Share</a>
                                 </div>
                             </div>
-                            <hr class="my-0" />
-                            <div class="card-body">
-                                <h5 class="h6 card-title">About</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-1">
-                                        <i data-feather="home" class="feather-sm me-1"></i> Lives in <strong>
-                                            <%= admin.city || 'Not specified' %>
-                                        </strong>
-                                    </li>
-                                    <li class="mb-1">
-                                        <i data-feather="briefcase" class="feather-sm me-1"></i> Works as
-                                        <strong>Administrator</strong>
-                                    </li>
-                                    <li class="mb-1">
-                                        <i data-feather="map-pin" class="feather-sm me-1"></i> From <strong>
-                                            <%= admin.city || 'Unknown' %>
-                                        </strong>
-                                    </li>
-                                </ul>
-                            </div>
-                            <hr class="my-0" />
-                            <div class="card-body">
-                                <h5 class="h6 card-title">Elsewhere</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-1"><a href="#">staciehall.co</a></li>
-                                    <li class="mb-1"><a href="#">Twitter</a></li>
-                                    <li class="mb-1"><a href="#">Facebook</a></li>
-                                    <li class="mb-1"><a href="#">Instagram</a></li>
-                                    <li class="mb-1"><a href="#">LinkedIn</a></li>
-                                </ul>
+                            <div class="card-body border-top">
+                                <h6 class="text-uppercase small text-muted">About</h6>
+                                <p class="mb-2"><i class="bx bx-map me-1"></i> <strong>City:</strong>
+                                    <%= admin.city || 'Not specified' %>
+                                </p>
+                                <p class="mb-2"><i class="bx bx-briefcase me-1"></i> <strong>Role:</strong>
+                                    Administrator</p>
+                                <% if (admin.hobby) { %>
+                                    <p class="mb-2"><i class="bx bx-heart me-1"></i> <strong>Hobbies:</strong>
+                                        <%= Array.isArray(admin.hobby) ? admin.hobby.join(', ') : admin.hobby %></p>
+                                <% } %>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 col-xl-9">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-actions float-end">
-                                    <div class="dropdown position-relative">
-                                        <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                            <i class="align-middle" data-feather="more-horizontal"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item"
-                                                href="/editAdmin/<%= admin._id %>?returnTo=/profile">Edit Profile</a>
-                                            <a class="dropdown-item" href="/change-password">Change Password</a>
-                                            <a class="dropdown-item" href="/logout">Logout</a>
-                                        </div>
+
+                    <!-- Details Card -->
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Personal Information</h5>
+                                <div class="row mt-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted small">Full Name</label>
+                                        <div class="fw-semibold"><%= admin.fname %> <%= admin.lname %></div>
                                     </div>
-                                </div>
-                                <h5 class="card-title mb-0">Personal Information</h5>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted small">Email</label>
+                                        <div class="fw-semibold"><%= admin.email %></div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted small">City</label>
+                                        <div class="fw-semibold"><%= admin.city || ' Not specified' %>
                             </div>
-                            <div class="card-body h-100">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="mb-3">
-                                            <label class="form-label fw-bold text-primary">Full Name</label>
-                                            <p class="form-control-plaintext fw-semibold text-dark">
-                                                <%= admin.fname %>
-                                                    <%= admin.lname %>
-                                            </p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label fw-bold text-primary">Email</label>
-                                            <p class="form-control-plaintext fw-semibold text-dark">
-                                                <%= admin.email %>
-                                            </p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label fw-bold text-primary">City</label>
-                                            <p class="form-control-plaintext fw-semibold text-dark">
-                                                <%= admin.city || 'Not specified' %>
-                                            </p>
-                                        </div>
-                                        <% if (admin.hobby) { %>
-                                            <div class="mb-3">
-                                                <label class="form-label fw-bold text-primary">Hobby</label>
-                                                <p class="form-control-plaintext fw-semibold text-dark">
-                                                    <%= admin.hobby %>
-                                                </p>
-                                            </div>
-                                            <% } %>
-                                                <% if (admin.about) { %>
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-bold text-primary">About</label>
-                                                        <p class="form-control-plaintext fw-semibold text-dark">
-                                                            <%= admin.about %>
-                                                        </p>
-                                                    </div>
-                                                    <% } %>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="text-center">
-                                            <img alt="<%= admin.fname %> <%= admin.lname %>" src="<%= admin.profile %>"
-                                                class="rounded-circle img-responsive mt-2" width="128" height="128" />
-                                            <div class="mt-2">
-                                                <span class="badge bg-primary">Administrator</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted small">Phone</label>
+                            <div class="fw-semibold">
+                                <%= admin.phone || 'N/A' %>
                             </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-muted small">About</label>
+                            <p class="text-muted">
+                                <%= admin.about || 'No bio added yet.' %>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    feather.replace();
-                });
-            </script>
-        </main>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Elsewhere</h5>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bx bx-globe"></i> Website</a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bx bxl-twitter"></i> Twitter</a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bx bxl-facebook"></i>
+                            Facebook</a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bx bxl-instagram"></i>
+                            Instagram</a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bx bxl-linkedin"></i>
+                            LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+    </div>
 
-        <%- include('../footer') %>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof feather !== 'undefined') feather.replace();
+        });
+    </script>
+    </main>
+
+    <%- include('../footer') %>
