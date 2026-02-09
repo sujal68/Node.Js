@@ -61,9 +61,28 @@ module.exports.deleteSubCategory = async (req, res) => {
 
 module.exports.editSubCategoryPage = async (req, res) => {
     try {
-        
+        const subCategoryData = await SubCategory.findById(req.params.id).populate('category_id');
+        const allCategory = await Category.find();
+
+        return res.render('subCategory/editSubCategoryPage', { subCategoryData, allCategory, currentPath: req.originalUrl.split('?')[0] });
     } catch (error) {
-        console.log("Error : ", err);
+        console.log("Error : ", error);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    }
+}
+
+module.exports.editSubCategory = async (req, res) => {
+    try {
+        const updatedSubCategory = await SubCategory.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (updatedSubCategory) {
+            req.flash('success', `${updatedSubCategory.subCategory_name} SubCategory Updated Successfully..`);
+        } else {
+            req.flash('error', `${updatedSubCategory.subCategory_name} SubCategory Updation Failed..`);
+        }
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    } catch (error) {
+        console.log("Error : ", error);
         req.flash('error', "Something went wrong !!");
         return res.redirect('/subCategory/viewSubCategoryPage');
     }
