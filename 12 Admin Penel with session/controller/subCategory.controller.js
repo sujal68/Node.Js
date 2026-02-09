@@ -42,3 +42,29 @@ module.exports.viewSubCategoryPage = async (req, res) => {
         return res.redirect('/subCategory/viewSubCategoryPage');
     }
 }
+
+module.exports.deleteSubCategory = async (req, res) => {
+    try {
+        const deletedSubcategory = await SubCategory.findByIdAndDelete(req.params.id);
+        if (deletedSubcategory) {
+            req.flash('success', `${deletedSubcategory.subCategory_name} SubCategory Deleted Successfully..`);
+        } else {
+            req.flash('error', `${deletedSubcategory.subCategory_name} SubCategory Deletion Failed..`);
+        }
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    } catch (err) {
+        console.log("Error : ", err);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    }
+}
+
+module.exports.editSubCategoryPage = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log("Error : ", err);
+        req.flash('error', "Something went wrong !!");
+        return res.redirect('/subCategory/viewSubCategoryPage');
+    }
+}
