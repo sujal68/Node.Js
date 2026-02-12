@@ -13,3 +13,4 @@ module.exports.addExtraCategoryPage = async (req, res) => {
         return res.redirect('/subCategory/viewSubCategoryPage');
     }
 }
+

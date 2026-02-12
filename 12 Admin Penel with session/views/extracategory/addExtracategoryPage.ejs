@@ -347,7 +347,7 @@
                                     <div class="li-row full-width">
                                         <div class="li-field">
                                             <label>📂 Select Category</label>
-                                            <select name="category_id" required>
+                                            <select id="category_id" name="category_id" required>
                                                 <option value="">-- Select a Category --</option>
                                                 <% allCategory.forEach((category)=> { %>
                                                     <option value="<%= category._id %>">
@@ -361,13 +361,8 @@
                                     <div class="li-row full-width">
                                         <div class="li-field">
                                             <label>📂 Select sub Category</label>
-                                            <select name="category_id" required>
+                                            <select id="subcategory_id" name="subcategory_id" required>
                                                 <option value="">-- Select a Sub Category --</option>
-                                                <% allCategory.forEach((category)=> { %>
-                                                    <option value="<%= category._id %>">
-                                                        <%= category.category_name %>
-                                                    </option>
-                                                    <% }); %>
                                             </select>
                                         </div>
                                     </div>
@@ -404,30 +399,55 @@
                 const uploadBox = document.getElementById("uploadBox");
                 const fileInput = document.getElementById("fileInput");
 
-                uploadBox.addEventListener("click", () => fileInput.click());
+                if (uploadBox && fileInput) {
+                    uploadBox.addEventListener("click", () => fileInput.click());
 
-                uploadBox.addEventListener("dragover", e => {
-                    e.preventDefault();
-                    uploadBox.classList.add("dragging");
-                });
+                    uploadBox.addEventListener("dragover", e => {
+                        e.preventDefault();
+                        uploadBox.classList.add("dragging");
+                    });
 
-                uploadBox.addEventListener("dragleave", () => {
-                    uploadBox.classList.remove("dragging");
-                });
+                    uploadBox.addEventListener("dragleave", () => {
+                        uploadBox.classList.remove("dragging");
+                    });
 
-                uploadBox.addEventListener("drop", e => {
-                    e.preventDefault();
-                    fileInput.files = e.dataTransfer.files;
+                    uploadBox.addEventListener("drop", e => {
+                        e.preventDefault();
+                        fileInput.files = e.dataTransfer.files;
 
-                    uploadBox.innerHTML = `
-            <i class="ri-image-line"></i>
-            <p>${fileInput.files[0].name}</p>
-            <span>File selected</span>
-        `;
-                    uploadBox.classList.remove("dragging");
-                });
+                        uploadBox.innerHTML = `
+                <i class="ri-image-line"></i>
+                <p>${fileInput.files[0].name}</p>
+                <span>File selected</span>
+            `;
+                        uploadBox.classList.remove("dragging");
+                    });
+                }
 
             });
 
+        </script>
+        <script>
+            const allSubCategory = <%- JSON.stringify(allSubCategory) %>;
+
+            document.getElementById('category_id').addEventListener('change', function () {
+                const categoryId = this.value;
+                const subcategorySelect = document.getElementById('subcategory_id');
+
+                subcategorySelect.innerHTML = '<option value="">Select SubCategory</option>';
+
+                if (categoryId) {
+                    const filteredSubCategories = allSubCategory.filter(
+                        sub => sub.category_id.toString() === categoryId
+                    );
+
+                    filteredSubCategories.forEach(sub => {
+                        const option = docu+ment.createElement('option');
+                        option.value = sub._id;
+                        option.textContent = sub.subcategory_name;
+                        subcategorySelect.appendChild(option);
+                    });
+                }
+            });
         </script>
         <%- include('../footer') %>
