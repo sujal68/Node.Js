@@ -428,26 +428,26 @@
 
         </script>
         <script>
-            const allSubCategory = <%- JSON.stringify(allSubCategory) %>;
+            const allSubCategory = <%- JSON.stringify(allSubCategory) %>
 
-            document.getElementById('category_id').addEventListener('change', function () {
-                const categoryId = this.value;
-                const subcategorySelect = document.getElementById('subcategory_id');
+                document.getElementById('category_id').addEventListener('change', function () {
+                    const categoryId = this.value;
+                    const subcategorySelect = document.getElementById('subcategory_id');
 
-                subcategorySelect.innerHTML = '<option value="">Select SubCategory</option>';
+                    subcategorySelect.innerHTML = '<option value="">Select SubCategory</option>';
 
-                if (categoryId) {
-                    const filteredSubCategories = allSubCategory.filter(
-                        sub => sub.category_id.toString() === categoryId
-                    );
+                    if (categoryId) {
+                        const filteredSubCategories = allSubCategory.filter(
+                            sub => sub.category_id.toString() === categoryId
+                        );
 
-                    filteredSubCategories.forEach(sub => {
-                        const option = docu+ment.createElement('option');
-                        option.value = sub._id;
-                        option.textContent = sub.subcategory_name;
-                        subcategorySelect.appendChild(option);
-                    });
-                }
-            });
+                        filteredSubCategories.forEach(sub => {
+                            const option = document.createElement('option');
+                            option.value = sub._id;
+                            option.textContent = sub.subCategory_name;
+                            subcategorySelect.appendChild(option);
+                        });
+                    }
+                });
         </script>
-        <%- include('../footer') %>
+    
