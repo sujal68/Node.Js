@@ -150,20 +150,20 @@
         </main>
 
         <script>
-            const allSubCategory = <% - JSON.stringify(allSubCategory) %>;
-            const initialCategoryId = "<%= extraCategoryData.category_id ? extraCategoryData.category_id._id : (extraCategoryData.category_id || '') %>";
-            const initialSubcategoryId = "<%= extraCategoryData.subcategory_id ? extraCategoryData.subcategory_id._id : (extraCategoryData.subcategory_id || '') %>";
+            const allSubCategory = <%- JSON.stringify(allSubCategory || []) %>;
+            const initialCategoryId = "<%= extraCategoryData.category_id ? (extraCategoryData.category_id._id || extraCategoryData.category_id) : '' %>";
+            const initialSubcategoryId = "<%= extraCategoryData.subcategory_id ? (extraCategoryData.subcategory_id._id || extraCategoryData.subcategory_id) : '' %>";
 
             function populateSubcategories(categoryId, selectedId) {
                 const subcategorySelect = document.getElementById('subcategory_id');
                 subcategorySelect.innerHTML = '<option value="">Select SubCategory</option>';
                 if (!categoryId) return;
-                const filtered = allSubCategory.filter(sub => sub.category_id.toString() === categoryId.toString());
+                const filtered = allSubCategory.filter(sub => String(sub.category_id) === String(categoryId));
                 filtered.forEach(sub => {
                     const option = document.createElement('option');
                     option.value = sub._id;
                     option.textContent = sub.subCategory_name;
-                    if (selectedId && selectedId.toString() === sub._id.toString()) option.selected = true;
+                    if (selectedId && String(selectedId) === String(sub._id)) option.selected = true;
                     subcategorySelect.appendChild(option);
                 });
             }

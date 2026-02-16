@@ -82,5 +82,6 @@ adminRoutes.get('/logout', passport.checkAuthIsDone, logout);
 adminRoutes.use('/category', passport.checkAuthIsDone, require("./category.route"));
 adminRoutes.use('/subCategory', passport.checkAuthIsDone, require("./subCategory.route"));
 adminRoutes.use('/extraCategory', passport.checkAuthIsDone, require("./extraCategory.route"));
+adminRoutes.use('/product', passport.checkAuthIsDone, require("./product.route"));
 
 module.exports = adminRoutes;
