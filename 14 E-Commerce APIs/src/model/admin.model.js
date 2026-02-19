@@ -1,0 +1,43 @@
+const mongoose = require('mongoose');
+
+const adminSchema = mongoose.Schema({
+    first_name: {
+        type: String,
+        required: true,
+    },
+    last_name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
+    idDelete: {
+        type: Boolean,
+        default: false,
+    },
+    createAt: {
+        type: String,
+        required: true,
+    },
+    updateAt: {
+        type: String,
+        required: true,
+    },
+});
+
+module.exports = mongoose.model("Admins", adminSchema, "Admin");
