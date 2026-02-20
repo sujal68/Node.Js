@@ -17,6 +17,7 @@ module.exports.MSG = {
     Admin_Registration_Failed: "Admin registration failed, try again",
     Admin_Login_Success: "Admin login successful",
     Admin_Login_Failed: "Admin login failed",
+    Admin_INCORRECT_PAASWORD: "Invalid Password",
     Admin_Not_Found: "Admin not found",
     Admin_Deleted: "Admin deleted successfully",
     Admin_Updated: "Admin updated successfully",
