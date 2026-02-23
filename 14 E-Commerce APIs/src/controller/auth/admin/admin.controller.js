@@ -39,8 +39,23 @@ module.exports.loginAdmin = async (req, res) => {
         if (!isPasswordMatch) {
             return res.status(statusCode.BAD_REQUEST).json(successResponse(statusCode.BAD_REQUEST, true, MSG.Admin_INCORRECT_PAASWORD));
         }
+
+        const payload = {
+            id: admin._id,
+        }
+        const Tocken = JWT.sign(payload, process.env.JWT_SECRET_KEY)
+
         return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admin_Login_Success));
     } catch (error) {
+        console.log("Something Went Wrong!!", error);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Internal_Server_Error));
+    }
+}
+
+module.exports.fetchAdmins = async (req, res) => {
+    try {
+
+    } catch (err) {
         console.log("Something Went Wrong!!", error);
         return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Internal_Server_Error));
     }

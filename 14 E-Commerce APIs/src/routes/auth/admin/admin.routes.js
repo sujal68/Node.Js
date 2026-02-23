@@ -1,8 +1,9 @@
 const express = require('express');
-const { registerAdmins, loginAdmin } = require('../../../controller/auth/admin/admin.controller');
+const { registerAdmins, loginAdmin, fetchAdmins } = require('../../../controller/auth/admin/admin.controller');
 const adminRouter = express.Router();
 
-adminRouter.use('/registerAdmin', registerAdmins);
-adminRouter.use('/loginAdmin', loginAdmin)
+adminRouter.post('/registerAdmin', registerAdmins);
+adminRouter.post('/loginAdmin', loginAdmin);
+adminRouter.get('/', fetchAdmins)
 
 module.exports = adminRouter;
