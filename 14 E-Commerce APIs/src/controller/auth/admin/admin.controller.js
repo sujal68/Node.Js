@@ -4,6 +4,7 @@ const { MSG } = require('../../../utils/msg');
 const moment = require('moment');
 const statusCode = require('http-status-codes');
 const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
 
 const adminAuthService = new AdminAuthService();
 
