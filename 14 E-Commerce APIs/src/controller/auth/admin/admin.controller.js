@@ -45,18 +45,20 @@ module.exports.loginAdmin = async (req, res) => {
         }
         const Tocken = JWT.sign(payload, process.env.JWT_SECRET_KEY)
 
-        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admin_Login_Success));
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admin_Login_Success, { token: Tocken }));
     } catch (error) {
         console.log("Something Went Wrong!!", error);
-        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Internal_Server_Error));
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 }
 
 module.exports.fetchAdmins = async (req, res) => {
     try {
-
+        const allAdmins = await adminAuthService.FetchAllAdmin();
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admins_Fetched, allAdmins));
     } catch (err) {
-        console.log("Something Went Wrong!!", error);
-        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Internal_Server_Error));
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 }

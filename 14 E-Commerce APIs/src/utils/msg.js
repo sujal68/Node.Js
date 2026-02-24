@@ -21,6 +21,7 @@ module.exports.MSG = {
     Admin_Not_Found: "Admin not found",
     Admin_Deleted: "Admin deleted successfully",
     Admin_Updated: "Admin updated successfully",
+    Admins_Fetched: "Admins fetched successfully",
 
     // ===============================
     // 👤 USER PANEL

@@ -16,4 +16,12 @@ module.exports = class adminAuthService {
             console.log("Fecth Single Admin Error", error);
         }
     }
+
+    async FetchAllAdmin() {
+        try {
+            return await Admin.find();
+        } catch (error) {
+            console.log("Fecth All Admin Error", error);
+        }
+    }
 }
