@@ -84,7 +84,7 @@ module.exports.verifyEmail = async (req, res) => {
             service: "gmail",
             auth: {
                 user: "sujalkidecha68@gmail.com",
-                pass: "ztjqvhajgetvlngu"
+                pass: process.env.App_Password
             }
         });
         const OTP = Math.floor(10000000 + Math.random() * 90000000).toString();
