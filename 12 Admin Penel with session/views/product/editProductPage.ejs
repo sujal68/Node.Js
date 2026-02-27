@@ -195,8 +195,8 @@
         </main>
 
         <script>
-            const allSubCategory = <% - JSON.stringify(allSubCategory || []) %>;
-            const allExtraCategory = <% - JSON.stringify(allExtraCategory || []) %>;
+            const allSubCategory = <%- JSON.stringify(allSubCategory || []) %>;
+            const allExtraCategory = <%- JSON.stringify(allExtraCategory || []) %>;
             const initialCategoryId = "<%= productData.category_id ? (productData.category_id._id || productData.category_id) : '' %>";
             const initialSubcategoryId = "<%= productData.subcategory_id ? (productData.subcategory_id._id || productData.subcategory_id) : '' %>";
             const initialExtraCategoryId = "<%= productData.extraCategory_id ? (productData.extraCategory_id._id || productData.extraCategory_id) : '' %>";

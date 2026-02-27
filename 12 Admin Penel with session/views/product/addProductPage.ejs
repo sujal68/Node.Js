@@ -193,8 +193,8 @@
         </main>
 
         <script>
-            const allSubCategory = <% - JSON.stringify(allSubCategory || []) %>;
-            const allExtraCategory = <% - JSON.stringify(allExtraCategory || []) %>;
+            const allSubCategory = <%- JSON.stringify(allSubCategory || []) %>;
+            const allExtraCategory = <%- JSON.stringify(allExtraCategory || []) %>;
 
             function populateSubcategories(categoryId) {
                 const subcategorySelect = document.getElementById('subcategory_id');
