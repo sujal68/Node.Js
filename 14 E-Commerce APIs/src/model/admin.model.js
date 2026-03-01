@@ -22,6 +22,14 @@ const adminSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    OTP: {
+        type: Number,
+        default: 0,
+    },
+    Otp_expire_time: {
+        type: Date,
+        default: null,
+    },
     isActive: {
         type: Boolean,
         default: true,

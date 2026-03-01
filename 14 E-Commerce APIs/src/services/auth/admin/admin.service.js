@@ -24,4 +24,12 @@ module.exports = class adminAuthService {
             console.log("Fecth All Admin Error", error);
         }
     }
+
+    async updateAdmin(id, body) {
+        try {
+            return await Admin.findByIdAndUpdate(id, body, { new: true });
+        } catch (error) {
+            console.log("Update Admin Error", error);
+        }
+    }
 }
