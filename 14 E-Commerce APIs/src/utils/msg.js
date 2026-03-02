@@ -9,6 +9,11 @@ module.exports.MSG = {
     Token_Invalid: "Invalid or expired token",
     Access_Denied: "Access denied",
     Something_Went_Wrong: "Something went wrong, please try again later",
+    Otp_send_successFully: "Otp Send SuccessFully...",
+    Many_Time_Otp: "Please try agian after 60 minutes",
+    Otp_Expire: "OTP expired",
+    Invalid_Otp: "Invalid OTP",
+    VERIFY_OTP: "OTP verified successfully",
 
     // ===============================
     // 👨‍💼 ADMIN PANEL
@@ -22,6 +27,8 @@ module.exports.MSG = {
     Admin_Deleted: "Admin deleted successfully",
     Admin_Updated: "Admin updated successfully",
     Admins_Fetched: "Admins fetched successfully",
+    ADMIN_PASSWORD_UPDATE_FAILED: "Admin password updation failed",
+    ADMIN_PASSWORD_UPDATED: "Admin password updated",
 
     // ===============================
     // 👤 USER PANEL
