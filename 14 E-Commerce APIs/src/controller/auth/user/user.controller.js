@@ -79,9 +79,9 @@ module.exports.forgotPassword = async (req, res) => {
             user.attempt = 0;
         }
 
-        // if (user.attempt >= 3) {
-        //     return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Many_Time_Otp));
-        // }
+        if (user.attempt >= 3) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Many_Time_Otp));
+        }
 
         const OTP = Math.floor(100000 + Math.random() * 900000);
 
@@ -93,8 +93,85 @@ module.exports.forgotPassword = async (req, res) => {
 
         await userAuthService.updateUser(user.id, { OTP: OTP, OTP_Expire: expireOTPTime, attempt: user.attempt, attempt_expire: new Date(Date.now() + 1000 * 60 * 60) });
 
-        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.OTP_SEND));
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.Otp_send_successFully));
 
+    } catch (err) {
+        console.log("Error : ", err);
+    }
+}
+
+module.exports.verifyOtp = async (req, res) => {
+    try {
+        const user = await userAuthService.fetchSingleUser({ email: req.body.email });
+
+        if (!user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
+        }
+
+        if (user.verify_attempt_expire < Date.now()) {
+            user.verify_attempt = 0;
+        }
+
+        if (user.verify_attempt >= 3) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Many_Time_Otp));
+        }
+
+        if (user.OTP_Expire < Date.now()) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Otp_Expire));
+        }
+
+        user.verify_attempt++;
+
+        await userAuthService.updateUser(user.id, { verify_attempt: user.verify_attempt, verify_attempt_expire: new Date(Date.now() + 1000 * 60 * 60) });
+
+
+        if (req.body.OTP != user.OTP) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Invalid_Otp));
+        }
+
+        await userAuthService.updateUser(user.id, { OTP: 0, OTP_Expire: null, verify_attempt: user.verify_attempt, verify_attempt_expire: new Date(Date.now() + 1000 * 60 * 60) });
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.VERIFY_OTP));
+
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}
+
+
+module.exports.resetPassword = async (req, res) => {
+    try {
+        console.log(req.body);
+
+        const user = await userAuthService.fetchSingleUser({ email: req.body.email });
+
+        console.log(user);
+
+        if (!user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
+        }
+
+        req.body.new_password = await bycrypt.hash(req.body.new_password, 11);
+
+        const updatedPassword = await userAuthService.updateUser(user.id, { password: req.body.new_password });
+
+        if (!updatedPassword) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.USER_PASSWORD_UPDATE_FAILED));
+        }
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.USER_PASSWORD_UPDATED));
+
+
+    } catch (err) {
+        console.log("Error : ", err);
+    }
+}
+
+module.exports.fetchAllUser = async (req, res) => {
+    try {
+        const allAdmin = await adminAuthService.fetchAllAdmin();
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.ADMIN_FETCH_SUCCESS, allAdmin));
     } catch (err) {
         console.log("Error : ", err);
     }
