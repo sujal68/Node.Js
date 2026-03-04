@@ -51,7 +51,7 @@ const adminSchema = mongoose.Schema({
         type: Boolean,
         default: true,
     },
-    idDelete: {
+    isDelete: {
         type: Boolean,
         default: false,
     },

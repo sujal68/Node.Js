@@ -10,4 +10,5 @@ userRouter.post('/resetPassword', resetPassword);
 
 userRouter.get('/fetchAllUser', fetchAllUser);
 
+
 module.exports = userRouter;

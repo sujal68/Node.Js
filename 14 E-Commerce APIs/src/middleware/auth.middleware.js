@@ -3,17 +3,18 @@ const status = require('http-status-codes');
 const { MSG } = require("../utils/msg");
 const { errorResponse } = require("../utils/response");
 const AdminAuthService = require('../services/auth/admin/admin.service');
+const UserAuthService = require('../services/auth/user/user.service');
 
 const adminAuthService = new AdminAuthService();
+const userAuthService = new UserAuthService();
 
 module.exports.authMiddleware = async (req, res, next) => {
     let token = req.headers.authorization;
 
-    token = token.slice(7, token.length);
-
     if (!token) {
-        return res.status(status.BAD_REQUEST).json(errorResponse(status.BAD_REQUEST, true, MSG.Token_Not_Provided));
+        return res.status(status.BAD_REQUEST).json(errorResponse(status.BAD_REQUEST, true, MSG.Token_Missing));
     }
+    token = token.slice(7, token.length);
     try {
         const decoded = JWT.verify(token, process.env.JWT_SECRET_KEY);
         const admin = await adminAuthService.FetchSingleAdmin({ id: decoded.adminId });

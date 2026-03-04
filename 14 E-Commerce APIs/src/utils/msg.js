@@ -29,6 +29,8 @@ module.exports.MSG = {
     Admins_Fetched: "Admins fetched successfully",
     ADMIN_PASSWORD_UPDATE_FAILED: "Admin password updation failed",
     ADMIN_PASSWORD_UPDATED: "Admin password updated",
+    ADMIN_Profile_fetch_success: "Admin Profile Fetch Successfully",
+    ADMIN_Allready_exist: "Admin Allready Exist",
 
     // ===============================
     // 👤 USER PANEL

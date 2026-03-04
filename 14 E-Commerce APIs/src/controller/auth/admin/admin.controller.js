@@ -11,6 +11,11 @@ const adminAuthService = new AdminAuthService();
 
 module.exports.registerAdmins = async (req, res) => {
     try {
+        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email, isDelete: false, isActive: true }, true);
+
+        if (admin) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.ADMIN_Allready_exist));
+        }
         const password = req.body.password;
         req.body.password = await bcrypt.hash(req.body.password, 11);
 
@@ -31,7 +36,8 @@ module.exports.registerAdmins = async (req, res) => {
 
 module.exports.loginAdmin = async (req, res) => {
     try {
-        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email });
+        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email, isDelete: false, isActive: true }, false);
+        console.log("ADMIN FOUND:", admin);
         if (!admin) {
             return res.status(statusCode.BAD_REQUEST).json(successResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found));
         }
@@ -43,6 +49,7 @@ module.exports.loginAdmin = async (req, res) => {
 
         const payload = {
             id: admin._id,
+            isAdmin: true,
         }
         const Tocken = JWT.sign(payload, process.env.JWT_SECRET_KEY)
 
@@ -54,19 +61,9 @@ module.exports.loginAdmin = async (req, res) => {
     }
 }
 
-module.exports.fetchAdmins = async (req, res) => {
-    try {
-        const allAdmins = await adminAuthService.FetchAllAdmin();
-        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admins_Fetched, allAdmins));
-    } catch (err) {
-        console.log("Something Went Wrong!!", err);
-        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
-    }
-}
-
 module.exports.ForgotPassword = async (req, res) => {
     try {
-        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email });
+        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email, isDelete: false, isActive: true }, false);
 
         if (!admin) {
             return res.status(statusCode.BAD_REQUEST)
@@ -107,16 +104,17 @@ module.exports.ForgotPassword = async (req, res) => {
             .json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 };
+
 module.exports.VerifyOtp = async (req, res) => {
     try {
-        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email });
+        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email, isDelete: false, isActive: true }, false);
 
         if (!admin) {
             return res.status(statusCode.BAD_REQUEST)
                 .json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found));
         }
 
-        if (!admin.verify_attempt_expire || new Date(admin.verify_attempt_expire).getTime() < Date.now()) {
+        if (admin.verify_attempt_expire < Date.now()) {
             admin.verify_attempt = 0;
         }
 
@@ -125,9 +123,8 @@ module.exports.VerifyOtp = async (req, res) => {
                 .json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Many_Time_Otp));
         }
 
-        if (!admin.Otp_expire_time || new Date(admin.Otp_expire_time).getTime() < Date.now()) {
-            return res.status(statusCode.BAD_REQUEST)
-                .json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Otp_Expire));
+        if (admin.Otp_expire_time < Date.now()) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Otp_Expire));
         }
 
         admin.verify_attempt++;
@@ -157,9 +154,10 @@ module.exports.VerifyOtp = async (req, res) => {
         return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 };
+
 module.exports.NewChangePassword = async (req, res) => {
     try {
-        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email });
+        const admin = await adminAuthService.FetchSingleAdmin({ email: req.body.email, isDelete: false, isActive: true }, true);
 
         req.body.new_password = await bcrypt.hash(req.body.new_password, 11);
 
@@ -173,5 +171,95 @@ module.exports.NewChangePassword = async (req, res) => {
 
     } catch (error) {
         console.log("Error : ", err);
+    }
+}
+
+module.exports.fetchAdmins = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+        const allAdmins = await adminAuthService.FetchAllAdmin();
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admins_Fetched, allAdmins));
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
+    }
+}
+
+module.exports.deleteAdmin = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access))
+        }
+        console.log(req.query);
+
+        const admin = await adminAuthService.FetchSingleAdmin({ _id: req.query.id, isDelete: false, isActive: true }, true)
+
+        if (!admin) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found))
+        }
+        const deleteAdmin = await adminAuthService.updateAdmin(req.query.id, { isDelete: true, isActive: false })
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admin_Deleted, deleteAdmin))
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
+    }
+}
+
+module.exports.updateAdmin = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        };
+
+        const admin = await adminAuthService.FetchSingleAdmin({ _id: req.query.id, isDelete: false, isActive: true }, true);
+
+        if (!admin) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found));
+        }
+
+        const updatedAdmin = await adminAuthService.updateAdmin(req.query.id, req.body);
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.Admin_Updated, updatedAdmin))
+
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
+    }
+}
+
+module.exports.activeOrInActiveAdmins = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+        console.log(req.query);
+
+        const admin = await adminAuthService.FetchSingleAdmin({ _id: req.query.id, isDelete: false }, true);
+
+        if (!admin) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found));
+        }
+
+        const updatedAdmin = await adminAuthService.updateAdmin(req.query.id, { isActive: !admin.isActive });
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, `${admin.first_name} ${admin.last_name} is ${updatedAdmin.isActive ? 'active' : 'inactive'}`));
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
+    }
+}
+
+module.exports.adminProfile = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.ADMIN_Profile_fetch_success, req.admin));
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 }
