@@ -215,7 +215,6 @@ module.exports.updateAdmin = async (req, res) => {
         };
 
         const admin = await adminAuthService.FetchSingleAdmin({ _id: req.query.id, isDelete: false, isActive: true }, true);
-
         if (!admin) {
             return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Admin_Not_Found));
         }
@@ -251,6 +250,18 @@ module.exports.activeOrInActiveAdmins = async (req, res) => {
     }
 }
 
+module.exports.adminProfile = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.ADMIN_Profile_fetch_success, req.admin));
+    } catch (err) {
+        console.log("Something Went Wrong!!", err);
+        return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
+    }
+}
 module.exports.adminProfile = async (req, res) => {
     try {
         if (req.user) {

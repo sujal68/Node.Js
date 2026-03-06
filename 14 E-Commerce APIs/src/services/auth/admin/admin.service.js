@@ -11,6 +11,7 @@ module.exports = class adminAuthService {
 
     async FetchSingleAdmin(body, isSelect) {
         try {
+            console.log("Fetch Single Admin Body:", body);
             if (isSelect) {
                 return await Admin.findOne(body).select('_id first_name last_name email phone isActive create_at update_at');
             } else {

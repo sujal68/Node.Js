@@ -19,8 +19,8 @@ module.exports.registerUser = async (req, res) => {
 
         req.body.password = await bycrypt.hash(req.body.password, 11);
 
-        req.body.createAt = moment().format("YYYY-MM-DD HH:mm:ss A");
-        req.body.updateAt = moment().format("YYYY-MM-DD HH:mm:ss A");
+        req.body.create_at = moment().format("YYYY-MM-DD HH:mm:ss A");
+        req.body.update_at = moment().format("YYYY-MM-DD HH:mm:ss A");
 
         const newUser = await userAuthService.registerUser(req.body);
 
