@@ -31,6 +31,8 @@ module.exports.MSG = {
     ADMIN_PASSWORD_UPDATED: "Admin password updated",
     ADMIN_Profile_fetch_success: "Admin Profile Fetch Successfully",
     ADMIN_Allready_exist: "Admin Allready Exist",
+    CHANGE_PASSWORD_FAILED: "Failed to change password",
+    CHANGE_PASSWORD: "Password changed successfully",
 
     // ===============================
     // 👤 USER PANEL

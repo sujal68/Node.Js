@@ -176,3 +176,4 @@ module.exports.fetchAllUser = async (req, res) => {
         console.log("Error : ", err);
     }
 }
+

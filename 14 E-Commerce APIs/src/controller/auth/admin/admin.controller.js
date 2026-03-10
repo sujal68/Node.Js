@@ -255,6 +255,7 @@ module.exports.adminProfile = async (req, res) => {
         if (req.user) {
             return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
         }
+        console.log(req.admin);
 
         return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.ADMIN_Profile_fetch_success, req.admin));
     } catch (err) {
@@ -262,13 +263,27 @@ module.exports.adminProfile = async (req, res) => {
         return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));
     }
 }
-module.exports.adminProfile = async (req, res) => {
+
+module.exports.changePassword = async (req, res) => {
     try {
         if (req.user) {
             return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.Unauthorized_Access));
         }
+        console.log("tick controller come", req.admin.id)
+        const admin = await adminAuthService.FetchSingleAdmin({ _id: req.admin.id }, false);
+        console.log("Admin Found : ", admin);
+        const isPassword = await bcrypt.compare(req.body.current_password, admin.password)
 
-        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.ADMIN_Profile_fetch_success, req.admin));
+        if (!isPassword) {
+            return res.status(statusCode.BAD_REQUEST).json(errorResponse(statusCode.BAD_REQUEST, true, MSG.CHANGE_PASSWORD_FAILED))
+        }
+
+        req.body.new_password = await bcrypt.hash(req.body.new_password, 11);
+
+        await adminAuthService.updateAdmin(req.admin.id, { password: req.body.new_password });
+
+        return res.status(statusCode.OK).json(successResponse(statusCode.OK, false, MSG.CHANGE_PASSWORD));
+
     } catch (err) {
         console.log("Something Went Wrong!!", err);
         return res.status(statusCode.INTERNAL_SERVER_ERROR).json(errorResponse(statusCode.INTERNAL_SERVER_ERROR, true, MSG.Something_Went_Wrong));

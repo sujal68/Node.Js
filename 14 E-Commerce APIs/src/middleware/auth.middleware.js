@@ -17,8 +17,14 @@ module.exports.authMiddleware = async (req, res, next) => {
     token = token.slice(7, token.length);
     try {
         const decoded = JWT.verify(token, process.env.JWT_SECRET_KEY);
-        const admin = await adminAuthService.FetchSingleAdmin({ id: decoded.adminId });
+
+        console.log("Decoded : ", decoded);
+
+        const admin = await adminAuthService.FetchSingleAdmin({ _id: decoded.id }, true);
+        console.log("tick", admin)
         if (admin) {
+            req.admin = admin;
+            console.log("tick next")
             next();
         }
         else {
