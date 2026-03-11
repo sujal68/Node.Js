@@ -43,6 +43,7 @@ module.exports.MSG = {
     User_Login_Failed: "User login failed",
     User_Not_Found: "User not found",
     User_Deleted: "User deleted successfully",
+    User_Delete_Failed: "Failed to delete user",
     User_Updated: "User profile updated successfully",
     USER_PASSWORD_UPDATED: "User password updated successfully",
     USER_PASSWORD_UPDATE_FAILED: "User password updation failed",

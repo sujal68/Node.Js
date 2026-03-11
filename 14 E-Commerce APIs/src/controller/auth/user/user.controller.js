@@ -169,11 +169,33 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.fetchAllUser = async (req, res) => {
     try {
-        const allAdmin = await adminAuthService.fetchAllAdmin();
+        const allUsers = await userAuthService.fetchAllUser();
 
-        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.ADMIN_FETCH_SUCCESS, allAdmin));
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.USERS_FETCHED, allUsers));
     } catch (err) {
         console.log("Error : ", err);
     }
 }
 
+module.exports.deleteUser = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+        const user = await userAuthService.fetchSingleUser({ id: req.query.id, isDelete: false, isActive: true }, true);
+
+        if (!user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
+        }
+
+        const deletedUser = await userAuthService.updateUser(user.id, { isDelete: true, isActive: false });
+
+        if (!deletedUser) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Delete_Failed));
+        }
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.User_Deleted, deletedUser));
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}

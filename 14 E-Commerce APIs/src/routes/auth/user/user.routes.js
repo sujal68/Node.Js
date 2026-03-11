@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, forgotPassword, verifyOtp, resetPassword, fetchAllUser } = require('../../../controller/auth/user/user.controller');
+const { registerUser, loginUser, forgotPassword, verifyOtp, resetPassword, fetchAllUser, deleteUser } = require('../../../controller/auth/user/user.controller');
 const userRouter = express.Router();
 
 userRouter.post('/registerUser', registerUser);
@@ -8,7 +8,8 @@ userRouter.post('/forgotPassword', forgotPassword);
 userRouter.post('/verifyOTP', verifyOtp);
 userRouter.post('/resetPassword', resetPassword);
 
-userRouter.get('/fetchAllUser', fetchAllUser);
+userRouter.get('/', fetchAllUser);
+userRouter.delete('/', deleteUser);
 
 
 module.exports = userRouter;
