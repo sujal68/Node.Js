@@ -1,8 +1,8 @@
 require('dotenv').config();
+require('./config/db.config')
 const express = require('express');
-require('./config/db.config');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 6800;
 
 app.use(express.urlencoded());
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use('/api', require('./routes'));
 
 app.listen(PORT, (err) => {
     if (err) {
-        console.log("Server Is Not Stared ", err);
+        console.log("Server Connection failed...");
         return false;
     }
-    console.log(`Server Is Started At Port ${PORT}`);
-});
+    console.log("Server Is Started...");
+})

@@ -34,7 +34,6 @@ module.exports.registerUser = async (req, res) => {
     }
 }
 
-
 module.exports.loginUser = async (req, res) => {
     try {
         console.log(req.body);
@@ -138,7 +137,6 @@ module.exports.verifyOtp = async (req, res) => {
     }
 }
 
-
 module.exports.resetPassword = async (req, res) => {
     try {
         console.log(req.body);
@@ -182,7 +180,9 @@ module.exports.deleteUser = async (req, res) => {
         if (req.user) {
             return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
         }
-        const user = await userAuthService.fetchSingleUser({ id: req.query.id, isDelete: false, isActive: true }, true);
+        const user = await userAuthService.fetchSingleUser({ _id: req.query.id, isDelete: false, isActive: true }, true);
+
+        console.log(user);
 
         if (!user) {
             return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
@@ -195,6 +195,94 @@ module.exports.deleteUser = async (req, res) => {
         }
 
         return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.User_Deleted, deletedUser));
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}
+
+module.exports.updateUser = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+
+        const user = await userAuthService.fetchSingleUser({ _id: req.query.id, isDelete: false, isActive: true }, true);
+
+        if (!user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
+        }
+
+        const updatedUser = await userAuthService.updateUser(user.id, req.body);
+
+        req.body.update_at = moment().format("YYYY-MM-DD HH:mm:ss A");
+        if (!updatedUser) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Updated_failed));
+        }
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.User_Updated, updatedUser));
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}
+
+module.exports.isActive = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+
+        const user = await userAuthService.fetchSingleUser({ _id: req.query.id, isDelete: false }, true);
+
+        if (!user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Not_Found));
+        }
+
+        const updatedUser = await userAuthService.updateUser(user.id, { isActive: !user.isActive });
+
+        if (!updatedUser) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.User_Updated_failed));
+        }
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, `${user.first_name} ${user.last_name} is ${updatedUser.isActive ? 'Active' : 'inActive'}`));
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}
+
+module.exports.profile = async (req, res) => {
+    try {
+        if (req.user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+
+        console.log(req.user);
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.USER_PROFILE_FETCHED, req.user));
+
+    } catch (error) {
+        console.log("Error : ", error);
+    }
+}
+
+module.exports.changePassword = async (req, res) => {
+    try {
+        const user = await userAuthService.fetchSingleUser({ _id: req.user.id }, false);
+        if (user) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.Unauthorized_Access));
+        }
+        console.log(req.user);
+        const isPassword = await bycrypt.compare(req.body.current_password, user.password);
+
+        if (!isPassword) {
+            return res.status(statusCodes.BAD_REQUEST).json(errorResponse(statusCodes.BAD_REQUEST, true, MSG.CHANGE_PASSWORD_FAILED));
+        }
+
+        req.body.new_password = await bycrypt.hash(req.body.new_password, 11);
+
+        await userAuthService.updateUser(req.user.id, { password: req.body.new_password });
+
+        return res.status(statusCodes.OK).json(successResponse(statusCodes.OK, false, MSG.CHANGE_PASSWORD));
+
     } catch (error) {
         console.log("Error : ", error);
     }
